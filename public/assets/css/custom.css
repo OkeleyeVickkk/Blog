@@ -1,0 +1,54 @@
+@import url("./default.css");
+
+.form-label {
+	font-size: 0.93rem;
+	margin-bottom: 2px;
+	opacity: 0.7;
+}
+.form-control {
+	background-color: var(--form-control-bg-clr);
+	transition: 300ms ease-in-out;
+	color: var(--form-control-text-clr);
+	font-size: 0.95rem;
+	min-height: 2.9rem;
+}
+.form-control:focus {
+	border-color: rgba(var(--primary-clr-variant), 0.2);
+}
+.v-action-btn {
+	--transition-props: transform;
+	--transition-time: 100ms;
+	padding: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1rem;
+	text-align: center;
+	transition: var(--transition);
+}
+.v-action-btn:active {
+	transform: scale(0.97, 0.97);
+}
+.v-password-container .form-input {
+	position: relative;
+	background-color: var(--white);
+	overflow: hidden;
+}
+.v-password-container .form-input .form-control {
+	padding-right: calc(5rem + 14px);
+}
+.v-password-container .form-input .v-password-toggle {
+	min-width: 5rem;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translate(0%, -50%);
+	transition: var(--transition);
+	height: 100%;
+	background-color: #ddd6;
+	padding: 10px 1rem;
+	border-radius: 0 0.5rem 0.5rem 0;
+}
+.v-password-container .form-input .v-password-toggle:hover {
+	background-color: #ddd7;
+}
