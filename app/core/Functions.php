@@ -96,8 +96,10 @@ function generateRandomString(int $stringLength = 5): string
 
 function sendDataToUser(string $contentType, array $response = [])
 {
+
   switch (strtolower($contentType)) {
     case 'application/json':
+    case 'multipart/form-data':
       header("Content-Type: application/json");
       echo json_encode($response);
       exit;

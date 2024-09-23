@@ -92,7 +92,6 @@ declare(strict_types=1);
     if (!response.ok) return;
     const result = await response.json();
     const d = await result;
-    console.log(d)
   })
 </script>
 <?php require_once "layout/authFooter.php"; ?>
