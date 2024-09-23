@@ -93,3 +93,23 @@ function generateRandomString(int $stringLength = 5): string
 
   return $totalRandomChars;
 }
+
+function sendDataToUser(string $contentType, array $response = [])
+{
+  switch (strtolower($contentType)) {
+    case 'application/json':
+      header("Content-Type: application/json");
+      echo json_encode($response);
+      exit;
+      break;
+    case 'text/html':
+      header("Content-Type: text/html");
+      echo $response;
+      exit;
+      break;
+    default:
+      header('Content-Type: application/json');
+      echo json_encode($response);
+      exit;
+  }
+}

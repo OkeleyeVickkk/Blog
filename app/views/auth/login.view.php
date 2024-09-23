@@ -21,7 +21,7 @@ declare(strict_types=1);
                 <?php if ($this->pageData && $this->pageData['errorMessage'] !== ''): ?>
                   <span class="text-danger"><?= $this->pageData['errorMessage']; ?></span>
                 <?php endif; ?>
-                <form action="" method="post">
+                <form action="" method="post" class="v-form" enctype="multipart/form-data">
                   <div class="d-flex flex-column mb-3 pb-1">
                     <h1 class="h1 fw-bold mb-0">Logo</h1>
                     <h6 class="fw-normal mb-3">Sign into your account</h6>
@@ -29,19 +29,19 @@ declare(strict_types=1);
                   <div class="d-flex flex-column row-gap-3">
                     <div class="form-outline">
                       <label class="form-label" for="email">Email address</label>
-                      <input type="email" id="email" name="email" placeholder="Enter your email" class="form-control form-control-lg" />
+                      <input type="email" id="email" name="email" value="" placeholder="Enter your email" class="form-control form-control-lg" />
                     </div>
 
                     <div class="form-outline v-password-container">
                       <label class="form-label" for="password">Password</label>
                       <div class="form-input">
-                        <input type="password" id="password" data-password="password" name="password" class="form-control form-control-lg" />
+                        <input type="password" id="password" value="" data-password="password" name="password" class="form-control form-control-lg" />
                         <button type="button" class="v-password-toggle" data-password="password">Show</button>
                       </div>
                     </div>
                   </div>
                   <div class="mt-4 mb-4">
-                    <button class="btn btn-dark btn-block w-100 v-action-btn" type="submit">Login</button>
+                    <button class="btn btn-dark btn-block w-100 v-action-btn" id="login" type="submit">Login</button>
                   </div>
 
                   <div class="mb-5 pb-lg-2 d-flex flex-column">
@@ -65,4 +65,34 @@ declare(strict_types=1);
     </div>
   </div>
 </section>
+<script type="text/javascript">
+  const submitBtn = document.getElementById("login");
+  const url = "http://localhost/project-blog/public/Login.php";
+
+  submitBtn.addEventListener("click", async function(e) {
+    e.preventDefault();
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    if (!email || !password) return;
+
+    const data = {
+      email: email.value,
+      password: password.value
+    }
+
+    const options = {
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, options);
+    if (!response.ok) return;
+    const result = await response.json();
+    const d = await result;
+    console.log(d)
+  })
+</script>
 <?php require_once "layout/authFooter.php"; ?>
