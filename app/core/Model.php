@@ -15,7 +15,7 @@ trait Model
         $connection = $this->connect();
         $statement = $connection->prepare($sqlQuery);
         !empty($arr) ? $statement->execute($arr) : $statement->execute();
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
       }
     } catch (\Exception $error) {

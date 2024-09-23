@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+$session = Session::getInstance();
 ?>
 
 <?php require_once "layout/authHeader.php"; ?>

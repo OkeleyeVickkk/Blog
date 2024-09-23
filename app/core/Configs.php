@@ -9,7 +9,7 @@ define("ROOT_PATH", "http://localhost/project-blog/public/");
 define("DB", [
   "name" => "blogs",
   "uname" => "root",
-  "host" => "localhost",
+  "host" => "localhost:3306",
   "pass" => "horlarmhedey",
   "charset" => "utf8mb4"
 ]);

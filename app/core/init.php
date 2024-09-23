@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once "SessionConfig.php";
+require_once "Session.php";
 require_once "Functions.php";
 require_once "Configs.php";
 require_once "Database.php";

@@ -8,6 +8,8 @@ class Register
 
   public function index()
   {
+    $newUser = new User();
+
     if (strtoupper($_SERVER["REQUEST_METHOD"]) !== "POST") {
       $this->loadPage(filePath: 'auth/register');
       return;
@@ -23,18 +25,34 @@ class Register
       return;
     }
 
-    $newUser = new User();
+    if ($newUser->checkIfAccountExist(["email" => $email])) {
+      $this->pageData['errorMessage'] = "Email already exist";
+      $this->loadPage("auth/register");
+      return;
+    };
+
+    $fullnameArr = explode(" ", $fullname);
+    if (count($fullnameArr) > 1) {
+      $username = $fullnameArr[1] . '-' . generateRandomString(stringLength: 6);
+    } else {
+      $username = $fullnameArr[0];
+    }
+
     list($encrpyt_key, $hashedPass) = encryptUserPassword(passwordToEncrypt: $password);
     $response = $newUser->registerUser(
       userData: [
         "fullname" => $fullname,
         "email" => $email,
+        "username" => $username,
         "password" => $hashedPass,
         "encrypt_key" => $encrpyt_key
       ]
     );
+
     if ($response) {
-      redirectTo(toLocation: 'index.php', replace: true);
+      $sessionData =  Session::getInstance();
+      $sessionData->__set("user", $email);
+      redirectTo(toLocation: 'login.php', replace: true);
     }
   }
 }

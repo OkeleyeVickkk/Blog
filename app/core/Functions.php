@@ -76,6 +76,19 @@ function redirectTo(string $toLocation, bool $replace = false): void
 {
   header(
     "Location:" . ROOT_PATH . $toLocation .  "",
-    replace: $replace
+    replace: $replace,
   );
+}
+
+function generateRandomString(int $stringLength = 5): string
+{
+  $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  $totalRandomChars = '';
+
+  while (strlen($totalRandomChars) < $stringLength) {
+    $randomInt = mt_rand(0, strlen(trim($chars)) - 1);
+    $totalRandomChars .= $chars[$randomInt];
+  }
+
+  return $totalRandomChars;
 }

@@ -14,6 +14,9 @@ declare(strict_types=1);
               <h3 class="fw-semibold">Register</h3>
               <span class="text-muted">Create your account now</span>
             </div>
+            <?php if ($this->$pageData && $this->$pageData['errorMessage'] !== ''): ?>
+              <span class="text-danger"><?= $this->pageData['errorMessage']; ?></span>
+            <?php endif; ?>
             <form action="" method="post" class="d-flex flex-column row-gap-3 mt-4">
               <div class="form-outline">
                 <label class="form-label" for="fullname">Fullname</label>

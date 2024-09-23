@@ -7,6 +7,8 @@ class Login
   use Controller;
   public function index()
   {
+    $user = new User();
+
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
       $this->loadPage(filePath: 'auth/login');
       return;
@@ -21,7 +23,6 @@ class Login
       return;
     }
 
-    $user = new User();
 
     if (!$user->checkIfAccountExist(['email' => $email])) {
       $this->pageData['errorMessage'] = 'Email entered is not registered';
@@ -29,7 +30,7 @@ class Login
       return;
     }
 
-    list($encryptedKey, $hashedPass) = encryptUserPassword($password);
+    list($encryptedKey) = encryptUserPassword($password);
     $response = $user->getUserDetails(['email' => $email, 'encrypted_pass' => $encryptedKey]);
 
     if (!$response || !decryptUserPassword($password, $response[0]['password'])) {
@@ -37,6 +38,7 @@ class Login
       $this->loadPage(filePath: 'auth/login');
       return;
     }
-    echo 'Logging in';
+
+    $user->updateUserLogTime(userData: ["email" => $email]);
   }
 }

@@ -9,8 +9,8 @@ trait Database
     try {
       $dsn = "mysql:host=" . DB['host'] . ";dbname=" . DB['name'] . ";charset=" . DB['charset'] . ";";
       $options = [
-        'PDO::ATTR_DEFAULT_FETCH_MODE' => 'PDO::FETCH_ASSOC',
-        'PDO::ATTR_ERRMODE' => 'PDO::ERRMODE_EXCEPTION',
+        "PDO::ATTR_DEFAULT_FETCH_MODE" => "PDO::FETCH_ASSOC",
+        "PDO::ATTR_ERRMODE" => "PDO::ERRMODE_EXCEPTION",
       ];
       $connection = new PDO(
         dsn: $dsn,

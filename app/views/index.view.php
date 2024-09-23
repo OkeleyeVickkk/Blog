@@ -1,10 +1,12 @@
 <?php
 
 declare(strict_types=1);
+session_start();
 ?>
 
 
 <?php require_once "components/header.view.php"; ?>
+<?= $_SESSION['email'] ?>
 <div id="page" class="s-pagewrap ss-home">
   <?php require_once "components/nav.view.php"; ?>
   <section id="content" class="s-content">
