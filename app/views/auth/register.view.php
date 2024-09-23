@@ -14,9 +14,6 @@ declare(strict_types=1);
               <h3 class="fw-semibold">Register</h3>
               <span class="text-muted">Create your account now</span>
             </div>
-            <?php if ($this->pageData && $this->pageData['errorMessage'] !== ''): ?>
-              <span class="text-danger"><?= $this->pageData['errorMessage']; ?></span>
-            <?php endif; ?>
             <form action="" method="post" class="d-flex flex-column row-gap-3 mt-4">
               <div class="form-outline">
                 <label class="form-label" for="fullname">Fullname</label>
@@ -34,7 +31,7 @@ declare(strict_types=1);
                 </div>
               </div>
               <div class="d-flex pt-3">
-                <button type="submit" class="btn v-action-btn btn-dark w-100">Sign Up</button>
+                <button type="submit" id="register" class="btn v-action-btn btn-dark w-100">Sign Up</button>
               </div>
 
               <div class="text-center ">
@@ -56,4 +53,42 @@ declare(strict_types=1);
       </div>
     </div>
 </section>
+<script type="text/javascript">
+  const submitBtn = document.getElementById("register");
+  const url = "http://localhost/project-blog/public/register.php";
+
+  submitBtn.addEventListener("click", async function(e) {
+    e.preventDefault();
+    let email = document.getElementById('email');
+    let fullname = document.getElementById("fullname");
+    let password = document.getElementById('password');
+    if (!email || !password) return;
+
+    const data = {
+      email: email.value,
+      password: password.value,
+      fullname: fullname.value
+    }
+
+    const options = {
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) return;
+      const result = await response.json();
+      const responseData = await result;
+      if (responseData.status) {
+        window.location.href = "http://localhost/project-blog/public/login.php";
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+
+  })
+</script>
 <?php require_once "layout/authFooter.php"; ?>

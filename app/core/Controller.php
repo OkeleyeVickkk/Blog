@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 trait Controller
 {
-  public array $pageData = [];
+  // public array $pageData = [];
+  protected string $dataType = 'application/json';
+  protected array $response = [];
   public Session $session;
 
   public function __construct()

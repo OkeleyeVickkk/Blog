@@ -18,9 +18,6 @@ declare(strict_types=1);
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body rounded-0 p-4 px-2 p-lg-5 text-black">
-                <?php if ($this->pageData && $this->pageData['errorMessage'] !== ''): ?>
-                  <span class="text-danger"><?= $this->pageData['errorMessage']; ?></span>
-                <?php endif; ?>
                 <form action="" method="post" class="v-form" enctype="multipart/form-data">
                   <div class="d-flex flex-column mb-3 pb-1">
                     <h1 class="h1 fw-bold mb-0">Logo</h1>
@@ -91,7 +88,10 @@ declare(strict_types=1);
     const response = await fetch(url, options);
     if (!response.ok) return;
     const result = await response.json();
-    const d = await result;
+    const responseData = await result;
+    if (responseData.status) {
+      window.location.href = "http://localhost/project-blog/public/index.php";
+    }
   })
 </script>
 <?php require_once "layout/authFooter.php"; ?>

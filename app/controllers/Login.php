@@ -5,8 +5,6 @@ require_once FIRST_PARENT_DIR . 'models/User.php';
 class Login
 {
   use Controller;
-  private string $dataType = 'application/json';
-  private array $response = [];
 
   public function index()
   {
@@ -54,7 +52,7 @@ class Login
         $this->session->__set("user", $email);
         $this->response = array('status' => true, 'message' => 'Logged In successfully');
         sendDataToUser(contentType: $this->dataType, response: $this->response);
-        redirectTo(toLocation: 'index', replace: true);
+        exit;
       }
     }
   }

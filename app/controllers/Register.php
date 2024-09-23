@@ -15,19 +15,33 @@ class Register
       return;
     }
 
-    $fullname = cleanString(string: $_POST['fullname'], type: "text");
-    $email = cleanString(string: $_POST['email'], type: "email");
-    $password = cleanString(string: $_POST['password'], type: "text");
+    $userDataArr = json_decode(file_get_contents('php://input'), true);
 
-    if (isFalsy($fullname) || isFalsy($email) || isFalsy($password)) {
-      $this->pageData['errorMessage'] = "Email or fullname or password is error";
-      $this->loadPage(filePath: 'auth/register');
+    $fullname = cleanString(string: $userDataArr['fullname'], type: "text");
+    $email = cleanString(string: $userDataArr['email'], type: "email");
+    $password = cleanString(string: $userDataArr['password'], type: "text");
+
+    if (isFalsy($fullname)) {
+      $response = array("status" => false, "message" => "Error with your input, enter something more appropriate");
+      sendDataToUser(contentType: 'application/json', response: $response);
+      return;
+    }
+
+    if (isFalsy($email)) {
+      $response = array("status" => false, "message" => "Enter proper email address");
+      sendDataToUser(contentType: 'application/json', response: $response);
+      return;
+    }
+
+    if (isFalsy($password)) {
+      $response = array("status" => false, "message" => "Password cannot be empty");
+      sendDataToUser(contentType: 'application/json', response: $response);
       return;
     }
 
     if ($newUser->checkIfAccountExist(["email" => $email])) {
-      $this->pageData['errorMessage'] = "Email already exist";
-      $this->loadPage(filePath: 'auth/register');
+      $response = array("status" => false, "message" => "Email already exists");
+      sendDataToUser(contentType: 'application/json', response: $response);
       return;
     };
 
@@ -50,8 +64,9 @@ class Register
     );
 
     if ($response) {
-      $this->pageData['errorMessage'] = ''; //unsetting the error message
-      redirectTo(toLocation: 'login.php', replace: true);
+      $response = array("status" => true, "message" => "Registration successful");
+      sendDataToUser(contentType: 'application/json', response: $response);
+      return;
     }
   }
 }
