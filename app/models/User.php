@@ -68,8 +68,6 @@ class User
     $query = "INSERT INTO {$this->tableName} (user_id) VALUES (:user_id);";
     $result = $this->execute(sqlQuery: $query, arr: ["user_id" => $id]);
 
-    if ($result) {
-      redirectTo(toLocation: 'index', replace: true);
-    }
+    return $result;
   }
 }

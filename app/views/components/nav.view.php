@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 ?>
 <header id="masthead" class="s-header">
   <div class="s-header__branding">
@@ -30,10 +29,12 @@ declare(strict_types=1);
             <li><a href="<?= requireLink(link: 'audio'); ?>">Audio Post</a></li>
           </ul>
         </li>
-        <!-- <li><a href="<?= requireLink(link: 'styles'); ?>">Styles</a></li> -->
-        <li><a href="<?= requireLink(link: 'about'); ?>">About</a></li>
+        <!-- <li><a href=" <?= requireLink(link: 'styles'); ?>">Styles</a></li> -->
         <li><a href="<?= requireLink(link: 'contact'); ?>">Contact</a></li>
-        <li><a href="<?= requireLink(link: 'login'); ?>">Login</a></li>
+        <li><a href="<?= requireLink(link: 'create'); ?>">Write</a></li>
+        <?php if (!$this->session->__isset("user")): ?>
+          <li><a href="<?= requireLink(link: 'login'); ?>">Login</a></li>
+        <?php endif; ?>
       </ul>
       <!-- end s-header__nav -->
     </nav>

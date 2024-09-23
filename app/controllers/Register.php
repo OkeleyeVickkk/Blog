@@ -27,7 +27,7 @@ class Register
 
     if ($newUser->checkIfAccountExist(["email" => $email])) {
       $this->pageData['errorMessage'] = "Email already exist";
-      $this->loadPage("auth/register");
+      $this->loadPage(filePath: 'auth/register');
       return;
     };
 
@@ -50,8 +50,7 @@ class Register
     );
 
     if ($response) {
-      $sessionData =  Session::getInstance();
-      $sessionData->__set("user", $email);
+      $this->pageData['errorMessage'] = ''; //unsetting the error message
       redirectTo(toLocation: 'login.php', replace: true);
     }
   }

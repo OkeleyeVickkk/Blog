@@ -8,8 +8,6 @@ class Session
   private $sessionState = self::SESSION_NOT_STARTED;
   private static $instance;
 
-  private function __construct() {}
-
   public static function getInstance(): Session
   {
     if (!isset(self::$instance)) {

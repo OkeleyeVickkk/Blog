@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-$session = Session::getInstance();
 ?>
 
 <?php require_once "layout/authHeader.php"; ?>
@@ -36,7 +35,7 @@ $session = Session::getInstance();
                     <div class="form-outline v-password-container">
                       <label class="form-label" for="password">Password</label>
                       <div class="form-input">
-                        <input type="text" id="password" data-password="password" name="password" class="form-control form-control-lg" />
+                        <input type="password" id="password" data-password="password" name="password" class="form-control form-control-lg" />
                         <button type="button" class="v-password-toggle" data-password="password">Show</button>
                       </div>
                     </div>

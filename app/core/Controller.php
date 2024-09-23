@@ -5,6 +5,12 @@ declare(strict_types=1);
 trait Controller
 {
   public array $pageData = [];
+  public Session $session;
+
+  public function __construct()
+  {
+    $this->session = Session::getInstance();
+  }
 
   private function loadPage(string $filePath = 'index'): void
   {

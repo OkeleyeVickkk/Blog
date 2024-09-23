@@ -34,15 +34,16 @@ function isFalsy(mixed $data): bool
 
 function cleanString(string $string, mixed $type = "text"): bool|null|string
 {
-  if (empty($string)) die("Error, string cannot be empty");
+  if (empty($string)) return false;
   $data = (string) trim($string);
   $data = stripslashes($data);
 
   switch (strtolower($type)) {
     case "email":
       $data = filter_var($data, FILTER_VALIDATE_EMAIL);
-      if (isFalsy(data: $data)) {
-        die("Enter a proper email address");
+      if (isFalsy(data: $data) || !$data) {
+        $data = false;
+        return false;
       }
       break;
     case "text":

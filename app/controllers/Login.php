@@ -18,11 +18,10 @@ class Login
     $password = cleanString($_POST['password'], 'text');
 
     if (isFalsy($email) || isFalsy($password)) {
-      $this->pageData['errorMessage'] = 'Error occurred';
+      $this->pageData['errorMessage'] = 'Enter the correct data';
       $this->loadPage(filePath: 'auth/login');
       return;
     }
-
 
     if (!$user->checkIfAccountExist(['email' => $email])) {
       $this->pageData['errorMessage'] = 'Email entered is not registered';
@@ -39,6 +38,13 @@ class Login
       return;
     }
 
-    $user->updateUserLogTime(userData: ["email" => $email]);
+    if ($response) {
+      $result = $user->updateUserLogTime(userData: ["email" => $email]);
+      if ($result) {
+        $this->session->__set("user", $email);
+        $this->pageData['errorMessage'] = ''; //unsetting the error message
+        redirectTo(toLocation: 'index', replace: true);
+      }
+    }
   }
 }
