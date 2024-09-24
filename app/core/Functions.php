@@ -94,9 +94,8 @@ function generateRandomString(int $stringLength = 5): string
   return $totalRandomChars;
 }
 
-function sendDataToUser(string $contentType, array $response = [])
+function sendDataToUser(string $contentType, array $response = []): void
 {
-
   switch (strtolower($contentType)) {
     case 'application/json':
     case 'multipart/form-data':

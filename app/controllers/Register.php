@@ -4,14 +4,14 @@ require_once FIRST_PARENT_DIR . "models/User.php";
 
 class Register
 {
-  use Controller;
+  use UserController;
 
   public function index()
   {
     $newUser = new User();
 
     if (strtoupper($_SERVER["REQUEST_METHOD"]) !== "POST") {
-      $this->loadPage(filePath: 'auth/register');
+      $this->loadUserPage(filePath: 'auth/register');
       return;
     }
 

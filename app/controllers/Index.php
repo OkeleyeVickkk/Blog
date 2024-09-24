@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 class Index
 {
-  use Controller;
+  use UserController;
+
   public function index(array $params): void
   {
-    $this->pageData = $params;
-    $this->loadPage(filePath: 'index');
+    $this->loadUserPage(filePath: 'index');
   }
 }

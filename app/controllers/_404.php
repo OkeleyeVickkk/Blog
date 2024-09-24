@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 class _404
 {
-  use Controller;
+  use UserController;
 
   public function index()
   {
-    $this->loadPage('404');
+    $this->loadUserPage('404');
   }
 }

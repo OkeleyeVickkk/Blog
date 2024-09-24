@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-trait Controller
+trait UserController
 {
   // public array $pageData = [];
   protected string $dataType = 'application/json';
@@ -14,9 +14,9 @@ trait Controller
     $this->session = Session::getInstance();
   }
 
-  private function loadPage(string $filePath = 'index'): void
+  private function loadUserPage(string $filePath = 'index'): void
   {
-    $viewsFolder = FIRST_PARENT_DIR  . "views/";
+    $viewsFolder = FIRST_PARENT_DIR  . "views/users/";
     $fileName = $viewsFolder . $filePath . '.view.php';
     if (file_exists($fileName)) {
       require_once $fileName;

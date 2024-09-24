@@ -3,7 +3,6 @@
 declare(strict_types=1);
 ?>
 
-
 <?php require_once "components/header.view.php"; ?>
 <div id="page" class="s-pagewrap ss-home">
   <?php require_once "components/nav.view.php"; ?>
