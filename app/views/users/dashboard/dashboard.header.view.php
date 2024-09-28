@@ -17,7 +17,7 @@ declare(strict_types=1);
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
               <path d="M19.4 14.9C20.2 16.4 21 17 21 17H3s3-2 3-9c0-3.3 2.7-6 6-6c.7 0 1.3.1 1.9.3M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-              <circle cx="18" cy="8" r="4" stroke="#12a632" fill="#12a632" />
+              <circle cx="18" cy="8" r="3" />
             </g>
           </svg>
         </button>
@@ -129,7 +129,7 @@ declare(strict_types=1);
               <img src="<?= requireAssets("images/avatars/user-06.jpg") ?>" alt="" class="img-fluid" />
             </div>
             <div class="v-right-nav-detail d-none d-sm-flex">
-              <span class="v-user-name">Okeke JohnPaul </span>
+              <span class="v-user-name">Okeleye Victor</span>
             </div>
           </button>
           <button type="button" class="v-mobile-menu-toggler d-md-none">
@@ -145,8 +145,7 @@ declare(strict_types=1);
             <div class="v-profile-image">
               <img src="<?= requireAssets("images/avatars/user-06.jpg") ?>" alt="" class="img-fluid" />
             </div>
-            <span class="v-profile-name mt-2">Okeke JohnPaul</span>
-            <span class="v-profile-level">Level 2</span>
+            <span class="v-profile-name mt-2">Okeleye Victor Olamide</span>
           </div>
           <div class="v-step-container v-step-two mt-auto">
             <ul class="v-dropdown-link-list">
@@ -174,7 +173,7 @@ declare(strict_types=1);
                       <circle cx="18" cy="8" r="3" />
                     </g>
                   </svg>
-                  <span class="v-link-name">Notification</span>
+                  <span class="v-link-name">Notifications</span>
                 </a>
               </li>
             </ul>

@@ -14,7 +14,7 @@ declare(strict_types=1);
               <h3 class="fw-semibold">Register</h3>
               <span class="text-muted">Create your account now</span>
             </div>
-            <form action="" method="post" class="d-flex flex-column row-gap-3 mt-4">
+            <form action="" method="post" class="d-flex flex-column row-gap-3 mt-4 v-form">
               <div class="form-outline">
                 <label class="form-label" for="fullname">Fullname</label>
                 <input type="text" spellcheck="false" id="fullname" name="fullname" placeholder="Enter your fullname" class="form-control form-control-lg" />
@@ -31,7 +31,10 @@ declare(strict_types=1);
                 </div>
               </div>
               <div class="d-flex pt-3">
-                <button type="submit" id="register" class="btn v-action-btn btn-dark w-100">Sign Up</button>
+                <button type="submit" id="register" class="btn v-action-btn btn-dark w-100">
+                  <span class="v-btn-loader"></span>
+                  <span class="v-text">Sign up</span>
+                </button>
               </div>
 
               <div class="text-center ">
@@ -54,6 +57,9 @@ declare(strict_types=1);
     </div>
 </section>
 <script type="text/javascript">
+  // import {
+  //   createElement
+  // } from "./modules.js";
   const submitBtn = document.getElementById("register");
   const url = "http://localhost/project-blog/public/register.php";
 
@@ -79,16 +85,20 @@ declare(strict_types=1);
     }
     try {
       const response = await fetch(url, options);
-      if (!response.ok) return;
-      const result = await response.json();
-      const responseData = await result;
-      if (responseData.status) {
-        window.location.href = "http://localhost/project-blog/public/login.php";
+      if (!response.ok) {
+        throw new Error("Failed status");
+        return;
       }
+      const result = await response.json();
+      console.log(result)
+      const responseData = result;
+      console.log(responseData)
+      // if (responseData.status) {
+      // window.location.href = "http://localhost/project-blog/public/login.php";
+      // }
     } catch (error) {
-      console.warn(error);
+      console.log(error)
     }
-
   })
 </script>
 <?php require_once "layout/authFooter.php"; ?>

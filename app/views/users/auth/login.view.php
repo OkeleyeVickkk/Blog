@@ -38,7 +38,10 @@ declare(strict_types=1);
                     </div>
                   </div>
                   <div class="mt-4 mb-4">
-                    <button class="btn btn-dark btn-block w-100 v-action-btn" id="login" type="submit">Login</button>
+                    <button class="btn btn-dark btn-block w-100 v-action-btn" id="login" type="submit">
+                      <span class="v-btn-loader"></span>
+                      <span class="v-text">Login</span>
+                    </button>
                   </div>
 
                   <div class="mb-5 pb-lg-2 d-flex flex-column">
@@ -62,9 +65,14 @@ declare(strict_types=1);
     </div>
   </div>
 </section>
-<script type="text/javascript">
+<script type="module">
+  import {
+    createElement
+  } from "./modules.js";
+
+  const baseUrl = "http://localhost/project-blog/public";
   const submitBtn = document.getElementById("login");
-  const url = "http://localhost/project-blog/public/Login.php";
+  const url = `${baseUrl}/login.php`;
 
   submitBtn.addEventListener("click", async function(e) {
     e.preventDefault();
@@ -85,13 +93,20 @@ declare(strict_types=1);
       body: JSON.stringify(data)
     }
 
-    const response = await fetch(url, options);
-    if (!response.ok) return;
-    const result = await response.json();
-    const responseData = await result;
-    if (responseData.status) {
-      window.location.href = "http://localhost/project-blog/public/index.php";
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error("Failed status");
+      const result = await response.json();
+      const responseData = await result;
+      console.log(response.data)
+      // if (responseData.status) {
+      //   window.location.href = `${baseUrl}/dashboard/index.php`;
+      // }
+    } catch (error) {
+      console.log(error)
     }
   })
+
+  // createElement("div")
 </script>
 <?php require_once "layout/authFooter.php"; ?>

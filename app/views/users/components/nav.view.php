@@ -32,9 +32,7 @@ declare(strict_types=1);
         <!-- <li><a href=" <?= requireLink(link: 'styles'); ?>">Styles</a></li> -->
         <li><a href="<?= requireLink(link: 'contact'); ?>">Contact</a></li>
         <li><a href="<?= requireLink(link: 'create'); ?>">Write</a></li>
-        <?php if (!$this->session->__isset("user")): ?>
-          <li><a href="<?= requireLink(link: 'login'); ?>">Login</a></li>
-        <?php endif; ?>
+        <li><a href="<?= requireLink(link: 'login'); ?>">Login</a></li>
       </ul>
       <!-- end s-header__nav -->
     </nav>

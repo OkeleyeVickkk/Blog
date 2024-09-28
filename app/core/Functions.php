@@ -34,6 +34,7 @@ function isFalsy(mixed $data): bool
 
 function cleanString(string $string, mixed $type = "text"): bool|null|string
 {
+  var_dump($string);
   if (empty($string)) return false;
   $data = (string) trim($string);
   $data = stripslashes($data);
@@ -96,6 +97,7 @@ function generateRandomString(int $stringLength = 5): string
 
 function sendDataToUser(string $contentType, array $response = []): void
 {
+  var_dump($response);
   switch (strtolower($contentType)) {
     case 'application/json':
     case 'multipart/form-data':
@@ -112,5 +114,15 @@ function sendDataToUser(string $contentType, array $response = []): void
       header('Content-Type: application/json');
       echo json_encode($response);
       exit;
+  }
+}
+
+function removeExtension(string $extension): string
+{
+  if (!isset($extension)) return '';
+  if (!empty($extension) && str_contains($extension, ".")) {
+    return explode(".", $extension);
+  } else {
+    return $extension;
   }
 }

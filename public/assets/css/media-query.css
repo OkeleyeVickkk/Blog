@@ -6,7 +6,7 @@
 }
 @media all and (min-width: 420px) {
 	.v-header-inner .v-logo {
-		width: 9rem;
+		/* width: 9rem; */
 	}
 	.v-page-wrapper .v-listed-history .v-main .v-merge {
 		grid-template-columns: 0.8fr 0.6fr;

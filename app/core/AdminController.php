@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 trait AdminController
 {
-  function loadAdminPage(string $path = "index")
+  public function loadAdminPage(string $path = "index", $params = [])
   {
     $viewsFolder = FIRST_PARENT_DIR  . "views/admin/";
     $fileName = $viewsFolder . $path . '.view.php';

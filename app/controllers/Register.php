@@ -15,7 +15,10 @@ class Register
       return;
     }
 
-    $userDataArr = json_decode(file_get_contents('php://input'), true);
+    $userDataArr = json_decode(file_get_contents("php://input"), true);
+    if ($userDataArr == null) {
+      echo "Something is wrong";
+    }
 
     $fullname = cleanString(string: $userDataArr['fullname'], type: "text");
     $email = cleanString(string: $userDataArr['email'], type: "email");
@@ -64,9 +67,11 @@ class Register
     );
 
     if ($response) {
-      $response = array("status" => true, "message" => "Registration successful");
-      sendDataToUser(contentType: 'application/json', response: $response);
-      return;
+      sendDataToUser(
+        contentType: 'application/json',
+        response: array("status" => true, "message" => "Registration successful")
+      );
+      exit;
     }
   }
 }

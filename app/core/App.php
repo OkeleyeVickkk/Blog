@@ -39,8 +39,9 @@ class App
     }
 
     if (isset($resultingArr[1])) {
-      if (method_exists($this->controller, $resultingArr[1])) {
-        $this->method = $resultingArr[1];
+      $result = explode(".", $resultingArr[1]); //if there exist .html, .php or anything like so after the controller
+      if (method_exists($this->controller, $result[0])) {
+        $this->method = $result[0];
         unset($resultingArr[1]);
       }
     }

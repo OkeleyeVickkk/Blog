@@ -11,7 +11,7 @@ class User
   {
     if (!$userData) return false;
     $query =
-      "INSERT INTO {$this->tableName}(fullname, user_name, user_email, password, encrypt_pass_key) 
+      "INSERT INTO {$this->tableName} (fullname, user_name, user_email, password, encrypt_pass_key) 
          VALUES(:fullname, :username, :email, :password, :encrypt_key);";
     $response = $this->execute(sqlQuery: $query, arr: $userData);
     if (!$response) die("Error occured from the user model");

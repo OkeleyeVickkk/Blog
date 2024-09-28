@@ -5,12 +5,13 @@ declare(strict_types=1);
 class Dashboard
 {
   use UserController;
-  function index()
+
+  public function index()
   {
     $this->loadUserPage('dashboard/index');
   }
 
-  function layout()
+  public function layout()
   {
     $this->loadUserPage("dashboard/layout");
   }

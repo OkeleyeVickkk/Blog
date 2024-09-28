@@ -16,6 +16,7 @@ class Login
     }
 
     $result = json_decode(file_get_contents("php://input"), true);
+    var_dump($result);
     $email = cleanString($result['email'], 'email');
     $password = cleanString($result['password'], 'text');
 

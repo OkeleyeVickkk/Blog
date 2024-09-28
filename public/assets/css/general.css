@@ -16,7 +16,6 @@
 	0% {
 		transform: rotate(0deg);
 	}
-
 	100% {
 		transform: rotate(360deg);
 	}
@@ -148,7 +147,7 @@
 	border-bottom: 1px solid var(--border-line-clr);
 }
 .v-header-inner .v-logo {
-	width: 7.5rem;
+	max-width: 7.5rem;
 	transition: width 300ms ease-in-out;
 }
 .v-header-inner .v-profile-image {
@@ -621,7 +620,7 @@
 	min-width: var(--max-sidebar-width);
 	z-index: 9;
 	width: 90%;
-	padding: 1.1rem 1rem 1.8rem 1.3rem;
+	padding: 1.1rem 1rem 1.8rem 0.8rem;
 	display: flex;
 	position: fixed;
 	contain: layout;
