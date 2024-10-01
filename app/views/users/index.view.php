@@ -12,7 +12,10 @@ declare(strict_types=1);
       <div class="hero__slider swiper-container">
         <div class="swiper-wrapper">
           <article class="hero__slide swiper-slide">
-            <div class="hero__entry-image" style="background-image: url('<?= requireAssets('images/thumbs/featured/featured-01_2000.jpg'); ?>');"></div>
+            <div
+              class="hero__entry-image"
+              style="background-image: url('<?= requireAssets('images/thumbs/featured/featured-01_2000.jpg'); ?>');">
+            </div>
             <div class="hero__entry-text">
               <div class="hero__entry-text-inner">
                 <div class="hero__entry-meta">

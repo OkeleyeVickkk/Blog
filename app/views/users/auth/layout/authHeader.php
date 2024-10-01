@@ -18,3 +18,4 @@ declare(strict_types=1);
 </head>
 
 <body>
+  <?php require_once(dirname(__FILE__) . '../../../components/toast.view.php'); ?>

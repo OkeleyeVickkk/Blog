@@ -16,9 +16,6 @@ class Register
     }
 
     $userDataArr = json_decode(file_get_contents("php://input"), true);
-    if ($userDataArr == null) {
-      echo "Something is wrong";
-    }
 
     $fullname = cleanString(string: $userDataArr['fullname'], type: "text");
     $email = cleanString(string: $userDataArr['email'], type: "email");
@@ -55,14 +52,14 @@ class Register
       $username = $fullnameArr[0];
     }
 
-    list($encrpyt_key, $hashedPass) = encryptUserPassword(passwordToEncrypt: $password);
+    list($encrypt_pass_key, $hashedPass) = encryptUserPassword(passwordToEncrypt: $password);
     $response = $newUser->registerUser(
       userData: [
         "fullname" => $fullname,
         "email" => $email,
         "username" => $username,
         "password" => $hashedPass,
-        "encrypt_key" => $encrpyt_key
+        "encrypt_pass_key" => $encrypt_pass_key
       ]
     );
 

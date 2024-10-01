@@ -12,7 +12,7 @@ class User
     if (!$userData) return false;
     $query =
       "INSERT INTO {$this->tableName} (fullname, user_name, user_email, password, encrypt_pass_key) 
-         VALUES(:fullname, :username, :email, :password, :encrypt_key);";
+         VALUES(:fullname, :username, :email, :password, :encrypt_pass_key);";
     $response = $this->execute(sqlQuery: $query, arr: $userData);
     if (!$response) die("Error occured from the user model");
     return $response;
@@ -23,7 +23,7 @@ class User
     if ($userData) {
       $query =
         "SELECT * FROM {$this->tableName}
-        WHERE user_email = :email AND password = :password AND encrypt_pass_key = :encrypt_key;";
+        WHERE user_email = :email AND password = :password AND encrypt_pass_key = :encrypt_pass_key;";
 
       $result = $this->runQuery(sqlQuery: $query, arr: $userData);
       return $result;

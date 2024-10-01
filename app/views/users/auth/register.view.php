@@ -31,7 +31,7 @@ declare(strict_types=1);
                 </div>
               </div>
               <div class="d-flex pt-3">
-                <button type="submit" id="register" class="btn v-action-btn btn-dark w-100">
+                <button type="button" id="register" class="btn v-action-btn btn-dark w-100">
                   <span class="v-btn-loader"></span>
                   <span class="v-text">Sign up</span>
                 </button>
@@ -56,49 +56,4 @@ declare(strict_types=1);
       </div>
     </div>
 </section>
-<script type="text/javascript">
-  // import {
-  //   createElement
-  // } from "./modules.js";
-  const submitBtn = document.getElementById("register");
-  const url = "http://localhost/project-blog/public/register.php";
-
-  submitBtn.addEventListener("click", async function(e) {
-    e.preventDefault();
-    let email = document.getElementById('email');
-    let fullname = document.getElementById("fullname");
-    let password = document.getElementById('password');
-    if (!email || !password) return;
-
-    const data = {
-      email: email.value,
-      password: password.value,
-      fullname: fullname.value
-    }
-
-    const options = {
-      method: 'POST',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Failed status");
-        return;
-      }
-      const result = await response.json();
-      console.log(result)
-      const responseData = result;
-      console.log(responseData)
-      // if (responseData.status) {
-      // window.location.href = "http://localhost/project-blog/public/login.php";
-      // }
-    } catch (error) {
-      console.log(error)
-    }
-  })
-</script>
 <?php require_once "layout/authFooter.php"; ?>
