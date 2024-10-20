@@ -65,48 +65,4 @@ declare(strict_types=1);
     </div>
   </div>
 </section>
-<script type="module">
-  import {
-    createElement
-  } from "./modules.js";
-
-  const baseUrl = "http://localhost/project-blog/public";
-  const submitBtn = document.getElementById("login");
-  const url = `${baseUrl}/login.php`;
-
-  submitBtn.addEventListener("click", async function(e) {
-    e.preventDefault();
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    if (!email || !password) return;
-
-    const data = {
-      email: email.value,
-      password: password.value
-    }
-
-    const options = {
-      method: 'POST',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }
-
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) throw new Error("Failed status");
-      const result = await response.json();
-      const responseData = await result;
-      console.log(response.data)
-      // if (responseData.status) {
-      //   window.location.href = `${baseUrl}/dashboard/index.php`;
-      // }
-    } catch (error) {
-      console.log(error)
-    }
-  })
-
-  // createElement("div")
-</script>
 <?php require_once "layout/authFooter.php"; ?>

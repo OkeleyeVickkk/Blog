@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 trait UserController
 {
-  // public array $pageData = [];
+  public array $pageData = [];
   protected string $dataType = 'application/json';
-  protected array $response = [];
   public Session $session;
 
   public function __construct()
@@ -14,7 +13,7 @@ trait UserController
     $this->session = Session::getInstance();
   }
 
-  private function loadUserPage(string $filePath = 'index'): void
+  private function loadUserPage(string $filePath = 'index', array $pageData = []): void
   {
     $viewsFolder = FIRST_PARENT_DIR  . "views/users/";
     $fileName = $viewsFolder . $filePath . '.view.php';

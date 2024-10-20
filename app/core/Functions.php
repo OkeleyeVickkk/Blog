@@ -53,7 +53,6 @@ function cleanString(string $string, mixed $type = "text"): bool|null|string
       $data = htmlspecialchars($data);
       break;
   }
-
   return $data;
 }
 
@@ -61,7 +60,6 @@ function encryptUserPassword(string $passwordToEncrypt): array|string
 {
   $passwordKey = hash("sha256", $passwordToEncrypt);
   $hashedPass = password_hash($passwordToEncrypt, PASSWORD_DEFAULT);
-
   return [$passwordKey, $hashedPass];
 }
 
@@ -85,12 +83,10 @@ function generateRandomString(int $stringLength = 5): string
 {
   $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   $totalRandomChars = '';
-
   while (strlen($totalRandomChars) < $stringLength) {
     $randomInt = mt_rand(0, strlen(trim($chars)) - 1);
     $totalRandomChars .= $chars[$randomInt];
   }
-
   return $totalRandomChars;
 }
 

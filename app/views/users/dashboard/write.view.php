@@ -12,7 +12,7 @@
       <div class="v-main-content-inner col-lg-11 col-xl-11 mx-auto">
         <div class="p-0">
           <header class="v-page-title">
-            <h3 class="v-title">Index Page</h3>
+            <h3 class="v-title">Write Page</h3>
             <span class="v-subtext">
               Good <span class="v-day ms-1" data-daytime="day">morning, be great today</span>
               <span class="d-flex align-items-center justify-content-center">
@@ -22,9 +22,7 @@
           </header>
         </div>
         <div class="v-main-content-inner col-12 row mt-3 m-0 justify-content-between mx-auto position-relative">
-          <div class="v-page-wrapper p-0">
-            <?= preIt($pageData) ?>
-          </div>
+          <div class="v-page-wrapper p-0"></div>
         </div>
       </div>
     </main>

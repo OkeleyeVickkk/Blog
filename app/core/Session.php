@@ -33,11 +33,10 @@ class Session
     $_SESSION[$name] = $value;
   }
 
-  public function __get(string $name): mixed
+  public function __get(string $name): bool|string|array
   {
-    if (isset($_SESSION[$name])) {
-      return $_SESSION[$name];
-    }
+    if (!isset($_SESSION[$name])) return false;
+    return $_SESSION[$name];
   }
 
   public function __isset(string $name): bool

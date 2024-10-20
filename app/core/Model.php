@@ -5,7 +5,6 @@ declare(strict_types=1);
 trait Model
 {
   use Database;
-  protected string $tableName = "users";
 
   //execute does select
   public function runQuery(string $sqlQuery, array $arr = []): array

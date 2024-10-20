@@ -5,7 +5,8 @@
 	const falsies = ["", null, undefined, 0, false, [], {}];
 	const LOADING_STATUS = "isLoading";
 	const ERROR = "error";
-	const SUCCESS = "SUCCESS";
+	const SUCCESS = "success";
+	const BASE_URL = "http://localhost/project-blog/public";
 
 	const createElement = function (element) {
 		if (!element) return;
@@ -77,10 +78,76 @@
 		});
 	}
 
+	function authenticateLogin() {
+		const submitBtn = document.getElementById("login");
+		if (!submitBtn) return;
+
+		submitBtn.addEventListener("click", async function (e) {
+			e.preventDefault();
+			const target = this;
+			addClass(target, LOADING_STATUS);
+			let email = document.getElementById("email");
+			let password = document.getElementById("password");
+			if (!email || !password) {
+				removeClass(target, LOADING_STATUS);
+				return;
+			}
+
+			const dataObj = {
+				email: email.value.trim(),
+				password: password.value.trim(),
+			};
+
+			for (item in dataObj) {
+				if (dataObj[item] === "") {
+					switch (item) {
+						case "email":
+							showToast("Enter email address", ERROR);
+							break;
+						case "password":
+							showToast("You didn't enter a password", ERROR);
+							break;
+						default:
+							showToast(`Please enter ${item}`, ERROR);
+							break;
+					}
+					removeClass(target, LOADING_STATUS);
+					return;
+				}
+			}
+
+			const url = `${BASE_URL}/login`;
+			const options = {
+				method: "POST",
+				header: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(dataObj),
+			};
+			try {
+				addClass(target, LOADING_STATUS);
+				const response = await fetch(url, options);
+				if (!response.ok) {
+					removeClass(target, LOADING_STATUS);
+					throw new Error("Error occured, try again!");
+				}
+				const result = await response.json();
+				if (result && result.status === true) {
+					showToast(result.message, SUCCESS);
+					setTimeout(() => window.location.replace(`${BASE_URL}/dashboard/`), 2000);
+				} else {
+					throw new Error(result.message);
+				}
+			} catch (error) {
+				removeClass(target, LOADING_STATUS);
+				showToast(error, ERROR);
+			}
+		});
+	}
+
 	function authenticateRegistration() {
 		const submitBtn = document.getElementById("register");
 		if (!submitBtn) return;
-		const url = "http://localhost/project-blog/public/register.php";
 
 		submitBtn.addEventListener("click", async function (e) {
 			e.preventDefault();
@@ -121,6 +188,8 @@
 				}
 			}
 
+			const url = `${BASE_URL}/register.php`;
+
 			const options = {
 				method: "POST",
 				header: {
@@ -133,12 +202,14 @@
 				const response = await fetch(url, options);
 				if (!response.ok) {
 					removeClass(target, LOADING_STATUS);
-					throw new Error("Failed status");
+					throw new Error("Error occured, try again!");
 				}
 				const result = await response.json();
 				if (result && result.status === true) {
-					showToast(SUCCESS, result.message);
-					window.location.href = "http://localhost/project-blog/public/login.php";
+					showToast(result.message, SUCCESS);
+					setTimeout(() => {
+						window.location.replace(`${BASE_URL}/login`);
+					}, 2000);
 				} else {
 					throw new Error(result.message);
 				}
@@ -152,5 +223,6 @@
 	(function () {
 		initPasswordToggler();
 		authenticateRegistration();
+		authenticateLogin();
 	})();
 })();

@@ -58,7 +58,7 @@ if (checkLength(document.querySelectorAll("[data-v-receiver]"))) {
 			const arrayOfChildren = childrenButtons || childrenLiTags;
 			arrayOfChildren.forEach((child) => {
 				child.addEventListener("click", function () {
-					checkIfEleHasClassList(dropdown) || checkIfEleHasClassList(dropdownToggler) ? (hideElement(dropdown), hideElement(dropdownToggler)) : null;
+					(checkIfEleHasClassList(dropdown) || checkIfEleHasClassList(dropdownToggler)) && (hideElement(dropdown), hideElement(dropdownToggler));
 				});
 			});
 		}
