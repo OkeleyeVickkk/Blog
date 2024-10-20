@@ -5,11 +5,18 @@ require_once FIRST_PARENT_DIR . 'models/User.php';
 class Login
 {
   use UserController;
-  protected User $user = new User();
+
+  protected $user;
+
+  public function __construct()
+  {
+    if (!isset($this->user)) {
+      $this->user = new User();
+    }
+  }
 
   public function index()
   {
-
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
       $this->loadUserPage(filePath: 'auth/login');
       return;
@@ -33,7 +40,6 @@ class Login
 
     if (!$this->user->checkIfAccountExist(['email' => $email])) {
       $this->pageData = array('status' => false, 'message' => 'Email entered is not registered');
-      var_dump($this->pageData);
       sendDataToUser(contentType: $this->dataType, response: $this->pageData);
       return;
     }
@@ -48,13 +54,13 @@ class Login
     }
 
     if ($response) {
-      $result = $this->user->updateUserLogTime(userData: ["email" => $email]);
-      if ($result) {
-        $this->session->__set("user", $email);
-        $this->pageData = array('status' => true, 'message' => 'Logged In successfully');
-        sendDataToUser(contentType: $this->dataType, response: $this->pageData);
-        exit;
-      }
+      // $result = $this->user->updateUserLogTime(userData: ["email" => $email]);
+      // if ($result) {
+      $this->pageData = array('status' => true, 'message' => 'Logged In successfully');
+      sendDataToUser(contentType: $this->dataType, response: $this->pageData);
+
+      exit;
+      // }
     }
   }
 }

@@ -4,14 +4,8 @@ declare(strict_types=1);
 
 trait UserController
 {
-  public array $pageData = [];
+  protected array $pageData = [];
   protected string $dataType = 'application/json';
-  public Session $session;
-
-  public function __construct()
-  {
-    $this->session = Session::getInstance();
-  }
 
   private function loadUserPage(string $filePath = 'index', array $pageData = []): void
   {

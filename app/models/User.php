@@ -67,7 +67,9 @@ class User
     }
     unset($query);
     $this->tableName = 'clockUserIn';
-    $query = "INSERT INTO {$this->tableName} (idOfWhoLoggedIn, userEmail, isAdmin) VALUES (:userId, :userEmail, :isAdmin);";
+    $query = "INSERT INTO {$this->tableName} 
+              (idOfWhoLoggedIn, userEmail, isAdmin) 
+              VALUES (:userId, :userEmail, :isAdmin);";
     $result = $this->execute(
       sqlQuery: $query,
       arr: [
