@@ -244,8 +244,7 @@ window.addEventListener("DOMContentLoaded", function () {
 	const pathname = "profile";
 	if (window.location.pathname.includes(pathname) || window.location.pathname == pathname) {
 		const btn = document.createElement("button");
-		btn.setAttribute("data-bs-target", "#cashBack");
-		btn.setAttribute("data-bs-toggle", "offcanvas");
+		// btn.setAtste("data-bs-toggle", "offcanvas");
 		btn.style.display = "none";
 		document.body.appendChild(btn);
 		btn.click();

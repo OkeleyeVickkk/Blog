@@ -130,7 +130,7 @@ declare(strict_types=1);
             </div>
             <div class="v-right-nav-detail d-none d-sm-flex">
               <span class="v-user-name">
-                Okeleye Victor Olamide,
+                <?= $pageData['fullName'] ?>
               </span>
             </div>
           </button>
@@ -148,7 +148,7 @@ declare(strict_types=1);
               <img src="<?= requireAssets("images/avatars/user-06.jpg") ?>" alt="" class="img-fluid" />
             </div>
             <span class="v-profile-name mt-2">
-              <?= $pageData['fullName']; ?>
+              <?= htmlspecialchars($pageData['fullName']); ?>
             </span>
           </div>
           <div class="v-step-container v-step-two mt-auto">

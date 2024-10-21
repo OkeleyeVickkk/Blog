@@ -10,17 +10,28 @@ class User
   public function registerUser(array $userData): mixed
   {
     if (!$userData) return false;
-    $query = "INSERT INTO {$this->tableName} 
-             (fullName, userName, userEmail, password, encryptPassKey, isAdmin) 
-             VALUES(:fullname, :username, :email, :password, :encryptPassKey, :isAdmin);";
-    $response = $this->execute(sqlQuery: $query, arr: $userData);
-    if (!$response) {
+    try {
+      $query = "INSERT INTO {$this->tableName} 
+               (fullName, userName, userEmail, password, encryptPassKey, isAdmin) 
+               VALUES(:fullname, :username, :email, :password, :encryptPassKey, :isAdmin);";
+      $responseFromCreatingNewUser = $this->execute(sqlQuery: $query, arr: $userData);
+      if (!$responseFromCreatingNewUser) {
+        throw new Exception('Error creating an account, try again!');
+      }
+
+      $this->tableName = "userProfileImage";
+      $query = "INSERT INTO {$this->tableName} (userEmail) VALUES (:email);";
+      $response = $this->execute(sqlQuery: $query, arr: ['email' => $userData['email']]);
+
+      if (!$response) {
+        throw new Exception("Error updating the user profile table");
+      }
+    } catch (\Exception $error) {
       $response = array(
         "status" => false,
-        "message" => "Error creating an account, try again!"
+        "message" => $error
       );
-      sendDataToUser(contentType: 'application/json', response: $response);
-    };
+    }
     return $response;
   }
 

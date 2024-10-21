@@ -1,12 +1,12 @@
-<?php require_once "dashboard.meta.view.php" ?>
+<?php require_once "pageLayouts/dashboard.meta.view.php" ?>
 <!-- header @::start -->
 <div class="v-body-wrapper">
-  <?php require_once "dashboard.header.view.php" ?>
+  <?php require_once "pageLayouts/dashboard.header.view.php" ?>
   <!-- header @::end -->
   <!-- main @::start -->
   <section id="v-main">
     <!-- sidebar @::start -->
-    <?php require_once "dashboard.sidebar.view.php" ?>
+    <?php require_once "pageLayouts/dashboard.sidebar.view.php" ?>
     <!-- sidebar @::end -->
     <main class="v-main-content">
       <div class="v-main-content-inner col-lg-11 col-xl-11 mx-auto">
@@ -29,4 +29,4 @@
   </section>
   <!-- main @::end -->
 </div>
-<?php require_once "dashboard.footer.view.php"; ?>
+<?php require_once "pageLayouts/dashboard.footer.view.php"; ?>

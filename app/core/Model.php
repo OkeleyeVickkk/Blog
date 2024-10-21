@@ -26,13 +26,16 @@ trait Model
   public function execute(string $sqlQuery, array $arr = []): bool
   {
     try {
+      $this->connect()->beginTransaction();
       if ($sqlQuery) {
         $connection = $this->connect();
         $statement = $connection->prepare($sqlQuery);
         $response = !empty($arr) ? $statement->execute($arr) : $statement->execute();
         return $response;
       }
+      $this->connect()->rollBack();
     } catch (\Exception $error) {
+      $this->connect()->rollBack();
       die($error->getMessage());
     }
   }

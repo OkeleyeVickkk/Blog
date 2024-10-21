@@ -51,4 +51,9 @@ class Dashboard
   {
     $this->loadUserPage("dashboard/write");
   }
+
+  public function profile()
+  {
+    $this->loadUserPage("dashboard/profile");
+  }
 }

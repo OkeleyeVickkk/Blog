@@ -97,12 +97,12 @@ function sendDataToUser(string $contentType, array $response = []): void
   echo $contentType === 'text/html' ? $response : json_encode($response);
 }
 
-function removeExtension(string $extension): string
+function splitString(string $stringChars, string $separator = null)
 {
-  if (!isset($extension)) return '';
-  if (!empty($extension) && str_contains($extension, ".")) {
-    return explode(".", $extension);
+  if ($separator === null) {
+    $result = explode(' ', $stringChars);
   } else {
-    return $extension;
+    $result = explode($separator, $stringChars);
   }
+  return htmlspecialchars($result[0]);
 }

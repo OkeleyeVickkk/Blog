@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="<?= requireAssets("css/bootstrap.min.css") ?>" />
   <link rel=" stylesheet" type="text/css" href="<?= requireAssets("css/dashboard.default.css", true) ?>" />
   <link rel=" stylesheet" type="text/css" href="<?= requireAssets("css/general.css", true) ?>" />
-  <?php echo isset($customPageLink) ?  $customPageLink : ''; ?>
+  <?= isset($customPageLink) ?  $customPageLink : ''; ?>
   <link rel=" stylesheet" type="text/css" href="<?= requireAssets("css/media-query.css", true) ?>" />
 
   <!-- utils styles -->

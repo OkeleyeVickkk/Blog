@@ -1,12 +1,12 @@
-<?php require_once "dashboard.meta.view.php" ?>
+<?php require_once "pageLayouts/dashboard.meta.view.php" ?>
 <!-- header @::start -->
 <div class="v-body-wrapper">
-  <?php require_once "dashboard.header.view.php" ?>
+  <?php require_once "pageLayouts/dashboard.header.view.php" ?>
   <!-- header @::end -->
   <!-- main @::start -->
   <section id="v-main">
     <!-- sidebar @::start -->
-    <?php require_once "dashboard.sidebar.view.php" ?>
+    <?php require_once "pageLayouts/dashboard.sidebar.view.php" ?>
     <!-- sidebar @::end -->
     <main class="v-main-content">
       <div class="v-main-content-inner col-lg-11 col-xl-11 mx-auto">
@@ -14,17 +14,15 @@
           <header class="v-page-title">
             <h3 class="v-title">Index Page</h3>
             <span class="v-subtext">
-              Good <span class="v-day ms-1" data-daytime="day">morning, be great today</span>
+              Good <span class="v-day ms-1">day <?= splitString($pageData['userName'], ' ') ?></span>
               <span class="d-flex align-items-center justify-content-center">
-                <img src="" data-icon="day" alt="" class="img-fluid ms-1" />
+                <span class="v-icon" data-icon="day"></span>
               </span>
             </span>
           </header>
         </div>
         <div class="v-main-content-inner col-12 row mt-3 m-0 justify-content-between mx-auto position-relative">
           <div class="v-page-wrapper p-0">
-            <?= preIt($pageData) ?>
-            <?= ($pageData['fullName']) ?>
           </div>
         </div>
       </div>
@@ -32,4 +30,4 @@
   </section>
   <!-- main @::end -->
 </div>
-<?php require_once "dashboard.footer.view.php"; ?>
+<?php require_once "pageLayouts/dashboard.footer.view.php"; ?>
