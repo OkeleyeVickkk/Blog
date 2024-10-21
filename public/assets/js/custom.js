@@ -92,12 +92,10 @@
 				removeClass(target, LOADING_STATUS);
 				return;
 			}
-
 			const dataObj = {
 				email: email.value.trim(),
 				password: password.value.trim(),
 			};
-
 			for (item in dataObj) {
 				if (dataObj[item] === "") {
 					switch (item) {
@@ -108,7 +106,7 @@
 							showToast("You didn't enter a password", ERROR);
 							break;
 						default:
-							showToast(`Please enter ${item}`, ERROR);
+							showToast(`${item} required`, ERROR);
 							break;
 					}
 					removeClass(target, LOADING_STATUS);

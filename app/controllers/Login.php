@@ -1,6 +1,7 @@
 <?php
 
 require_once FIRST_PARENT_DIR . 'models/User.php';
+require_once FIRST_PARENT_DIR . 'core/Session.php';
 
 class Login
 {
@@ -45,22 +46,19 @@ class Login
     }
 
     list($encryptedKey) = encryptUserPassword($password);
-    $response = $this->user->getUserDetails(['email' => $email, 'encryptedPass' => $encryptedKey]);
+    $response = $this->user->getUserAuthDetails(['email' => $email, 'encryptedPass' => $encryptedKey]);
 
     if (!$response || !decryptUserPassword($password, $response[0]['password'])) {
-      $this->pageData = array('status' => false, 'message' => 'You entered the wrong password');
+      $this->pageData = array('status' => false, 'message' => 'Password incorrect!');
       sendDataToUser(contentType: $this->dataType, response: $this->pageData);
       return;
     }
 
     if ($response) {
-      // $result = $this->user->updateUserLogTime(userData: ["email" => $email]);
-      // if ($result) {
+      Session::getInstance()->__set(USER_SESSION, $email);
       $this->pageData = array('status' => true, 'message' => 'Logged In successfully');
       sendDataToUser(contentType: $this->dataType, response: $this->pageData);
-
       exit;
-      // }
     }
   }
 }

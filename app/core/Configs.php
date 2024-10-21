@@ -15,3 +15,5 @@ define("DB", [
   "pass" => "horlarmhedey",
   "charset" => "utf8mb4"
 ]);
+
+define("USER_SESSION", "user");

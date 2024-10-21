@@ -28,7 +28,6 @@ declare(strict_types=1);
                       <label class="form-label" for="email">Email address</label>
                       <input type="email" id="email" name="email" value="" placeholder="Enter your email" class="form-control form-control-lg" />
                     </div>
-
                     <div class="form-outline v-password-container">
                       <label class="form-label" for="password">Password</label>
                       <div class="form-input">

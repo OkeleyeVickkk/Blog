@@ -44,13 +44,25 @@ class User
     }
   }
 
-  public function getUserDetails(array $userData): array
+  public function getUserAuthDetails(array $userData): array
   {
     if ($userData) {
       $query =  "SELECT * FROM {$this->tableName}
                 WHERE userEmail = :email AND encryptPassKey = :encryptedPass;";
       $result = $this->runQuery(sqlQuery: $query, arr: $userData);
       return $result;
+    }
+  }
+  public function getUserDetails(array $userData): array
+  {
+    if ($userData) {
+      $this->tableName = 'users';
+      $query =  "SELECT * FROM {$this->tableName}
+                WHERE userEmail = :email";
+      $result = $this->runQuery(sqlQuery: $query, arr: $userData);
+      if (count($result) > 0) {
+        return $result[0];
+      }
     }
   }
 

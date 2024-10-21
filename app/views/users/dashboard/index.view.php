@@ -24,6 +24,7 @@
         <div class="v-main-content-inner col-12 row mt-3 m-0 justify-content-between mx-auto position-relative">
           <div class="v-page-wrapper p-0">
             <?= preIt($pageData) ?>
+            <?= ($pageData['fullName']) ?>
           </div>
         </div>
       </div>

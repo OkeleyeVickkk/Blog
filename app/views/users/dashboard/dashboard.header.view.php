@@ -129,7 +129,9 @@ declare(strict_types=1);
               <img src="<?= requireAssets("images/avatars/user-06.jpg") ?>" alt="" class="img-fluid" />
             </div>
             <div class="v-right-nav-detail d-none d-sm-flex">
-              <span class="v-user-name">Okeleye Victor</span>
+              <span class="v-user-name">
+                Okeleye Victor Olamide,
+              </span>
             </div>
           </button>
           <button type="button" class="v-mobile-menu-toggler d-md-none">
@@ -145,7 +147,9 @@ declare(strict_types=1);
             <div class="v-profile-image">
               <img src="<?= requireAssets("images/avatars/user-06.jpg") ?>" alt="" class="img-fluid" />
             </div>
-            <span class="v-profile-name mt-2">Okeleye Victor Olamide</span>
+            <span class="v-profile-name mt-2">
+              <?= $pageData['fullName']; ?>
+            </span>
           </div>
           <div class="v-step-container v-step-two mt-auto">
             <ul class="v-dropdown-link-list">

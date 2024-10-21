@@ -7,8 +7,9 @@ trait UserController
   protected array $pageData = [];
   protected string $dataType = 'application/json';
 
-  private function loadUserPage(string $filePath = 'index', array $pageData = []): void
+  private function loadUserPage(string $filePath = 'index'): void
   {
+    $pageData = $this->pageData;
     $viewsFolder = FIRST_PARENT_DIR  . "views/users/";
     $fileName = $viewsFolder . $filePath . '.view.php';
     if (file_exists($fileName)) {
