@@ -1,9 +1,8 @@
-import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
+import { showToast, setLoadStatus, falsies } from "./utils.custom.js";
 (function () {
 	// @ts-check
 	"use-strict";
 
-	const LOADING_STATUS = "isLoading";
 	const ERROR = "error";
 	const SUCCESS = "success";
 	const BASE_URL = "http://localhost/project-blog/public";
@@ -40,18 +39,18 @@ import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 		submitBtn.addEventListener("click", async function (e) {
 			e.preventDefault();
 			const target = this;
-			addClass(target, LOADING_STATUS);
+			setLoadStatus(target, undefined, true);
 			let email = document.getElementById("email");
 			let password = document.getElementById("password");
 			if (!email || !password) {
-				removeClass(target, LOADING_STATUS);
+				target.innerHTML = "Login";
 				return;
 			}
 			const dataObj = {
 				email: email.value.trim(),
 				password: password.value.trim(),
 			};
-			for (item in dataObj) {
+			for (const item in dataObj) {
 				if (dataObj[item] === "") {
 					switch (item) {
 						case "email":
@@ -64,7 +63,7 @@ import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 							showToast(`${item} required`, ERROR);
 							break;
 					}
-					removeClass(target, LOADING_STATUS);
+					target.innerHTML = "Login";
 					return;
 				}
 			}
@@ -78,10 +77,10 @@ import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 				body: JSON.stringify(dataObj),
 			};
 			try {
-				addClass(target, LOADING_STATUS);
+				setLoadStatus(target, undefined, true);
 				const response = await fetch(url, options);
 				if (!response.ok) {
-					removeClass(target, LOADING_STATUS);
+					target.innerHTML = "Login";
 					throw new Error("Error occured, try again!");
 				}
 				const result = await response.json();
@@ -92,7 +91,7 @@ import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 					throw new Error(result.message);
 				}
 			} catch (error) {
-				removeClass(target, LOADING_STATUS);
+				target.innerHTML = "Login";
 				showToast(error, ERROR);
 			}
 		});
@@ -105,12 +104,12 @@ import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 		submitBtn.addEventListener("click", async function (e) {
 			e.preventDefault();
 			const target = this;
-			addClass(target, LOADING_STATUS);
+			setLoadStatus(target, undefined, true);
 			let email = document.getElementById("email");
 			let fullname = document.getElementById("fullname");
 			let password = document.getElementById("password");
 			if (!email || !password || !fullname) {
-				removeClass(target, LOADING_STATUS);
+				setLoadStatus(target, "Register", false);
 				return;
 			}
 
@@ -136,7 +135,7 @@ import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 							showToast(`Please enter ${item}`, ERROR);
 							break;
 					}
-					removeClass(target, LOADING_STATUS);
+					setLoadStatus(target, "Register", false);
 					return;
 				}
 			}
@@ -151,10 +150,10 @@ import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 				body: JSON.stringify(dataObj),
 			};
 			try {
-				addClass(target, LOADING_STATUS);
+				setLoadStatus(target, undefined, true);
 				const response = await fetch(url, options);
 				if (!response.ok) {
-					removeClass(target, LOADING_STATUS);
+					setLoadStatus(target, "Register", false);
 					throw new Error("Error occured, try again!");
 				}
 				const result = await response.json();
@@ -167,7 +166,7 @@ import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 					throw new Error(result.message);
 				}
 			} catch (error) {
-				removeClass(target, LOADING_STATUS);
+				setLoadStatus(target, "Register", false);
 				showToast(error, ERROR);
 			}
 		});

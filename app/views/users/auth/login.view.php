@@ -38,7 +38,6 @@ declare(strict_types=1);
                   </div>
                   <div class="mt-4 mb-4">
                     <button class="btn btn-dark btn-block w-100 v-action-btn" id="login" type="submit">
-                      <span class="v-btn-loader"></span>
                       <span class="v-text">Login</span>
                     </button>
                   </div>

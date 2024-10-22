@@ -7,6 +7,12 @@ export const createElement = function (element) {
 	return [eleToCreate, null];
 };
 
+export function setLoadStatus(target, textToSet, isLoading = false) {
+	const SPINNER = `<span class="v-btn-loader"></span>`;
+	if (!target) return;
+	isLoading ? (target.innerHTML = SPINNER) : (target.innerHTML = textToSet);
+}
+
 export const showToast = function (toastMessage, toastStatus = "") {
 	const [button, error] = createElement("button");
 	if (error !== null || !button) return alert("Omo code don break somewhere");
@@ -49,4 +55,13 @@ export function addClass(element, state = "active") {
 
 export function checkLength(elementArray) {
 	if (elementArray && elementArray.length) return true;
+}
+
+export function callDomEle(target, parentElem, isTargetMoreThanOne = false) {
+	if (!target) return null;
+	parentElem = parentElem || document;
+	const queryMethod = isTargetMoreThanOne ? "querySelectorAll" : "querySelector";
+	const elem = parentElem[queryMethod](target);
+
+	return elem || null;
 }

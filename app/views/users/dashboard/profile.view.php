@@ -15,7 +15,7 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
     <?php require_once "pageLayouts/dashboard.sidebar.view.php" ?>
     <!-- sidebar @::end -->
     <main class="v-main-content">
-      <div class="v-main-content-inner col-lg-7 col-xl-6 p-4 mx-auto rounded-4 bg-white">
+      <div class="v-main-content-inner col-lg-9 col-xl-6 p-4 mx-auto rounded-4 bg-white">
         <div class="p-0">
           <header class="v-page-title">
             <h3 class="v-title">My Account</h3>

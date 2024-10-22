@@ -20,3 +20,4 @@
 </head>
 
 <body>
+  <?php require_once(dirname(__FILE__) . '../../../components/toast.view.php'); ?>

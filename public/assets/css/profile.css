@@ -209,7 +209,6 @@ body:has(.offcanvas .modal) .offcanvas .modal-content {
 	width: var(--size);
 	height: var(--size);
 	aspect-ratio: 1/1;
-	background-color: var(--purple-light);
 	position: relative;
 }
 #basicProfileSetting .v-custom-input-trigger {
@@ -220,8 +219,8 @@ body:has(.offcanvas .modal) .offcanvas .modal-content {
 	height: 100%;
 	-o-object-fit: cover;
 	object-fit: cover;
-	-o-object-position: center;
-	object-position: center;
+	-o-object-position: center top;
+	object-position: center top;
 }
 .offcanvas .v-form-group .form-label {
 	font-size: 0.88rem;
@@ -1016,7 +1015,7 @@ body:has(.offcanvas .modal) .offcanvas .modal-content {
 #selectBank .form-check {
 	padding: 1rem 1rem 1rem 2rem;
 }
-.modal:not(#cardifyBillsQuickSwap) .v-form-input .v-icon svg {
+.modal:not(#cardifyBillsQuickSwap) .v-form-input svg {
 	--size: 1.85rem;
 }
 /* .modal .v-form-input:has(.v-icon) .form-control {

@@ -42,16 +42,7 @@
 	text-align: center;
 	transition: var(--transition);
 }
-.v-action-btn.isLoading .v-btn-loader {
-	display: block;
-}
-.v-action-btn.isLoading .v-text {
-	display: none;
-}
-.v-action-btn:not(.isLoading) .v-btn-loader {
-	display: none;
-}
-.v-action-btn:not(.isLoading) .v-text {
+.v-action-btn .v-btn-loader {
 	display: block;
 }
 .v-action-btn:active {

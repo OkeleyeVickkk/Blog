@@ -121,45 +121,51 @@ declare(strict_types=1);
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="d-flex flex-column row-gap-3">
+          <form class="d-flex flex-column row-gap-3">
             <div class="v-profile-container d-flex align-items-center column-gap-4">
-              <input type="file" hidden />
+              <input type="file" hidden data-receive="fileInput" accept="image/*" />
               <div class="v-profile border">
-                <img src="<?= requireAssets('images/avatars/user-avatar.png') ?>" alt="" class="img-fluid" />
+                <img data-image-display="fileInput" src="<?= requireAssets('images/avatars/user-avatar.png') ?>" alt="" class="img-fluid" />
               </div>
-              <button type="button" class="v-custom-input-trigger">Click/Tap to change</button>
+              <button type="button" data-toggle="fileInput" class="v-custom-input-trigger">Click/Tap to change</button>
             </div>
             <ul class="v-listed-details">
               <li class="v-each-item">
                 <span class="v-text">Fullname</span>
-                <span class="v-text">Okeke Victor</span>
+                <span class="v-text"><?= htmlspecialchars($pageData['fullName']) ?></span>
+                <input type="hidden" name="" value="<?= htmlspecialchars($pageData['fullName']) ?>">
               </li>
-              <li class="v-each-item">
+              <li class=" v-each-item">
                 <span class="v-text">Email</span>
-                <span class="v-text">horlarmhedey200@gmail.com</span>
+                <span class="v-text"><?= htmlspecialchars($pageData['userEmail']) ?></span>
+                <input type="hidden" value="<?= htmlspecialchars($pageData['userEmail']) ?>">
               </li>
               <li class="v-each-item">
                 <span class="v-text">Username</span>
-                <span class="v-text">justus</span>
+                <span class="v-text"><?= htmlspecialchars($pageData['userName']) ?></span>
+                <input type="hidden" value="<?= htmlspecialchars($pageData['userName']) ?>">
               </li>
               <li class="v-each-item">
                 <span class="v-text">Phone Number</span>
-                <span class="v-text">09130586120</span>
+                <span class="v-text">
+                  <?= htmlspecialchars(isset($pageData['phoneNo']) ? $pageData['phoneNo'] : "Not set") ?>
+                  <input type="hidden" value="<?= htmlspecialchars(isset($pageData['phoneNo']) ? $pageData['phoneNo'] : "") ?>">
+                </span>
               </li>
               <li class="v-each-item">
                 <span class="v-text">Password</span>
                 <span class="v-text">
                   <span class="v-hidden">****</span>
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#changePassword" class="v-hidden">
+                  <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#changePassword" class="v-hidden">
                     <small class="v-inner-text" style="color: var(--primary-clr)">Change Password</small>
-                  </button>
+                  </button> -->
                 </span>
               </li>
             </ul>
-          </div>
+          </form>
         </div>
         <div class="modal-footer justify-content-center border-0">
-          <button type="button" class="v-modal-action v-choose" disabled>Update</button>
+          <button type="button" class="v-modal-action v-choose">Update</button>
           <!-- <button type="button" data-bs-dismiss="modal" class="v-modal-action v-cancel">cancel</button> -->
         </div>
       </div>
@@ -195,15 +201,13 @@ declare(strict_types=1);
                     data-v-receive-toggle="old-password"
                     placeholder="Enter old password" />
                   <button type="button" class="v-password-toggler" data-v-toggle="old-password">
-                    <span class="v-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                        <rect width="24" height="24" fill="none" />
-                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                          <path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
-                          <path d="M2 12c1.6-4.097 5.336-7 10-7s8.4 2.903 10 7c-1.6 4.097-5.336 7-10 7s-8.4-2.903-10-7" />
-                        </g>
-                      </svg>
-                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                      <rect width="24" height="24" fill="none" />
+                      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
+                        <path d="M2 12c1.6-4.097 5.336-7 10-7s8.4 2.903 10 7c-1.6 4.097-5.336 7-10 7s-8.4-2.903-10-7" />
+                      </g>
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -217,15 +221,13 @@ declare(strict_types=1);
                     data-v-receive-toggle="new-password"
                     placeholder="Enter new password" />
                   <button type="button" class="v-password-toggler" data-v-toggle="new-password">
-                    <span class="v-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                        <rect width="24" height="24" fill="none" />
-                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                          <path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
-                          <path d="M2 12c1.6-4.097 5.336-7 10-7s8.4 2.903 10 7c-1.6 4.097-5.336 7-10 7s-8.4-2.903-10-7" />
-                        </g>
-                      </svg>
-                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                      <rect width="24" height="24" fill="none" />
+                      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
+                        <path d="M2 12c1.6-4.097 5.336-7 10-7s8.4 2.903 10 7c-1.6 4.097-5.336 7-10 7s-8.4-2.903-10-7" />
+                      </g>
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -239,15 +241,13 @@ declare(strict_types=1);
                     data-v-receive-toggle="retype-password"
                     placeholder="Retype new pin" />
                   <button type="button" class="v-password-toggler" data-v-toggle="retype-password">
-                    <span class="v-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                        <rect width="24" height="24" fill="none" />
-                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                          <path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
-                          <path d="M2 12c1.6-4.097 5.336-7 10-7s8.4 2.903 10 7c-1.6 4.097-5.336 7-10 7s-8.4-2.903-10-7" />
-                        </g>
-                      </svg>
-                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                      <rect width="24" height="24" fill="none" />
+                      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
+                        <path d="M2 12c1.6-4.097 5.336-7 10-7s8.4 2.903 10 7c-1.6 4.097-5.336 7-10 7s-8.4-2.903-10-7" />
+                      </g>
+                    </svg>
                   </button>
                 </div>
               </div>

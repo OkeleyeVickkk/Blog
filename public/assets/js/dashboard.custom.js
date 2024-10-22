@@ -1,4 +1,4 @@
-import { addClass, removeClass, checkLength } from "./utils.custom.js";
+import { addClass, removeClass, checkLength, callDomEle, falsies, showToast } from "./utils.custom.js";
 
 const sidebarLinksWithDropdown = document.querySelectorAll(".v-main-link-container:has(.v-is-dropdown) .v-sidebar-link");
 const backdrop = document.querySelector(".v-right-nav #v-backdrop");
@@ -12,6 +12,26 @@ const goBackToggler = document.querySelector("#v-main .v-go-back");
 const dropdownTogglers = document.querySelectorAll("[data-v-target]");
 const allCardTabPanes = document.querySelectorAll("#v-cards-tab-content .v-tab-pane-inner");
 const all4DigitsInputContainers = document.querySelectorAll(".v-grid-inputs-container .v-grid-inputs-wrapper");
+
+const VISIBLE_EYE = `
+	<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+		<rect width="24" height="24" fill="none" />
+		<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+			<path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
+			<path d="M2 12c1.6-4.097 5.336-7 10-7s8.4 2.903 10 7c-1.6 4.097-5.336 7-10 7s-8.4-2.903-10-7" />
+		</g>
+	</svg>
+`;
+
+const INVISIBLE_EYE = `
+<svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
+	<rect width="24" height="24" fill="none" />
+	<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+		<path d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.69 1.69 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874" />
+		<path d="M14.13 9.887a3 3 0 1 0-4.243 4.242M4 20L20 4M10 18.704A7.1 7.1 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A23 23 0 0 0 19.57 9" />
+	</g>
+</svg>
+`;
 
 if (goBackToggler) {
 	goBackToggler.addEventListener("click", () => window.history.back());
@@ -143,31 +163,6 @@ if (checkLength(sidebarLinksWithDropdown)) {
 	sidebarLinksWithDropdown.forEach((link) => link.addEventListener("click", toggleSideBarLinkDropdown));
 }
 
-if (checkLength(allCardTabPanes)) {
-	allCardTabPanes.forEach((cardTabPane) => {
-		const allCardFaceToggler = cardTabPane.querySelectorAll(".v-card-item .v-card-face-toggler");
-		const cardsBothViews = cardTabPane.querySelectorAll(".v-card-item .v-card-face");
-		const card = cardTabPane.querySelector(".v-card");
-
-		allCardFaceToggler.forEach((toggler, _, togglersArr) => {
-			toggler.addEventListener("click", function () {
-				const cardAttrView = toggler.getAttribute("data-card-face-toggle-view");
-				togglersArr.forEach((eachToggler) => {
-					if (toggler === eachToggler && eachToggler.classList.contains("active")) return;
-					cardsBothViews.forEach((cardFace) => {
-						const cardView = cardFace.getAttribute("data-card-face-view");
-						cardAttrView === cardView
-							? (cardFace.classList.add("active"), card.classList.add("active"))
-							: (cardFace.classList.remove("active"), card.classList.remove("active"));
-					});
-					eachToggler.classList.remove("active");
-					toggler.classList.add("active");
-				});
-			});
-		});
-	});
-}
-
 if (checkLength(all4DigitsInputContainers)) {
 	for (const array of all4DigitsInputContainers) {
 		const codeInputs = array.querySelectorAll(".form-control");
@@ -188,40 +183,93 @@ if (checkLength(all4DigitsInputContainers)) {
 }
 
 function togglePasswords() {
-	const allInputContainerWithPassToggles = document.querySelectorAll(".v-input:has(.v-toggler-password), .v-form-input:has(button)");
-	if (checkLength(allInputContainerWithPassToggles)) {
-		console.log(allInputContainerWithPassToggles);
-		allInputContainerWithPassToggles.forEach((passWithToggle) => {
-			const hideShowButton = passWithToggle.querySelector(".v-toggler-password");
-			const passInput = passWithToggle.querySelector(".form-control");
-			hideShowButton && passInput
-				? hideShowButton.addEventListener("click", function () {
-						const typeOfInput = passInput.type;
-						typeOfInput === "password"
-							? ((passInput.type = "text"), (hideShowButton.textContent = "Hide"))
-							: ((passInput.type = "password"), (hideShowButton.textContent = "Show"));
-				  })
-				: null;
-		});
-	}
+	const allInputContainerWithPassToggles = callDomEle(".v-input:has(.v-toggler-password), .v-form-input:has(button)", undefined, true);
+	if (!checkLength(allInputContainerWithPassToggles)) return;
+	allInputContainerWithPassToggles.forEach((passWithToggle) => {
+		if (passWithToggle.contains(callDomEle("svg", passWithToggle))) {
+			const toggler = callDomEle("[data-v-toggle]", passWithToggle);
+			toggler.addEventListener("click", function (event) {
+				event.stopPropagation();
+				const self = this;
+				const attrValue = this.getAttribute("data-v-toggle");
+				if (falsies.includes(attrValue)) return;
+				const input = callDomEle(`input[data-v-receive-toggle=${attrValue}]`);
+				const typeOfInput = input.type;
+				if (falsies.includes(attrValue)) return;
+				typeOfInput === "password"
+					? ((input.type = "text"), (self.innerHTML = INVISIBLE_EYE))
+					: ((input.type = "password"), (self.innerHTML = VISIBLE_EYE));
+			});
+		} else {
+			const hideShowButton = callDomEle(".v-toggler-password", passWithToggle);
+			const passInput = callDomEle(".form-control", passWithToggle);
+
+			hideShowButton &&
+				passInput &&
+				hideShowButton.addEventListener("click", function () {
+					const typeOfInput = passInput.type;
+					typeOfInput === "password"
+						? ((passInput.type = "text"), (hideShowButton.textContent = "Hide"))
+						: ((passInput.type = "password"), (hideShowButton.textContent = "Show"));
+				});
+		}
+	});
 }
 
-function callDomEle(target, isTargetMoreThanOne = false) {
-	if (!target) return;
-	let elem;
-	if (isTargetMoreThanOne) {
-		elem = document.querySelectorAll(target);
-		if (!elem.length) return;
-	} else {
-		elem = document.querySelector(target);
-	}
-	return elem;
+const readFile = (passedFile) => {
+	if (!passedFile) return;
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.addEventListener("load", () => resolve(reader.result));
+		reader.addEventListener("error", () => reject(new Error(reader.error)));
+
+		reader.readAsDataURL(passedFile);
+	});
+};
+
+function initProfileImageUpload(element, displayContainer, toggler) {
+	if (!element) return;
+	element.addEventListener("input", async function (event) {
+		const acceptedFiles = ["image/png", "image/avif", "image/webp", "image/jpeg", "image/jpg"];
+		const maxFileSize = 2 * 1024 * 1024;
+		const files = event.target.files;
+		if (!files.length) return;
+		const file = files[0];
+		if (!acceptedFiles.includes(file.type.toLowerCase())) {
+			showToast("File has to be of type .png, .avif, .webp, .jpeg or jpg", "failed");
+			return;
+		}
+		if (file.size > maxFileSize) {
+			showToast("File is too large, ensure it is less that 2mb", "failed");
+			return;
+		}
+		const result = await readFile(file);
+		if (!result) {
+			showToast("Error uploading file, try again!", "failed");
+			return;
+		}
+
+		if (!displayContainer) return;
+		toggler.innerHTML = "Re-upload";
+		if (displayContainer.nodeType === Node.ELEMENT_NODE) {
+			displayContainer.src = result;
+		}
+	});
 }
 
 function toggleInput() {
-	let button = "#basicProfileSetting .v-custom-input-trigger";
-	button = callDomEle(button);
-	// console.log(button);
+	const modal = callDomEle("#basicProfileSetting");
+	const button = callDomEle(".v-custom-input-trigger", modal);
+	if (!button) return;
+	button.addEventListener("click", function () {
+		const attr = this.dataset.toggle;
+		if (!attr) return;
+		const inputEle = callDomEle(`[data-receive=${attr}]`);
+		const displayContainer = callDomEle(`[data-image-display=${attr}]`);
+		if (!inputEle) return;
+		inputEle.click();
+		initProfileImageUpload(inputEle, displayContainer, this);
+	});
 }
 
 function initAnimations() {
