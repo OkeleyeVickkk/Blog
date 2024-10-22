@@ -24,7 +24,7 @@ class Dashboard
         $this->pageData = $response;
       }
     } else {
-      redirectTo(toLocation: 'login');
+      redirectTo(toLocation: 'login', replace: true);
     }
   }
 
@@ -39,21 +39,21 @@ class Dashboard
 
   public function index()
   {
-    $this->loadUserPage('dashboard/index');
+    $this->loadUserPage('dashboard/index', $this->pageData);
   }
 
   public function layout()
   {
-    $this->loadUserPage("dashboard/layout");
+    $this->loadUserPage("dashboard/layout", $this->pageData);
   }
 
   public function write()
   {
-    $this->loadUserPage("dashboard/write");
+    $this->loadUserPage("dashboard/write", $this->pageData);
   }
 
   public function profile()
   {
-    $this->loadUserPage("dashboard/profile");
+    $this->loadUserPage("dashboard/profile", $this->pageData);
   }
 }

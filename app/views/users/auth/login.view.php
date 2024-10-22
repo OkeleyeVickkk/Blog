@@ -5,19 +5,19 @@ declare(strict_types=1);
 
 <?php require_once "layout/authHeader.php"; ?>
 <section class="vh-100">
-  <div class="container h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card rounded-4 overflow-hidden">
+  <div class="container-lg h-100">
+    <div class="row col-12 m-0 d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10 p-0">
+        <div class="card rounded-4 overflow-hidden col-12 col-sm-9 col-md-7 col-lg-12 col-xl-11 mx-auto">
           <div class="row col-12 overflow-hidden m-0">
-            <div class="col-md-6 col-lg-5 d-none p-0 d-md-block">
+            <div class="col-lg-6 col-xl-5 d-none p-0 d-lg-block">
               <figure class="overflow-hidden h-100">
                 <img src="<?= requireAssets(filePath: "images/thumbs/masonry/beetle-1200.jpg"); ?>"
                   alt="login form" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover" ; />
               </figure>
             </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body rounded-0 p-4 px-2 p-lg-5 text-black">
+            <div class="col-lg-6 col-xl-7 d-flex align-items-center">
+              <div class="w-100 rounded-0 p-4 p-lg-5 text-black">
                 <form action="" method="post" class="v-form" enctype="multipart/form-data">
                   <div class="d-flex flex-column mb-3 pb-1">
                     <h1 class="h1 fw-bold mb-0">Logo</h1>

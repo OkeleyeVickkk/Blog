@@ -45,85 +45,6 @@ declare(strict_types=1);
         </div>
       </div>
     </div>
-    <form action="" class="mt-3">
-      <div class="v-form-group my-3 d-flex flex-column row-gap-2">
-        <div class="v-form-input">
-          <label for="phoneNumberContact" class="form-label"> Support phone number </label>
-          <div class="position-relative v-icon-holder">
-            <input
-              type="text"
-              class="form-control"
-              id="phoneNumberContact"
-              data-v-receive-toggle="copyPhone"
-              value="+234 (0) 812 9700 472"
-              disabled
-              readonly />
-            <button type="button" class="v-copy-toggler" data-v-toggle="copyPhone">
-              <span class="v-text">Copy</span>
-              <span class="v-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                  <rect width="24" height="24" fill="none" />
-                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                  </g>
-                </svg>
-              </span>
-            </button>
-          </div>
-        </div>
-        <div class="v-form-input">
-          <label for="emailAddressContact" class="form-label"> Email address </label>
-          <div class="position-relative v-icon-holder">
-            <input
-              type="text"
-              class="form-control"
-              id="emailAddressContact"
-              data-v-receive-toggle="copyEmail"
-              value="support@cardify.co"
-              disabled
-              readonly />
-            <button type="button" class="v-copy-toggler" data-v-toggle="copyEmail">
-              <span class="v-text">Copy</span>
-              <span class="v-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                  <rect width="24" height="24" fill="none" />
-                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                  </g>
-                </svg>
-              </span>
-            </button>
-          </div>
-        </div>
-        <div class="v-form-input">
-          <label for="socialMediaContact" class="form-label"> Social Media</label>
-          <div class="position-relative v-icon-holder">
-            <input
-              type="text"
-              class="form-control"
-              id="socialMediaContact"
-              data-v-receive-toggle="retype-password"
-              value="@cardifyafrica"
-              disabled
-              readonly />
-            <button type="button" class="v-copy-toggler" data-v-toggle="retype-password">
-              <span class="v-text">Copy</span>
-              <span class="v-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                  <rect width="24" height="24" fill="none" />
-                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                  </g>
-                </svg>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </form>
   </div>
 </div>
 <!-- blog&Contacts @::end -->
@@ -211,7 +132,7 @@ declare(strict_types=1);
             <ul class="v-listed-details">
               <li class="v-each-item">
                 <span class="v-text">Fullname</span>
-                <span class="v-text">Okeke JohnPaul</span>
+                <span class="v-text">Okeke Victor</span>
               </li>
               <li class="v-each-item">
                 <span class="v-text">Email</span>
@@ -340,96 +261,6 @@ declare(strict_types=1);
     </div>
   </div>
   <!-- password change modal @::end  -->
-
-  <!-- notification settings modal @::start  -->
-  <div
-    class="modal fade"
-    id="notificationSettings"
-    tabindex="-1"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    aria-labelledby="notificationSettingsLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 v-green-it" id="notificationSettingsLabel">Notification Settings</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="" class="">
-            <section class="v-head-top">
-              <div class="v-form-group mb-3 d-flex flex-column row-gap-3">
-                <li class="v-item d-flex align-items-center justify-content-between column-gap-4">
-                  <label class="v-text" role="label" for="enable-email-noti">Enable Email Notifications</label>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="enable-email-noti" />
-                  </div>
-                </li>
-                <li class="v-item d-flex align-items-center justify-content-between column-gap-4">
-                  <label class="v-text" role="label" for="enable-push-noti">Enable Push Notifications</label>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="enable-push-noti" />
-                  </div>
-                </li>
-                <li class="v-item d-flex align-items-center justify-content-between column-gap-4">
-                  <label class="v-text" role="label" for="enable-sms-noti">Enable SMS Notifications</label>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="enable-sms-noti" />
-                  </div>
-                </li>
-              </div>
-            </section>
-          </form>
-        </div>
-        <div class="modal-footer justify-content-center border-0">
-          <button type="button" class="v-modal-action v-choose" disabled>Update Notification</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- notification settings modal @::end  -->
-
-  <!-- verifyEmail modal @::start -->
-  <div
-    class="modal fade"
-    id="verifyEmail"
-    tabindex="-1"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    aria-labelledby="verifyEmailModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title v-green-it fs-5" id="verifyEmailModalLabel">Validation</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="v-modal-body-inner">
-            <span class="v-support-text">
-              Some Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, repudiandae molestias! Blanditiis impedit corporis
-              recusandae labore aliquid odit dolor asperiore
-            </span>
-            <div class="v-grid-inputs-container col-12 mx-auto mt-4 mb-5">
-              <div class="v-grid-inputs-wrapper">
-                <input type="tel" maxlength="1" inputmode="numeric" class="form-control" />
-                <input type="tel" maxlength="1" inputmode="numeric" class="form-control" />
-                <input type="tel" maxlength="1" inputmode="numeric" class="form-control" />
-                <input type="tel" maxlength="1" inputmode="numeric" class="form-control" />
-                <input type="tel" maxlength="1" inputmode="numeric" class="form-control" />
-                <input type="tel" maxlength="1" inputmode="numeric" class="form-control" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer border-0 mt-2">
-          <button type="button" class="v-modal-action v-choose" data-bs-toggle="modal" data-bs-target="#use2FaApp">Proceed</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- verifyEmail modal @::end -->
 
   <!-- authAppVerification modal @::start -->
   <div

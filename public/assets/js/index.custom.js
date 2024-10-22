@@ -1,3 +1,5 @@
+import { addClass, removeClass, checkLength } from "./utils.custom.js";
+
 const sidebarLinksWithDropdown = document.querySelectorAll(".v-main-link-container:has(.v-is-dropdown) .v-sidebar-link");
 const backdrop = document.querySelector(".v-right-nav #v-backdrop");
 const allTogglers = document.querySelectorAll("[data-target]");
@@ -15,21 +17,6 @@ if (goBackToggler) {
 	goBackToggler.addEventListener("click", () => window.history.back());
 }
 
-function checkLength(elementArray) {
-	if (elementArray && elementArray.length) return true;
-}
-
-function hideElement(element, state = "active") {
-	if (!element) return;
-	element.classList.remove(state);
-}
-
-function showElement(element, state = "active") {
-	if (element) {
-		element.classList.add(state);
-	}
-}
-
 function handleDropdownToggle(e) {
 	e.stopPropagation();
 	const target = this.getAttribute("data-v-target");
@@ -38,9 +25,9 @@ function handleDropdownToggle(e) {
 	dropdowns.forEach((currentDropdown) => {
 		const attr = currentDropdown.getAttribute("data-v-receiver");
 		if (attr === target) {
-			if (currentDropdown.classList.contains("active")) hideElement(currentDropdown, "active");
-			else showElement(currentDropdown, "active");
-		} else hideElement(currentDropdown, "active");
+			if (currentDropdown.classList.contains("active")) removeClass(currentDropdown, "active");
+			else addClass(currentDropdown, "active");
+		} else removeClass(currentDropdown, "active");
 	});
 }
 
@@ -58,7 +45,7 @@ if (checkLength(document.querySelectorAll("[data-v-receiver]"))) {
 			const arrayOfChildren = childrenButtons || childrenLiTags;
 			arrayOfChildren.forEach((child) => {
 				child.addEventListener("click", function () {
-					(checkIfEleHasClassList(dropdown) || checkIfEleHasClassList(dropdownToggler)) && (hideElement(dropdown), hideElement(dropdownToggler));
+					(checkIfEleHasClassList(dropdown) || checkIfEleHasClassList(dropdownToggler)) && (removeClass(dropdown), removeClass(dropdownToggler));
 				});
 			});
 		}
@@ -71,8 +58,8 @@ if (checkLength(dropdownTogglers)) {
 
 function closeSideBarIfOpen() {
 	if (!sideBar?.classList.contains("active")) return;
-	hideElement(mobileMenuToggler, "active");
-	hideElement(sideBar, "active");
+	removeClass(mobileMenuToggler, "active");
+	removeClass(sideBar, "active");
 }
 
 if (checkLength(allTabsAndPillsButtonsTogglers)) {
@@ -84,8 +71,8 @@ if (mobileMenuToggler) {
 		let self = this;
 		e.stopPropagation();
 		sideBar && sideBar.classList.contains("active")
-			? (hideElement(self, "active"), hideElement(sideBar, "active"))
-			: (showElement(self, "active"), showElement(sideBar, "active"));
+			? (removeClass(self, "active"), removeClass(sideBar, "active"))
+			: (addClass(self, "active"), addClass(sideBar, "active"));
 	});
 }
 
@@ -94,7 +81,7 @@ function handleGeneralOutsideClick() {
 		e.stopPropagation();
 		document.querySelectorAll("[data-v-receiver]").forEach((currentElement) => {
 			if (!currentElement.contains(e.target) && currentElement.classList.contains("active")) {
-				hideElement(currentElement);
+				removeClass(currentElement);
 			}
 		});
 	});
@@ -105,7 +92,7 @@ function handleDropdownOutsideClick() {
 		event.stopPropagation();
 		allToggleReceivers.forEach((element) => {
 			if (!element.contains(event.target) && element.getAttribute("data-v-expanded") === "true") {
-				hideElement(backdrop, "show");
+				removeClass(backdrop, "show");
 				element.setAttribute("data-v-expanded", "false");
 			}
 		});
@@ -148,8 +135,8 @@ if (checkLength(allTogglers)) {
 function toggleSideBarLinkDropdown(event) {
 	event.stopPropagation();
 	const self = event.target;
-	if (self && self.classList.contains("active")) return hideElement(self, "active");
-	showElement(self, "active");
+	if (self && self.classList.contains("active")) return removeClass(self, "active");
+	addClass(self, "active");
 }
 
 if (checkLength(sidebarLinksWithDropdown)) {
@@ -200,23 +187,44 @@ if (checkLength(all4DigitsInputContainers)) {
 	}
 }
 
-const allInputContainerWithPassToggles = document.querySelectorAll(".v-input:has(.v-toggler-password)");
-if (checkLength(allInputContainerWithPassToggles)) {
-	allInputContainerWithPassToggles.forEach((passWithToggle) => {
-		const hideShowButton = passWithToggle.querySelector(".v-toggler-password");
-		const passInput = passWithToggle.querySelector(".form-control");
-		hideShowButton && passInput
-			? hideShowButton.addEventListener("click", function () {
-					const typeOfInput = passInput.type;
-					typeOfInput === "password"
-						? ((passInput.type = "text"), (hideShowButton.textContent = "Hide"))
-						: ((passInput.type = "password"), (hideShowButton.textContent = "Show"));
-			  })
-			: null;
-	});
+function togglePasswords() {
+	const allInputContainerWithPassToggles = document.querySelectorAll(".v-input:has(.v-toggler-password), .v-form-input:has(button)");
+	if (checkLength(allInputContainerWithPassToggles)) {
+		console.log(allInputContainerWithPassToggles);
+		allInputContainerWithPassToggles.forEach((passWithToggle) => {
+			const hideShowButton = passWithToggle.querySelector(".v-toggler-password");
+			const passInput = passWithToggle.querySelector(".form-control");
+			hideShowButton && passInput
+				? hideShowButton.addEventListener("click", function () {
+						const typeOfInput = passInput.type;
+						typeOfInput === "password"
+							? ((passInput.type = "text"), (hideShowButton.textContent = "Hide"))
+							: ((passInput.type = "password"), (hideShowButton.textContent = "Show"));
+				  })
+				: null;
+		});
+	}
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function callDomEle(target, isTargetMoreThanOne = false) {
+	if (!target) return;
+	let elem;
+	if (isTargetMoreThanOne) {
+		elem = document.querySelectorAll(target);
+		if (!elem.length) return;
+	} else {
+		elem = document.querySelector(target);
+	}
+	return elem;
+}
+
+function toggleInput() {
+	let button = "#basicProfileSetting .v-custom-input-trigger";
+	button = callDomEle(button);
+	// console.log(button);
+}
+
+function initAnimations() {
 	const dropdownSplide = document.querySelector("#profile__dropdown__splide");
 	if ((null || undefined) == dropdownSplide) return;
 	new Splide(dropdownSplide, {
@@ -237,20 +245,33 @@ document.addEventListener("DOMContentLoaded", function () {
 		snap: true,
 		gap: 10,
 	}).mount();
-});
+}
 
-window.addEventListener("DOMContentLoaded", function () {
-	// const pathname = "index" || "home" || "/dollar-card.html";
+function initiateOffcanvas() {
+	const arrOfPath = window.location.pathname.split("/");
 	const pathname = "profile";
-	if (window.location.pathname.includes(pathname) || window.location.pathname == pathname) {
+	if (arrOfPath.includes(pathname)) {
 		const btn = document.createElement("button");
-		// btn.setAtste("data-bs-toggle", "offcanvas");
+		btn.type = "button";
+		btn.setAttribute("data-bs-target", "#accountSettings");
+		btn.setAttribute("data-bs-toggle", "offcanvas");
 		btn.style.display = "none";
 		document.body.appendChild(btn);
 		btn.click();
 		btn.remove();
 	}
-});
+}
+
+(() => {
+	function init() {
+		initAnimations();
+		initiateOffcanvas();
+		toggleInput();
+		togglePasswords();
+	}
+
+	window.addEventListener("DOMContentLoaded", init);
+})();
 
 handleDropdownOutsideClick();
 handleGeneralOutsideClick();

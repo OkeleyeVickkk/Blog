@@ -1,57 +1,12 @@
+import { showToast, addClass, removeClass, falsies } from "./utils.custom.js";
 (function () {
 	// @ts-check
 	"use-strict";
 
-	const falsies = ["", null, undefined, 0, false, [], {}];
 	const LOADING_STATUS = "isLoading";
 	const ERROR = "error";
 	const SUCCESS = "success";
 	const BASE_URL = "http://localhost/project-blog/public";
-
-	const createElement = function (element) {
-		if (!element) return;
-		let eleToCreate = document.createElement(element);
-		if (eleToCreate.nodeType !== Node.ELEMENT_NODE) return [null, ERROR];
-		return [eleToCreate, null];
-	};
-
-	const addClass = (element, className) => {
-		if (!element) return;
-		element.classList.add(className);
-	};
-	const removeClass = (element, className) => {
-		if (!element) return;
-		element.classList.remove(className);
-	};
-
-	const showToast = function (toastMessage, toastStatus = "") {
-		const [button, error] = createElement("button");
-		if (error !== null || !button) return alert("Omo code don break somewhere");
-		button.setAttribute("type", "button");
-		button.setAttribute("id", "liveToastBtn");
-		document.body.appendChild(button);
-		const toast = document.getElementById("liveToast");
-		const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
-		toast.querySelector(".toast-body").innerHTML = `${toastMessage} `;
-		switch (toastStatus.toLowerCase()) {
-			case "success":
-				toast.setAttribute("data-status", "success");
-				break;
-			case "failed":
-			case "error":
-				toast.setAttribute("data-status", "failed");
-				break;
-			default:
-				toast.removeAttribute("data-status");
-				break;
-		}
-		button.addEventListener("click", () => {
-			toastBootstrap.show();
-		});
-
-		button.click();
-		button.remove();
-	};
 
 	function initPasswordToggler() {
 		const allPasswordToggler = document.querySelectorAll("button[data-password]");
