@@ -1,11 +1,11 @@
 /* page loader @::start */
 
 .v-btn-loader {
-	border: 5px solid rgba(var(--primary-clr-variant), 0.8);
+	border: 3px solid rgba(var(--white-variant), 0.8);
 	border-radius: 50%;
 	border-left-color: transparent;
-	width: 28px;
-	height: 28px;
+	width: 24px;
+	height: 24px;
 	animation: spin89345 900ms linear infinite;
 }
 .v-action.v-is-loading {

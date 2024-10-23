@@ -121,9 +121,9 @@ declare(strict_types=1);
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="d-flex flex-column row-gap-3">
+          <form class="d-flex flex-column row-gap-3" name="userProfileData">
             <div class="v-profile-container d-flex align-items-center column-gap-4">
-              <input type="file" hidden data-receive="fileInput" accept="image/*" />
+              <input type="file" hidden name="profileImage" value="" data-receive="fileInput" accept="image/*" />
               <div class="v-profile border">
                 <img data-image-display="fileInput" src="<?= requireAssets('images/avatars/user-avatar.png') ?>" alt="" class="img-fluid" />
               </div>
@@ -133,24 +133,25 @@ declare(strict_types=1);
               <li class="v-each-item">
                 <span class="v-text">Fullname</span>
                 <span class="v-text"><?= htmlspecialchars($pageData['fullName']) ?></span>
-                <input type="hidden" name="" value="<?= htmlspecialchars($pageData['fullName']) ?>">
+                <input type="hidden" name="fullName" value="<?= htmlspecialchars($pageData['fullName']) ?>">
+                <input type="hidden" name="userId" value="<?= htmlspecialchars($pageData['userId']) ?>">
               </li>
               <li class=" v-each-item">
                 <span class="v-text">Email</span>
                 <span class="v-text"><?= htmlspecialchars($pageData['userEmail']) ?></span>
-                <input type="hidden" value="<?= htmlspecialchars($pageData['userEmail']) ?>">
+                <input type="hidden" name="userEmail" value="<?= htmlspecialchars($pageData['userEmail']) ?>">
               </li>
               <li class="v-each-item">
                 <span class="v-text">Username</span>
                 <span class="v-text"><?= htmlspecialchars($pageData['userName']) ?></span>
-                <input type="hidden" value="<?= htmlspecialchars($pageData['userName']) ?>">
+                <input type="hidden" name="userName" value="<?= htmlspecialchars($pageData['userName']) ?>">
               </li>
               <li class="v-each-item">
                 <span class="v-text">Phone Number</span>
                 <span class="v-text">
                   <?= htmlspecialchars(isset($pageData['phoneNo']) ? $pageData['phoneNo'] : "Not set") ?>
-                  <input type="hidden" value="<?= htmlspecialchars(isset($pageData['phoneNo']) ? $pageData['phoneNo'] : "") ?>">
                 </span>
+                <input type="hidden" value="phoneNumber" value="<?= htmlspecialchars(isset($pageData['phoneNo']) ? $pageData['phoneNo'] : "") ?>">
               </li>
               <li class="v-each-item">
                 <span class="v-text">Password</span>
@@ -165,7 +166,7 @@ declare(strict_types=1);
           </form>
         </div>
         <div class="modal-footer justify-content-center border-0">
-          <button type="button" class="v-modal-action v-choose">Update</button>
+          <button type="button" class="v-modal-action v-choose v-action-btn">Update</button>
           <!-- <button type="button" data-bs-dismiss="modal" class="v-modal-action v-cancel">cancel</button> -->
         </div>
       </div>

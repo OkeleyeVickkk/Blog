@@ -1,4 +1,5 @@
-import { addClass, removeClass, checkLength, callDomEle, falsies, showToast } from "./utils.custom.js";
+import * as modules from "./utils.custom.js?ver=0.000000000000001";
+import { addClass, BASE_URL, removeClass, checkLength, callDomEle, falsies, showToast, setLoadStatus } from "./utils.custom.js?ver=0.000000000001";
 
 const sidebarLinksWithDropdown = document.querySelectorAll(".v-main-link-container:has(.v-is-dropdown) .v-sidebar-link");
 const backdrop = document.querySelector(".v-right-nav #v-backdrop");
@@ -10,7 +11,6 @@ const sideBar = document.querySelector(".v-menu-sidebar");
 const allTabsAndPillsButtonsTogglers = document.querySelectorAll(".v-menu-sidebar .nav-pills [data-bs-toggle='pill']");
 const goBackToggler = document.querySelector("#v-main .v-go-back");
 const dropdownTogglers = document.querySelectorAll("[data-v-target]");
-const allCardTabPanes = document.querySelectorAll("#v-cards-tab-content .v-tab-pane-inner");
 const all4DigitsInputContainers = document.querySelectorAll(".v-grid-inputs-container .v-grid-inputs-wrapper");
 
 const VISIBLE_EYE = `
@@ -195,7 +195,6 @@ function togglePasswords() {
 				if (falsies.includes(attrValue)) return;
 				const input = callDomEle(`input[data-v-receive-toggle=${attrValue}]`);
 				const typeOfInput = input.type;
-				if (falsies.includes(attrValue)) return;
 				typeOfInput === "password"
 					? ((input.type = "text"), (self.innerHTML = INVISIBLE_EYE))
 					: ((input.type = "password"), (self.innerHTML = VISIBLE_EYE));
@@ -248,7 +247,6 @@ function initProfileImageUpload(element, displayContainer, toggler) {
 			showToast("Error uploading file, try again!", "failed");
 			return;
 		}
-
 		if (!displayContainer) return;
 		toggler.innerHTML = "Re-upload";
 		if (displayContainer.nodeType === Node.ELEMENT_NODE) {
@@ -271,6 +269,41 @@ function toggleInput() {
 		initProfileImageUpload(inputEle, displayContainer, this);
 	});
 }
+
+const initUpdateBasicProfile = () => {
+	const updateToggler = callDomEle("#basicProfileSetting .v-modal-action");
+	if (!updateToggler) return;
+	updateToggler.addEventListener("click", async function () {
+		const self = this;
+		const allInputs = callDomEle("#basicProfileSetting input", undefined, true);
+		if (!allInputs.length) return;
+		setLoadStatus(self, undefined, true);
+		let parentForm = document.forms.userProfileData;
+		parentForm = new FormData(parentForm);
+
+		const url = `${BASE_URL}/dashboard/profile`;
+		try {
+			const response = await fetch(url, {
+				method: "POST",
+				headers: {
+					Accept: "application/json", //what the response should comback as
+				},
+				body: parentForm,
+			});
+
+			if (!response.ok || response.status !== 200) throw new Error(response.statusText);
+			const data = await response.json();
+			if (!data.status) {
+				throw new Error(data.message);
+			}
+		} catch (error) {
+			showToast(error, "failed");
+			return;
+		} finally {
+			setLoadStatus(self, "Update", false);
+		}
+	});
+};
 
 function initAnimations() {
 	const dropdownSplide = document.querySelector("#profile__dropdown__splide");
@@ -316,10 +349,12 @@ function initiateOffcanvas() {
 		initiateOffcanvas();
 		toggleInput();
 		togglePasswords();
+		handleDropdownOutsideClick();
+		handleGeneralOutsideClick();
+
+		// profile page
+		initUpdateBasicProfile();
 	}
 
 	window.addEventListener("DOMContentLoaded", init);
 })();
-
-handleDropdownOutsideClick();
-handleGeneralOutsideClick();

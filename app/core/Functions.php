@@ -32,7 +32,7 @@ function isFalsy(mixed $data): bool
   return in_array($data, falsies());
 }
 
-function cleanString(string $string, mixed $type = "text"): bool|null|string
+function cleanString(string $string, mixed $type = "text"): mixed
 {
   if (empty($string)) return false;
   $data = (string) trim($string);
@@ -44,6 +44,12 @@ function cleanString(string $string, mixed $type = "text"): bool|null|string
       if (isFalsy(data: $data) || !$data) {
         $data = false;
         return false;
+      }
+      break;
+    case "number":
+      $data = filter_var($data, FILTER_VALIDATE_INT);
+      if (isFalsy(data: $data) || !$data) {
+        $data = false;
       }
       break;
     case "text":

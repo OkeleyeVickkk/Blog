@@ -1,4 +1,5 @@
 export const falsies = ["", null, undefined, 0, false, [], {}];
+export const BASE_URL = "http://localhost/project-blog/public";
 
 export const createElement = function (element) {
 	if (!element) return;
@@ -8,7 +9,7 @@ export const createElement = function (element) {
 };
 
 export function setLoadStatus(target, textToSet, isLoading = false) {
-	const SPINNER = `<span class="v-btn-loader"></span>`;
+	const SPINNER = `<span class="v-btn-loader d-flex align-items-center justify-content-center mx-auto"></span>`;
 	if (!target) return;
 	isLoading ? (target.innerHTML = SPINNER) : (target.innerHTML = textToSet);
 }

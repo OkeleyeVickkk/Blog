@@ -1,11 +1,10 @@
-import { showToast, setLoadStatus, falsies } from "./utils.custom.js";
+import { showToast, setLoadStatus, falsies, BASE_URL } from "./utils.custom.js";
 (function () {
 	// @ts-check
 	"use-strict";
 
 	const ERROR = "error";
 	const SUCCESS = "success";
-	const BASE_URL = "http://localhost/project-blog/public";
 
 	function initPasswordToggler() {
 		const allPasswordToggler = document.querySelectorAll("button[data-password]");

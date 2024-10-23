@@ -3,13 +3,15 @@
 declare(strict_types=1);
 
 require_once FIRST_PARENT_DIR . "core/Session.php";
+require_once FIRST_PARENT_DIR . "controllers/subControllers/profilePage.php";
 
 class Dashboard
 {
-  use UserController;
   private User $user;
-  private $userSession;
+  private ?string $userSession;
 
+  use UserController;
+  use ProfilePage;
 
   public function __construct()
   {
@@ -17,7 +19,11 @@ class Dashboard
       require_once FIRST_PARENT_DIR . "models/User.php";
       $this->user = new User();
       $userEmail = $this->userSession;
-      $this->user->updateUserLogTime(userData: ["email" => $userEmail]);
+      $response = $this->user->updateUserLogTime(userData: ["email" => $userEmail]);
+      if (!$response) {
+        redirectTo(toLocation: 'login', replace: true);
+        die;
+      }
 
       $response = $this->user->getUserDetails(userData: ["email" => $userEmail]);
       if (isset($response)) {
@@ -58,6 +64,13 @@ class Dashboard
   public function profile()
   {
     $this->pageData['pageTitle'] = "My Profile";
-    $this->loadUserPage("dashboard/profile", $this->pageData);
+    if (strtoupper($_SERVER['REQUEST_METHOD']) !== "POST") {
+      $this->loadUserPage("dashboard/profile", $this->pageData);
+      return;
+    }
+
+    if (isset($_FILES['profileImage']) || isset($_POST['userEmail']) || isset($_POST['userId'])) {
+      $this->uploadUserImage();
+    }
   }
 }
