@@ -17,14 +17,7 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
     <main class="v-main-content">
       <div class="v-main-content-inner col-lg-9 col-xl-6 p-4 mx-auto rounded-4 bg-white">
         <div class="p-0">
-          <header class="v-page-title">
-            <h3 class="v-title">My Account</h3>
-            <span class="v-subtext">
-              Good <span class="v-day ms-1" data-daytime="day">morning, be great today</span>
-              <span class="d-flex align-items-center justify-content-center" data-icon="day">
-              </span>
-            </span>
-          </header>
+          <?php require_once "pageLayouts/dashboard.pageTitle.view.php" ?>
         </div>
         <div class="v-main-content-inner col-12 row mt-3 m-0 justify-content-between mx-auto position-relative">
           <div class="v-page-wrapper p-0 mb-5">
@@ -37,7 +30,7 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
                     <span class="v-item">Edit username</span>
                   </div>
                   <div class="v-value">
-                    <span class="v-item">Okeleye Victor Olamide</span>
+                    <span class="v-item"><?= htmlspecialchars($pageData['userName']) ?></span>
                     <button type="button" class="v-edit-user">
                       Edit
                     </button>

@@ -39,21 +39,25 @@ class Dashboard
 
   public function index()
   {
+    $this->pageData['pageTitle'] = "Home";
     $this->loadUserPage('dashboard/index', $this->pageData);
   }
 
   public function layout()
   {
+    $this->pageData['pageTitle'] = "Layout";
     $this->loadUserPage("dashboard/layout", $this->pageData);
   }
 
   public function write()
   {
+    $this->pageData['pageTitle'] = "Write";
     $this->loadUserPage("dashboard/write", $this->pageData);
   }
 
   public function profile()
   {
+    $this->pageData['pageTitle'] = "My Profile";
     $this->loadUserPage("dashboard/profile", $this->pageData);
   }
 }

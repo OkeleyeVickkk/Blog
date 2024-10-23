@@ -11,15 +11,7 @@
     <main class="v-main-content">
       <div class="v-main-content-inner col-lg-11 col-xl-11 mx-auto">
         <div class="p-0">
-          <header class="v-page-title">
-            <h3 class="v-title">Index Page</h3>
-            <span class="v-subtext">
-              Good <span class="v-day ms-1">day <?= splitString($pageData['userName'], ' ') ?></span>
-              <span class="d-flex align-items-center justify-content-center">
-                <span class="v-icon" data-icon="day"></span>
-              </span>
-            </span>
-          </header>
+          <?php require_once "pageLayouts/dashboard.pageTitle.view.php" ?>
         </div>
         <div class="v-main-content-inner col-12 row mt-3 m-0 justify-content-between mx-auto position-relative">
           <div class="v-page-wrapper p-0">
