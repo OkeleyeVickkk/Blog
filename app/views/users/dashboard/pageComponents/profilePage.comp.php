@@ -233,7 +233,12 @@ declare(strict_types=1);
             <div class="v-profile-container d-flex align-items-center column-gap-4">
               <input type="file" hidden name="profileImage" value="" data-receive="fileInput" accept="image/*" />
               <div class="v-profile border">
-                <img data-image-display="fileInput" src="<?= requireAssets('images/avatars/user-avatar.png') ?>" alt="" class="img-fluid" />
+                <img
+                  data-image-display="fileInput"
+                  src="<?=
+                        isset($pageData['name'])
+                          ? requireAssets(filePath: "users/{$pageData['name']}.{$pageData['extension']}")
+                          : requireAssets(filePath: "images/avatars/user-avatar.webp") ?>" alt="" class="img-fluid" />
               </div>
               <button type="button" data-toggle="fileInput" class="v-custom-input-trigger">Click/Tap to upload</button>
             </div>

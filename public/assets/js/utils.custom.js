@@ -8,13 +8,13 @@ export const createElement = function (element) {
 	return [eleToCreate, null];
 };
 
-export function setLoadStatus(target, textToSet, isLoading = false) {
+export const setLoadStatus = function (target, textToSet, isLoading = false) {
 	const SPINNER = `<span class="v-btn-loader d-flex align-items-center justify-content-center mx-auto"></span>`;
 	if (!target) return;
 	isLoading
 		? ((target.innerHTML = SPINNER), target.setAttribute("disabled", true))
 		: ((target.innerHTML = textToSet), target.removeAttribute("disabled"));
-}
+};
 
 export const showToast = function (toastMessage, toastStatus = "") {
 	const [button, error] = createElement("button");
@@ -45,26 +45,33 @@ export const showToast = function (toastMessage, toastStatus = "") {
 	button.remove();
 };
 
-export function removeClass(element, state = "active") {
+export const removeClass = function (element, state = "active") {
 	if (!element) return;
 	element.classList.remove(state);
-}
+};
 
-export function addClass(element, state = "active") {
+export const addClass = function (element, state = "active") {
 	if (element) {
 		element.classList.add(state);
 	}
-}
+};
 
-export function checkLength(elementArray) {
+export const checkLength = function (elementArray) {
 	if (elementArray && elementArray.length) return true;
-}
+};
 
-export function callDomEle(target, parentElem, isTargetMoreThanOne = false) {
+export const callDomEle = function (target, parentElem, isTargetMoreThanOne = false) {
 	if (!target) return null;
 	parentElem = parentElem || document;
 	const queryMethod = isTargetMoreThanOne ? "querySelectorAll" : "querySelector";
 	const elem = parentElem[queryMethod](target);
 
 	return elem || null;
-}
+};
+
+export const reloadPage = function (timeOut = null) {
+	if (timeOut === null) return window.location.reload();
+	setTimeout(() => {
+		window.location.reload();
+	}, timeOut * 1000);
+};

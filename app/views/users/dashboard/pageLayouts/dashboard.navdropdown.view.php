@@ -116,7 +116,10 @@ declare(strict_types=1); ?>
   <div class="d-flex align-items-center gap-3">
     <button type="button" class="v-toggle-profile" data-target="v-profile-dropdown">
       <div class="v-profile-image">
-        <img src="<?= requireAssets("images/avatars/user-06.jpg") ?>" alt="" class="img-fluid" />
+        <img src="<?=
+                  isset($pageData['name'])
+                    ? requireAssets(filePath: "users/{$pageData['name']}.{$pageData['extension']}")
+                    : requireAssets(filePath: "images/avatars/user-avatar.webp") ?>" alt="" class="img-fluid" />
       </div>
       <div class="v-right-nav-detail d-none d-sm-flex">
         <span class="v-user-name">
@@ -135,7 +138,10 @@ declare(strict_types=1); ?>
   <div class="v-profile-dropdown v-dropdown" data-v-expanded="false" data-receiver="v-profile-dropdown">
     <div class="v-step-container v-step-one flex-grow-1">
       <div class="v-profile-image">
-        <img src="<?= requireAssets("images/avatars/user-06.jpg") ?>" alt="" class="img-fluid" />
+        <img src="<?=
+                  isset($pageData['name'])
+                    ? requireAssets(filePath: "users/{$pageData['name']}.{$pageData['extension']}")
+                    : requireAssets(filePath: "images/avatars/user-avatar.webp") ?>" alt="" class="img-fluid" />
       </div>
       <span class="v-profile-name mt-2">
         <?= htmlspecialchars($pageData['fullName']); ?>

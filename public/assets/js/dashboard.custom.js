@@ -1,4 +1,14 @@
-import { addClass, BASE_URL, removeClass, checkLength, callDomEle, falsies, showToast, setLoadStatus } from "./utils.custom.js?ver=0.000000000002";
+import {
+	addClass,
+	reloadPage,
+	BASE_URL,
+	removeClass,
+	checkLength,
+	callDomEle,
+	falsies,
+	showToast,
+	setLoadStatus,
+} from "./utils.custom.js?ver=0.000000000003";
 
 const sidebarLinksWithDropdown = document.querySelectorAll(".v-main-link-container:has(.v-is-dropdown) .v-sidebar-link");
 const backdrop = document.querySelector(".v-right-nav #v-backdrop");
@@ -324,6 +334,7 @@ const initUpdateUserProfileDetails = () => {
 			if (data && data.status) {
 				target.innerHTML = "Update";
 				showToast(data.message, "success");
+				reloadPage(3);
 				return;
 			}
 		} catch (error) {
@@ -366,6 +377,7 @@ const initUpdateBasicProfile = () => {
 				const toggler = callDomEle(".v-custom-input-trigger", parentContainer);
 				toggler.innerHTML = "Click/Tap to upload";
 				showToast(data.message, "success");
+				reloadPage(3);
 			}
 		} catch (error) {
 			showToast(error, "failed");
