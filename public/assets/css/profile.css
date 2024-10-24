@@ -320,6 +320,8 @@ body:has(.offcanvas .modal) .offcanvas .modal-content {
 .offcanvas .v-form-group .form-control[readonly] {
 	font-size: 0.9rem;
 	min-height: 3.2rem;
+	cursor: not-allowed;
+	background-color: #f1f1f1;
 }
 #blogAndContacts .v-each-cornered-item svg {
 	--size: 1.8rem;

@@ -49,6 +49,102 @@ declare(strict_types=1);
 </div>
 <!-- blog&Contacts @::end -->
 
+<!-- all details edit @::start -->
+<div class="offcanvas offcanvas-end" tabindex="-1" data-bs-backdrop="static" id="editDetails" aria-labelledby="editDetailsLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title v-green-it" id="editDetailsLabel">Edit Details</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form action="">
+      <div class="v-form-group d-flex flex-column row-gap-2">
+        <!-- @::form-input start -->
+        <div class="v-form-input">
+          <label for="fullname" class="form-label"> Fullname </label>
+          <div class="position-relative">
+            <input
+              type="text"
+              class="form-control"
+              name="fullname"
+              id="fullname"
+              value="<?= htmlspecialchars($pageData['fullName']) ?>"
+              readonly />
+          </div>
+        </div>
+        <!-- @::form-input end -->
+        <!-- @::form-input start -->
+        <div class="v-form-input">
+          <label for="email" class="form-label"> Email </label>
+          <div class="position-relative v-icon-holder">
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              spellcheck="false"
+              placeholder="Enter email address"
+              value="<?= htmlspecialchars($pageData['userEmail']) ?>" />
+            <span class="v-password-toggler pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
+                <rect width="24" height="24" fill="none" />
+                <path fill="currentColor" d="M7.243 17.997H3v-4.243L14.435 2.319a1 1 0 0 1 1.414 0l2.829 2.828a1 1 0 0 1 0 1.415zm-4.243 2h18v2H3z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <!-- @::form-input end -->
+        <!-- @::form-input start -->
+        <div class="v-form-input">
+          <label for="userName" class="form-label"> Username </label>
+          <div class="position-relative v-icon-holder">
+            <input
+              type="text"
+              class="form-control"
+              name="userName"
+              id="userName"
+              spellcheck="false"
+              value="<?= htmlspecialchars($pageData['userName']) ?>" />
+            <span class="v-password-toggler pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
+                <rect width="24" height="24" fill="none" />
+                <path fill="currentColor" d="M7.243 17.997H3v-4.243L14.435 2.319a1 1 0 0 1 1.414 0l2.829 2.828a1 1 0 0 1 0 1.415zm-4.243 2h18v2H3z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <!-- @::form-input end -->
+        <!-- @::form-input start -->
+        <div class="v-form-input">
+          <label for="phone" class="form-label"> Phone No </label>
+          <div class="position-relative v-icon-holder">
+            <input
+              type="tel"
+              class="form-control"
+              inputmode="numeric"
+              name="phone"
+              placeholder="Enter phone number"
+              id="phone"
+              value="<?= htmlspecialchars(isset($pageData['userPhone']) ? $pageData['userPhone'] : '') ?>" />
+            <span class="v-password-toggler pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
+                <rect width="24" height="24" fill="none" />
+                <path fill="currentColor" d="M7.243 17.997H3v-4.243L14.435 2.319a1 1 0 0 1 1.414 0l2.829 2.828a1 1 0 0 1 0 1.415zm-4.243 2h18v2H3z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <!-- @::form-input end -->
+      </div>
+    </form>
+    <footer class="v-offcanvas-footer mt-auto p-0">
+      <button type="button" class="v-action v-carry-on updateUserDetailsToggler">Update</button>
+      <button type="button" class="v-action v-close" data-bs-dismiss="offcanvas">cancel</button>
+    </footer>
+  </div>
+</div>
+</div>
+<!-- all details edit @::end -->
+
 <!-- account settings @::start -->
 <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-backdrop="static" id="accountSettings" aria-labelledby="accountSettingsLabel">
   <div class="offcanvas-header">
@@ -67,7 +163,18 @@ declare(strict_types=1);
               d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
           </svg>
         </span>
-        <span class="v-text" role="text">Basic Profile Settings</span>
+        <span class="v-text" role="text">Basic Profile</span>
+      </button>
+      <!-- v-each-button @::end -->
+      <!-- v-each-button @::start -->
+      <button type="button" class="v-each-cornered-item" data-bs-toggle="offcanvas" data-bs-target="#editDetails">
+        <span class="v-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 256 256">
+            <rect width="256" height="256" fill="none" />
+            <path fill="currentColor" d="m227.32 73.37l-44.69-44.68a16 16 0 0 0-22.63 0L36.69 152A15.86 15.86 0 0 0 32 163.31V208a16 16 0 0 0 16 16h168a8 8 0 0 0 0-16H115.32l112-112a16 16 0 0 0 0-22.63M192 108.69L147.32 64l24-24L216 84.69Z" />
+          </svg>
+        </span>
+        <span class="v-text" role="text">Edit Profile Details</span>
       </button>
       <!-- v-each-button @::end -->
       <!-- v-each-button @::start -->
@@ -127,14 +234,12 @@ declare(strict_types=1);
               <div class="v-profile border">
                 <img data-image-display="fileInput" src="<?= requireAssets('images/avatars/user-avatar.png') ?>" alt="" class="img-fluid" />
               </div>
-              <button type="button" data-toggle="fileInput" class="v-custom-input-trigger">Click/Tap to change</button>
+              <button type="button" data-toggle="fileInput" class="v-custom-input-trigger">Click/Tap to upload</button>
             </div>
             <ul class="v-listed-details">
               <li class="v-each-item">
                 <span class="v-text">Fullname</span>
                 <span class="v-text"><?= htmlspecialchars($pageData['fullName']) ?></span>
-                <input type="hidden" name="fullName" value="<?= htmlspecialchars($pageData['fullName']) ?>">
-                <input type="hidden" name="userId" value="<?= htmlspecialchars($pageData['userId']) ?>">
               </li>
               <li class=" v-each-item">
                 <span class="v-text">Email</span>
@@ -144,14 +249,12 @@ declare(strict_types=1);
               <li class="v-each-item">
                 <span class="v-text">Username</span>
                 <span class="v-text"><?= htmlspecialchars($pageData['userName']) ?></span>
-                <input type="hidden" name="userName" value="<?= htmlspecialchars($pageData['userName']) ?>">
               </li>
               <li class="v-each-item">
                 <span class="v-text">Phone Number</span>
                 <span class="v-text">
                   <?= htmlspecialchars(isset($pageData['phoneNo']) ? $pageData['phoneNo'] : "Not set") ?>
                 </span>
-                <input type="hidden" value="phoneNumber" value="<?= htmlspecialchars(isset($pageData['phoneNo']) ? $pageData['phoneNo'] : "") ?>">
               </li>
               <li class="v-each-item">
                 <span class="v-text">Password</span>
@@ -197,6 +300,7 @@ declare(strict_types=1);
                 <div class="position-relative v-icon-holder">
                   <input
                     type="password"
+                    autocomplete="TRUE"
                     class="form-control"
                     id="old-password"
                     data-v-receive-toggle="old-password"
@@ -217,6 +321,7 @@ declare(strict_types=1);
                 <div class="position-relative v-icon-holder">
                   <input
                     type="password"
+                    autocomplete="TRUE"
                     class="form-control"
                     id="new-password"
                     data-v-receive-toggle="new-password"
@@ -237,6 +342,7 @@ declare(strict_types=1);
                 <div class="position-relative v-icon-holder">
                   <input
                     type="password"
+                    autocomplete="TRUE"
                     class="form-control"
                     id="retype-password"
                     data-v-receive-toggle="retype-password"

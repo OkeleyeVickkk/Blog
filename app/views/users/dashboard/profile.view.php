@@ -31,7 +31,7 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
                   </div>
                   <div class="v-value">
                     <span class="v-item"><?= htmlspecialchars($pageData['userName']) ?></span>
-                    <button type="button" class="v-edit-user">
+                    <button ype="button" data-bs-target="#editDetails" data-bs-toggle="offcanvas" class="v-edit-user">
                       Edit
                     </button>
                   </div>

@@ -32,7 +32,6 @@ declare(strict_types=1);
               </div>
               <div class="d-flex pt-3">
                 <button type="button" id="register" class="btn v-action-btn btn-dark w-100">
-                  <span class="v-btn-loader"></span>
                   <span class="v-text">Sign up</span>
                 </button>
               </div>

@@ -1,5 +1,4 @@
-import * as modules from "./utils.custom.js?ver=0.000000000000001";
-import { addClass, BASE_URL, removeClass, checkLength, callDomEle, falsies, showToast, setLoadStatus } from "./utils.custom.js?ver=0.000000000001";
+import { addClass, BASE_URL, removeClass, checkLength, callDomEle, falsies, showToast, setLoadStatus } from "./utils.custom.js?ver=0.000000000002";
 
 const sidebarLinksWithDropdown = document.querySelectorAll(".v-main-link-container:has(.v-is-dropdown) .v-sidebar-link");
 const backdrop = document.querySelector(".v-right-nav #v-backdrop");
@@ -270,8 +269,21 @@ function toggleInput() {
 	});
 }
 
+const initUpdateUserProfileDetails = () => {
+	const parentContainer = callDomEle("#editDetails");
+	if (!parentContainer) return;
+	const toggler = callDomEle(".updateUserDetailsToggler", parentContainer);
+	if (!toggler) return;
+	toggler.addEventListener("click", function () {
+		const target = this;
+		const allInputs = callDomEle("input", parentContainer);
+		setLoadStatus(target, undefined, true);
+	});
+};
+
 const initUpdateBasicProfile = () => {
-	const updateToggler = callDomEle("#basicProfileSetting .v-modal-action");
+	const parentContainer = callDomEle("#basicProfileSetting");
+	const updateToggler = callDomEle(".v-modal-action", parentContainer);
 	if (!updateToggler) return;
 	updateToggler.addEventListener("click", async function () {
 		const self = this;
@@ -293,6 +305,11 @@ const initUpdateBasicProfile = () => {
 
 			if (!response.ok || response.status !== 200) throw new Error(response.statusText);
 			const data = await response.json();
+			if (data && data.status) {
+				const toggler = callDomEle(".v-custom-input-trigger", parentContainer);
+				toggler.innerHTML = "Click/Tap to upload";
+				showToast(data.message, "success");
+			}
 			if (!data.status) {
 				throw new Error(data.message);
 			}
@@ -346,7 +363,7 @@ function initiateOffcanvas() {
 (() => {
 	function init() {
 		initAnimations();
-		initiateOffcanvas();
+		// initiateOffcanvas();
 		toggleInput();
 		togglePasswords();
 		handleDropdownOutsideClick();
@@ -354,6 +371,7 @@ function initiateOffcanvas() {
 
 		// profile page
 		initUpdateBasicProfile();
+		initUpdateUserProfileDetails();
 	}
 
 	window.addEventListener("DOMContentLoaded", init);

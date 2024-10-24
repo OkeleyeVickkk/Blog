@@ -110,10 +110,9 @@ class User
     $this->tableName = "userProfileImage";
     if (!$userData) return false;
     $query = "UPDATE {$this->tableName}
-      SET name = :imageName, extension = :imageExt 
+      SET name = :imageName, extension = :imageExt, type = :imageType 
       WHERE userEmail = :userEmail";
     $response = $this->execute(sqlQuery: $query, arr: $userData);
-    var_dump($response);
     return $response;
   }
 }

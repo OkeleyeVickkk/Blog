@@ -118,7 +118,7 @@ import { showToast, setLoadStatus, falsies, BASE_URL } from "./utils.custom.js";
 				password: password.value.trim(),
 			};
 
-			for (item in dataObj) {
+			for (const item in dataObj) {
 				if (dataObj[item] === "") {
 					switch (item) {
 						case "fullname":

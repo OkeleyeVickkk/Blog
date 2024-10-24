@@ -11,7 +11,9 @@ export const createElement = function (element) {
 export function setLoadStatus(target, textToSet, isLoading = false) {
 	const SPINNER = `<span class="v-btn-loader d-flex align-items-center justify-content-center mx-auto"></span>`;
 	if (!target) return;
-	isLoading ? (target.innerHTML = SPINNER) : (target.innerHTML = textToSet);
+	isLoading
+		? ((target.innerHTML = SPINNER), target.setAttribute("disabled", true))
+		: ((target.innerHTML = textToSet), target.removeAttribute("disabled"));
 }
 
 export const showToast = function (toastMessage, toastStatus = "") {

@@ -9,11 +9,7 @@ trait ProfilePage
   protected function uploadUserImage()
   {
     $profileImage = isset($_FILES['profileImage']) ? $_FILES['profileImage'] : null;
-    $fullName = isset($_POST['fullName']) ? cleanString(string: $_POST['fullName'], type: "text") : '';
     $userEmail = isset($_POST['userEmail']) ? cleanString(string: $_POST['userEmail'], type: "email") : '';
-    $userName = isset($_POST['userName']) ? cleanString(string: $_POST['userName'], type: "text") : '';
-    $phoneNo = isset($_POST['phoneNo']) ? cleanString(string: $_POST['phoneNo'], type: "number") : '';
-    $userId = $_POST['userId'];
 
     if (!$profileImage || in_array($profileImage["tmp_name"], falsies())) {
       sendDataToUser("application/json", [
@@ -40,15 +36,23 @@ trait ProfilePage
       return;
     }
 
-    $uploadImagesDir = FIRST_PARENT_DIR . "../public/assets/uploadedImages/";
+    $uploadImagesDir = FIRST_PARENT_DIR . "../public/assets/users/";
     if (!file_exists($uploadImagesDir)) {
-      mkdir(FIRST_PARENT_DIR . "../public/assets/uploadedImages/");
+      mkdir(FIRST_PARENT_DIR . "../public/assets/users/");
     }
 
+    // attempt to get the extension of the file
+    $fileName = $profileImage['name'];
+    $fileArr = explode(".", $fileName);
+    $extension = end($fileArr);
+
+    // give the file a new name to prevent attacks;
+    $fileName = bin2hex(random_bytes(16));
     $result = [
       "userEmail" => $userEmail,
-      "imageName" => $profileImage['name'],
-      "imageExt" => $profileImage['type']
+      "imageName" => $fileName,
+      "imageExt" =>  $extension,
+      "imageType" => $profileImage['type']
     ];
 
     $user = new User();
@@ -56,7 +60,7 @@ trait ProfilePage
     if ($response) {
       $uploadToImageFolderStatus = move_uploaded_file(
         from: $profileImage['tmp_name'],
-        to: $uploadImagesDir . $profileImage['name']
+        to: $uploadImagesDir . $fileName . "." . $extension
       );
 
       if ($uploadToImageFolderStatus) {
