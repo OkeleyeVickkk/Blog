@@ -274,10 +274,63 @@ const initUpdateUserProfileDetails = () => {
 	if (!parentContainer) return;
 	const toggler = callDomEle(".updateUserDetailsToggler", parentContainer);
 	if (!toggler) return;
-	toggler.addEventListener("click", function () {
+	toggler.addEventListener("click", async function () {
 		const target = this;
-		const allInputs = callDomEle("input", parentContainer);
 		setLoadStatus(target, undefined, true);
+		const allInputs = callDomEle("input", parentContainer, true);
+		if (!allInputs.length) return;
+		for (let input of allInputs) {
+			if (input.value.trim() === "") {
+				setLoadStatus(target, "Update", false);
+				let errorMessage;
+				switch (input.getAttribute("name").toLowerCase()) {
+					case "phone":
+						errorMessage = "Enter phone number";
+						break;
+					case "username":
+						errorMessage = "Username is empty number";
+						break;
+					case "email":
+						errorMessage = "Email address is empty";
+						break;
+					case "fullname":
+						errorMessage = "Name cannot be empty";
+						break;
+					default:
+						errorMessage = "Ensure to fill all input";
+						break;
+				}
+				showToast(errorMessage, "failed");
+				return;
+			}
+		}
+
+		const URL = `${BASE_URL}/dashboard/profile`;
+		try {
+			const formData = new FormData(callDomEle("form", parentContainer));
+			const response = await fetch(URL, {
+				method: "POST",
+				headers: {
+					Accept: "application/json", //what the response should come back as
+					"x-custom-update": "userDetails", //setting custom header
+				},
+				body: formData,
+			});
+			if (!response.ok || response.status !== 200) throw new Error(response.statusText);
+			const data = await response.json();
+			if (!data.status) {
+				throw new Error(data.message);
+			}
+			if (data && data.status) {
+				target.innerHTML = "Update";
+				showToast(data.message, "success");
+				return;
+			}
+		} catch (error) {
+			showToast(error, "failed");
+		} finally {
+			setLoadStatus(target, "Update", false);
+		}
 	});
 };
 
@@ -298,20 +351,21 @@ const initUpdateBasicProfile = () => {
 			const response = await fetch(url, {
 				method: "POST",
 				headers: {
-					Accept: "application/json", //what the response should comback as
+					Accept: "application/json", //what the response should come back as
+					"x-custom-update": "profileImage",
 				},
 				body: parentForm,
 			});
 
 			if (!response.ok || response.status !== 200) throw new Error(response.statusText);
 			const data = await response.json();
+			if (!data.status) {
+				throw new Error(data.message);
+			}
 			if (data && data.status) {
 				const toggler = callDomEle(".v-custom-input-trigger", parentContainer);
 				toggler.innerHTML = "Click/Tap to upload";
 				showToast(data.message, "success");
-			}
-			if (!data.status) {
-				throw new Error(data.message);
 			}
 		} catch (error) {
 			showToast(error, "failed");

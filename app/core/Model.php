@@ -7,7 +7,7 @@ trait Model
   use Database;
 
   //execute does select
-  public function runQuery(string $sqlQuery, array $arr = []): array
+  protected function runQuery(string $sqlQuery, array $arr = []): array
   {
     try {
       if ($sqlQuery) {
@@ -23,7 +23,7 @@ trait Model
   }
 
   //execute does insert, delete, update
-  public function execute(string $sqlQuery, array $arr = []): bool
+  protected function execute(string $sqlQuery, array $arr = []): bool
   {
     try {
       if ($sqlQuery) {

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 ?>
 
 <!-- blog&Contacts @::start -->
@@ -60,14 +59,21 @@ declare(strict_types=1);
       <div class="v-form-group d-flex flex-column row-gap-2">
         <!-- @::form-input start -->
         <div class="v-form-input">
-          <label for="fullname" class="form-label"> Fullname </label>
+          <label for="fullName" class="form-label"> Fullname </label>
           <div class="position-relative">
             <input
               type="text"
               class="form-control"
-              name="fullname"
-              id="fullname"
+              name="fullName"
+              id="fullName"
               value="<?= htmlspecialchars($pageData['fullName']) ?>"
+              readonly />
+            <input
+              type="hidden"
+              class="form-control"
+              name="userId"
+              id="userId"
+              value="<?= htmlspecialchars($pageData['userId']) ?>"
               readonly />
           </div>
         </div>
@@ -82,14 +88,9 @@ declare(strict_types=1);
               name="email"
               id="email"
               spellcheck="false"
+              readonly
               placeholder="Enter email address"
               value="<?= htmlspecialchars($pageData['userEmail']) ?>" />
-            <span class="v-password-toggler pointer-events-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
-                <rect width="24" height="24" fill="none" />
-                <path fill="currentColor" d="M7.243 17.997H3v-4.243L14.435 2.319a1 1 0 0 1 1.414 0l2.829 2.828a1 1 0 0 1 0 1.415zm-4.243 2h18v2H3z" />
-              </svg>
-            </span>
           </div>
         </div>
         <!-- @::form-input end -->
@@ -124,7 +125,7 @@ declare(strict_types=1);
               name="phone"
               placeholder="Enter phone number"
               id="phone"
-              value="<?= htmlspecialchars(isset($pageData['userPhone']) ? $pageData['userPhone'] : '') ?>" />
+              value="<?= htmlspecialchars(isset($pageData['phoneNumber']) ? $pageData['phoneNumber'] : '') ?>" />
             <span class="v-password-toggler pointer-events-none">
               <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
                 <rect width="24" height="24" fill="none" />

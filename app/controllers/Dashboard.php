@@ -26,8 +26,13 @@ class Dashboard
       }
 
       $response = $this->user->getUserDetails(userData: ["email" => $userEmail]);
-      if (isset($response)) {
-        $this->pageData = $response;
+
+      if (isset($response) && is_array($response)) {
+        $mergedArr = [];
+        foreach ($response as $subArr) {
+          $mergedArr = array_merge($mergedArr, $subArr);
+        }
+        $this->pageData = $mergedArr;
       }
     } else {
       redirectTo(toLocation: 'login', replace: true);
@@ -69,8 +74,12 @@ class Dashboard
       return;
     }
 
-    if (isset($_FILES['profileImage']) || isset($_POST['userEmail']) || isset($_POST['userId'])) {
+    if (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE']) === strtolower("profileImage")) {
       $this->uploadUserImage();
+    }
+
+    if (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE']) === strtolower("userDetails")) {
+      $this->updateUserDetails();
     }
   }
 }

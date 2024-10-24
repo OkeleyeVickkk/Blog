@@ -35,20 +35,21 @@ function isFalsy(mixed $data): bool
 function cleanString(string $string, mixed $type = "text"): mixed
 {
   if (empty($string)) return false;
-  $data = (string) trim($string);
+  $data = trim($string);
   $data = stripslashes($data);
 
   switch (strtolower($type)) {
     case "email":
-      $data = filter_var($data, FILTER_VALIDATE_EMAIL);
-      if (isFalsy(data: $data) || !$data) {
+      $resultFromCheck = filter_var($data, FILTER_VALIDATE_EMAIL);
+      if (!$resultFromCheck) {
         $data = false;
         return false;
       }
       break;
     case "number":
-      $data = filter_var($data, FILTER_VALIDATE_INT);
-      if (isFalsy(data: $data) || !$data) {
+      $data = intval($data);
+      $resultFromCheck = filter_var($data, FILTER_VALIDATE_INT);
+      if (!$resultFromCheck) {
         $data = false;
       }
       break;
@@ -99,8 +100,8 @@ function generateRandomString(int $stringLength = 5): string
 function sendDataToUser(string $contentType, array $response = []): void
 {
   $contentType = strtolower($contentType);
-  header("Content-Type: " . ($contentType === 'text/html' ? $contentType : 'application/json'));
-  echo $contentType === 'text/html' ? $response : json_encode($response);
+  header("Content-Type: " . ($contentType !== 'application' ? $contentType : 'application/json'));
+  echo $contentType !== 'application/json' ? $response : json_encode($response);
 }
 
 function splitString(string $stringChars, string $separator = null)

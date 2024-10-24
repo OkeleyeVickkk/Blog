@@ -37,7 +37,7 @@
 	--white: rgba(var(--white-variant), 1);
 
 	/* --primary-clr-variant: var(--dark-variant); */
-	--primary-clr-variant: 10, 46, 54;
+	--primary-clr-variant: 26, 27, 37;
 	--primary-clr: rgba(var(--primary-clr-variant), 1);
 }
 *,
