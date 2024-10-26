@@ -105,7 +105,7 @@ if (mobileMenuToggler) {
 	});
 }
 
-function handleGeneralOutsideClick() {
+const handleGeneralOutsideClick = () => {
 	document.addEventListener("click", (e) => {
 		e.stopPropagation();
 		document.querySelectorAll("[data-v-receiver]").forEach((currentElement) => {
@@ -114,9 +114,9 @@ function handleGeneralOutsideClick() {
 			}
 		});
 	});
-}
+};
 
-function handleDropdownOutsideClick() {
+const handleDropdownOutsideClick = () => {
 	document.addEventListener("click", (event) => {
 		event.stopPropagation();
 		allToggleReceivers.forEach((element) => {
@@ -126,7 +126,7 @@ function handleDropdownOutsideClick() {
 			}
 		});
 	});
-}
+};
 
 function handleNotificationToggle(event) {
 	event.preventDefault();
@@ -191,7 +191,7 @@ if (checkLength(all4DigitsInputContainers)) {
 	}
 }
 
-function togglePasswords() {
+const togglePasswords = () => {
 	const allInputContainerWithPassToggles = callDomEle(".v-input:has(.v-toggler-password), .v-form-input:has(button)", undefined, true);
 	if (!checkLength(allInputContainerWithPassToggles)) return;
 	allInputContainerWithPassToggles.forEach((passWithToggle) => {
@@ -222,7 +222,7 @@ function togglePasswords() {
 				});
 		}
 	});
-}
+};
 
 const readFile = (passedFile) => {
 	if (!passedFile) return;
@@ -235,7 +235,7 @@ const readFile = (passedFile) => {
 	});
 };
 
-function initProfileImageUpload(element, displayContainer, toggler) {
+const initProfileImageUpload = (element, displayContainer, toggler) => {
 	if (!element) return;
 	element.addEventListener("input", async function (event) {
 		const acceptedFiles = ["image/png", "image/avif", "image/webp", "image/jpeg", "image/jpg"];
@@ -262,9 +262,9 @@ function initProfileImageUpload(element, displayContainer, toggler) {
 			displayContainer.src = result;
 		}
 	});
-}
+};
 
-function toggleInput() {
+const toggleInput = () => {
 	const modal = callDomEle("#basicProfileSetting");
 	const button = callDomEle(".v-custom-input-trigger", modal);
 	if (!button) return;
@@ -277,7 +277,7 @@ function toggleInput() {
 		inputEle.click();
 		initProfileImageUpload(inputEle, displayContainer, this);
 	});
-}
+};
 
 const initUpdateUserProfileDetails = () => {
 	const parentContainer = callDomEle("#editDetails");
@@ -388,6 +388,8 @@ const initUpdateBasicProfile = () => {
 	});
 };
 
+// animations
+
 function initAnimations() {
 	const dropdownSplide = document.querySelector("#profile__dropdown__splide");
 	if ((null || undefined) == dropdownSplide) return;
@@ -411,6 +413,7 @@ function initAnimations() {
 	}).mount();
 }
 
+// offcanvas
 function initiateOffcanvas() {
 	const arrOfPath = window.location.pathname.split("/");
 	const pathname = "profile";
@@ -438,6 +441,9 @@ function initiateOffcanvas() {
 		// profile page
 		initUpdateBasicProfile();
 		initUpdateUserProfileDetails();
+
+		// write page
+		// initSubmitBlogPost();
 	}
 
 	window.addEventListener("DOMContentLoaded", init);
