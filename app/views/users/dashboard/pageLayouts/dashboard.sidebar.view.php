@@ -29,7 +29,7 @@ declare(strict_types=1);
           </a>
         </li>
         <li class="v-main-link-container">
-          <a href="<?= requireLink("dashboard/write") ?>" class="v-sidebar-link">
+          <a href="<?= requireLink("dashboard/blogs") ?>" class="v-sidebar-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48">
               <rect width="48" height="48" fill="none" />
               <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">

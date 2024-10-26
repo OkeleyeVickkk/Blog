@@ -1,0 +1,98 @@
+.v-vertical-blogs-container {
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+.v-horizontal-blogs-container {
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+.v-blogs-grid-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem 1.15rem;
+	transition: grid-template-columns 300ms ease-in-out;
+	will-change: grid-template-columns;
+}
+@media all and (min-width: 650px) {
+	.v-blogs-grid-container {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media all and (min-width: 768px) and (max-width: 850px) {
+	.v-blogs-grid-container {
+		grid-template-columns: 1fr;
+	}
+}
+@media all and (min-width: 991px) {
+	.v-blogs-grid-container {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+.v-each-blog-post {
+	--profile-image-radius: 2.25rem;
+	display: flex;
+	flex-direction: column;
+	row-gap: 1rem;
+}
+.v-each-blog-post .v-author-image {
+	height: var(--profile-image-radius);
+	width: var(--profile-image-radius);
+	overflow: hidden;
+	border-radius: 50%;
+	border: 1px solid rgba(var(--dark-variant), 0.1);
+}
+.v-each-blog-post .v-blog-content .v-post-data {
+	column-gap: 9px;
+}
+.v-each-blog-post .v-blog-content,
+.v-each-blog-post .v-blog-content [href] {
+	display: flex;
+	flex-direction: column;
+}
+.v-each-blog-post .v-title {
+	font-size: 1.12rem;
+	color: var(--dark);
+	opacity: 0.97;
+}
+.v-each-blog-post .v-blog-content [href] {
+	color: var(--dark);
+	row-gap: 6px;
+}
+.v-each-blog-post .v-blog-content {
+	row-gap: 0.5rem;
+	flex-grow: 1;
+}
+.v-each-blog-post .v-blog-content .v-subtext {
+	font-size: 0.85rem;
+	color: rgba(var(--dark-variant), 0.7);
+	opacity: 0.95;
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	-o-text-overflow: ellipsis;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+	overflow: -moz-hidden-unscrollable;
+	overflow: hidden;
+	display: -webkit-box;
+}
+.v-each-blog-post .v-text {
+	font-size: 0.8rem;
+	color: #0009;
+}
+.v-each-blog-post .v-book-mark-blog {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 7px;
+	border-radius: 50%;
+	transition: 300ms ease-in-out;
+	overflow: hidden;
+	will-change: background-color;
+	color: #0008;
+	aspect-ratio: 1/1;
+}
+.v-each-blog-post .v-book-mark-blog:hover {
+	background-color: #ddd3;
+}

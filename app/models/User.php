@@ -83,7 +83,7 @@ class User
       $profileImageResult = $this->runQuery(sqlQuery: static::$query, arr: $userData);
 
       if ($profileImageResult && $userResult) {
-        $totalResult = array_merge($userResult, $profileImageResult);
+        $totalResult = (array) array_merge($userResult, $profileImageResult);
       }
 
       return $totalResult;

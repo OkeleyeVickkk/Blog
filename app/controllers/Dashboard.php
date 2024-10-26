@@ -19,13 +19,12 @@ class Dashboard
       require_once FIRST_PARENT_DIR . "models/User.php";
       $this->user = new User();
       $userEmail = $this->userSession;
-      $response = $this->user->updateUserLogTime(userData: ["email" => $userEmail]);
-      if (!$response) {
-        redirectTo(toLocation: 'login', replace: true);
-        die;
-      }
-
       $response = $this->user->getUserDetails(userData: ["email" => $userEmail]);
+
+      if (!$response || !$userEmail) {
+        redirectTo(toLocation: 'login', replace: true);
+        return;
+      }
 
       if (isset($response) && is_array($response)) {
         $mergedArr = [];
@@ -54,6 +53,12 @@ class Dashboard
     $this->loadUserPage('dashboard/index', $this->pageData);
   }
 
+  public function blogs()
+  {
+    $this->pageData['pageTitle'] = "Blogs";
+    $this->loadUserPage('dashboard/blogs', $this->pageData);
+  }
+
   public function layout()
   {
     $this->pageData['pageTitle'] = "Layout";
@@ -74,12 +79,9 @@ class Dashboard
       return;
     }
 
-    if (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE']) === strtolower("profileImage")) {
-      $this->uploadUserImage();
-    }
-
-    if (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE']) === strtolower("userDetails")) {
-      $this->updateUserDetails();
-    }
+    match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
+      strtolower("profileImage") => $this->uploadUserImage(),
+      strtolower("userDetails") => $this->updateUserDetails(),
+    };
   }
 }

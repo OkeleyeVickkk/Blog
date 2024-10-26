@@ -62,9 +62,9 @@ span:not(:has(img, .img-fluid)) {
 	image-rendering: pixelated;
 	text-rendering: geometricPrecision;
 }
-/* *:not(*:not(h1, h2, h3, h4, h5, h6, b, strong)) {
+*:not(*:not(h1, h2, h3, h4, h5, h6, b, strong)) {
 	font-family: var(--font-family-bold);
-} */
+}
 ul,
 li,
 p {
@@ -148,4 +148,9 @@ figure {
 }
 .form-control:focus {
 	border-color: rgba(var(--primary-clr-variant), 0.5) !important;
+}
+.v-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

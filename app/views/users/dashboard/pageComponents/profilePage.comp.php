@@ -259,7 +259,7 @@ declare(strict_types=1);
               <li class="v-each-item">
                 <span class="v-text">Phone Number</span>
                 <span class="v-text">
-                  <?= htmlspecialchars(isset($pageData['phoneNo']) ? $pageData['phoneNo'] : "Not set") ?>
+                  <?= htmlspecialchars(isset($pageData['phoneNumber']) ? $pageData['phoneNumber'] : "Not set") ?>
                 </span>
               </li>
               <li class="v-each-item">

@@ -55,6 +55,11 @@ class Login
     }
 
     if ($response) {
+      $response = $this->user->updateUserLogTime(userData: ["email" => $email]);
+      if (!$response) {
+        redirectTo(toLocation: 'login', replace: true);
+        return;
+      }
       Session::getInstance()->__set(USER_SESSION, $email);
       $this->pageData = array('status' => true, 'message' => 'Logged In successfully');
       sendDataToUser(contentType: $this->dataType, response: $this->pageData);
