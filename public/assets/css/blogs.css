@@ -54,6 +54,10 @@
 	color: var(--dark);
 	opacity: 0.97;
 }
+.v-blog-page .v-each-blog-post .v-title {
+	font-size: 2.3rem;
+	font-weight: 700;
+}
 .v-each-blog-post .v-blog-content [href] {
 	color: var(--dark);
 	row-gap: 6px;
@@ -77,9 +81,16 @@
 	overflow: hidden;
 	display: -webkit-box;
 }
+.v-blog-page .v-each-blog-post .v-blog-content .v-main-subtext {
+	font-size: 1.28rem;
+	line-height: normal;
+}
 .v-each-blog-post .v-text {
 	font-size: 0.8rem;
 	color: #0009;
+}
+.v-blog-page .v-each-blog-post .v-text {
+	font-size: 0.88rem;
 }
 .v-each-blog-post .v-book-mark-blog {
 	display: flex;
@@ -96,7 +107,21 @@
 .v-each-blog-post .v-book-mark-blog:hover {
 	background-color: #ddd3;
 }
-
+.v-blog-page .v-each-blog-post .v-book-mark-blog svg {
+	--size: 1.5rem;
+}
+.v-blog-page .v-each-blog-post .v-book-mark-blog {
+	padding: 8px;
+}
+.v-blog-page .v-action-container {
+	display: flex;
+	align-items: center;
+	column-gap: 3px;
+}
+.v-blog-page .v-action-container .v-count {
+	font-size: 0.9rem;
+	opacity: 0.8;
+}
 /* for write page */
 .v-text-editor-container .v-text-editor-control {
 	appearance: none;
