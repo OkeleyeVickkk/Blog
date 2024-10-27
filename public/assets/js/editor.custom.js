@@ -16,15 +16,14 @@ import { callDomEle, setLoadStatus, showToast, BASE_URL } from "./utils.custom.j
 				const editorContent = editor.getHTMLCode();
 				const blogTitle = callDomEle(".v-main-title", parentBlogContainer);
 				const blogSubtitle = callDomEle(".v-subtext", parentBlogContainer);
+				const bannerFile = callDomEle("[name=bannerImage]", parentBlogContainer);
 
 				const blogElementEntity = {
 					editorContent,
 					blogTitle,
 					blogSubtitle,
+					bannerFile,
 				};
-
-				console.log(editorContent);
-				return;
 
 				for (const data in blogElementEntity) {
 					if (data === "blogSubtitle") continue;
@@ -35,6 +34,9 @@ import { callDomEle, setLoadStatus, showToast, BASE_URL } from "./utils.custom.j
 							if (!attr) return;
 							if (attr.toLowerCase() === "blogtitle") {
 								errorValue = "Blog title is empty!";
+							}
+							if (attr.toLowerCase() === "bannerimage") {
+								errorValue = "Enter a banner image!";
 							}
 							setLoadStatus(target, "Publish");
 							return showToast(errorValue, "failed");
