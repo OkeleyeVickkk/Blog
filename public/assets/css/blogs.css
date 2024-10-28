@@ -36,13 +36,14 @@
 }
 .v-each-blog-post .v-author-image {
 	height: var(--profile-image-radius);
+	min-width: var(--profile-image-radius);
 	width: var(--profile-image-radius);
 	overflow: hidden;
 	border-radius: 50%;
 	border: 1px solid rgba(var(--dark-variant), 0.1);
 }
 .v-each-blog-post .v-blog-content .v-post-data {
-	column-gap: 9px;
+	column-gap: 10px;
 }
 .v-each-blog-post .v-blog-content,
 .v-each-blog-post .v-blog-content [href] {
@@ -63,7 +64,7 @@
 	row-gap: 6px;
 }
 .v-each-blog-post .v-blog-content {
-	row-gap: 0.5rem;
+	row-gap: 0.9rem;
 	flex-grow: 1;
 }
 .v-each-blog-post .v-blog-content .v-subtext {
@@ -86,11 +87,23 @@
 	line-height: normal;
 }
 .v-each-blog-post .v-text {
-	font-size: 0.8rem;
+	font-size: 0.88rem;
 	color: #0009;
+	flex-grow: 1;
+}
+@media all and (min-width: 650px) {
+	.v-each-blog-post .v-text {
+		flex-grow: 0;
+	}
+}
+.v-each-blog-post .v-subtitle {
+	font-size: 0.92rem;
 }
 .v-blog-page .v-each-blog-post .v-text {
-	font-size: 0.88rem;
+	font-size: 0.9rem;
+}
+.v-each-blog-post .v-blog-image {
+	height: 200px;
 }
 .v-each-blog-post .v-book-mark-blog {
 	display: flex;

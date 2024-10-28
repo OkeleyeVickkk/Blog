@@ -11,9 +11,16 @@
   <link rel="stylesheet" type="text/css" href="<?= requireAssets("css/bootstrap.min.css") ?>" />
   <link rel=" stylesheet" type="text/css" href="<?= requireAssets("css/dashboard.default.css", true) ?>" />
   <link rel=" stylesheet" type="text/css" href="<?= requireAssets("css/general.css", true) ?>" />
-  <?= isset($customPageLink) ?  $customPageLink : ''; ?>
+  <?php if (isset($customPageLink)) {
+    if (is_array($customPageLink)) {
+      foreach ($customPageLink as $eachLink) {
+        echo $eachLink;
+      }
+    } else {
+      echo $customPageLink;
+    }
+  } ?>
   <link rel=" stylesheet" type="text/css" href="<?= requireAssets("css/media-query.css", true) ?>" />
-
   <!-- utils styles -->
   <!-- <link rel=" stylesheet" href="./assets/css/splide.min.css" /> -->
   <title><?= isset($pageTitle) ? $pageTitle : 'Dashboard'; ?></title>

@@ -323,19 +323,19 @@ body:has(.offcanvas .modal) .offcanvas .modal-content {
 	cursor: not-allowed;
 	background-color: #f1f1f1;
 }
-#blogAndContacts .v-each-cornered-item svg {
+.v-blog-offcanvas .v-each-cornered-item svg {
 	--size: 1.8rem;
 }
 #kycVerification header .v-subtext {
 	font-size: 0.95rem;
 }
-#blogAndContacts .v-each-cornered-detail .v-subtext,
+.v-blog-offcanvas .v-each-cornered-detail .v-subtext,
 #kycVerification .v-each-cornered-detail .v-subtext {
 	font-size: 0.8rem;
 	margin-top: 5px;
 	display: flex;
 }
-#blogAndContacts .v-subtext,
+.v-blog-offcanvas .v-subtext,
 #verifyEmail .v-subtext,
 #kycVerification .v-subtext,
 #_2FASettings .v-subtext {

@@ -73,9 +73,6 @@ class User
       static::$query = "SELECT * FROM {$this->tableName}
                 WHERE userEmail = :email;";
       $userResult = $this->runQuery(sqlQuery: static::$query, arr: $userData);
-      // there are several ways to go about tis
-      // option 1 => call one query,then another
-      // option 2 => use the stored procedure to call more stuffs at once
 
       $this->tableName = "userProfileImage";
       static::$query = "SELECT * FROM {$this->tableName}
@@ -137,5 +134,35 @@ class User
     WHERE userId = :userId;";
 
     return $this->execute(sqlQuery: static::$query, arr: $userData);
+  }
+
+  public function postUserBlog(array $userData)
+  {
+    $this->tableName = "blogs";
+    if (empty($userData)) return false;
+    static::$query = "INSERT INTO {$this->tableName}
+    (blog_title, blog_content, author_name, author_id, blog_image, blog_subtitle, blog_image_type, blog_image_ext, created_at, updated_at) VALUES
+    (:blogTitle, :blogContent, :authorName, :authorId, :blogImage, :blogSubtitle, :blogImageType, :blogImageExt, NOW(), NOW())";
+
+    return $this->execute(sqlQuery: static::$query, arr: $userData);
+  }
+
+
+  public function getUserBlogs(array $userData)
+  {
+    if (empty($userData)) return false;
+    $this->tableName = "blogs";
+    static::$query = "SELECT * FROM {$this->tableName} WHERE author_id = :userId";
+
+    return $this->runQuery(sqlQuery: static::$query, arr: $userData);
+  }
+
+  public function getUserSpecificBlog(array $userData)
+  {
+    if (empty($userData)) return false;
+    $this->tableName = "blogs";
+    static::$query = "SELECT * FROM {$this->tableName} WHERE id = :blogId AND author_id = :userId;";
+
+    return $this->runQuery(sqlQuery: static::$query, arr: $userData);
   }
 }

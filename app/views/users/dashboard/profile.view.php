@@ -15,7 +15,7 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
     <?php require_once "pageLayouts/dashboard.sidebar.view.php" ?>
     <!-- sidebar @::end -->
     <main class="v-main-content">
-      <div class="v-main-content-inner col-lg-9 col-xl-6 p-4 mx-auto rounded-4 bg-white">
+      <div class="v-main-content-inner col-lg-9 col-xl-6 p-3 p-sm-4 mx-auto rounded-4 bg-white">
         <div class="p-0">
           <?php require_once "pageLayouts/dashboard.pageTitle.view.php" ?>
         </div>
@@ -86,7 +86,7 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
                 </button>
                 <!-- v-each-button @::end -->
                 <!-- v-each-button @::start -->
-                <button type="button" class="v-each-cornered-item" data-bs-toggle="offcanvas" data-bs-target="#blogAndContacts">
+                <button type="button" class="v-each-cornered-item" data-bs-toggle="offcanvas" data-bs-target="#blogsOffcanvas">
                   <span class="v-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
                       <rect width="24" height="24" fill="none" />

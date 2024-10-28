@@ -104,12 +104,22 @@ function sendDataToUser(string $contentType, array $response = []): void
   echo $contentType !== 'application/json' ? $response : json_encode($response);
 }
 
-function splitString(string $stringChars, string $separator = null)
+function splitString(string $stringChars, string $separator = null, int $returnAmount = 1)
 {
   if ($separator === null) {
-    $result = explode(' ', $stringChars);
+    $resultArr = explode(' ', $stringChars);
   } else {
-    $result = explode($separator, $stringChars);
+    $resultArr = explode($separator, $stringChars);
   }
-  return htmlspecialchars($result[0]);
+  return array_splice($resultArr, $returnAmount);
+}
+
+
+function formatDate(string $date): string
+{
+  if ($date) {
+    $date = explode(" ", $date)[0];
+    $formattedDate = date("d M, Y", strtotime($date));
+  }
+  return $formattedDate;
 }

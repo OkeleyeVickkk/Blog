@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 require_once FIRST_PARENT_DIR . "core/Session.php";
 require_once FIRST_PARENT_DIR . "controllers/subControllers/profilePage.php";
+require_once FIRST_PARENT_DIR . "controllers/subControllers/blogs.php";
 
 class Dashboard
 {
   private User $user;
   private ?string $userSession;
+  private array $userData = [];
 
-  use UserController;
-  use ProfilePage;
+  use UserController, ProfilePage, Blog;
 
   public function __construct()
   {
@@ -19,19 +20,22 @@ class Dashboard
       require_once FIRST_PARENT_DIR . "models/User.php";
       $this->user = new User();
       $userEmail = $this->userSession;
-      $response = $this->user->getUserDetails(userData: ["email" => $userEmail]);
+      $this->userData = $this->user->getUserDetails(userData: ["email" => $userEmail]);
 
-      if (!$response || !$userEmail) {
+      if (!$this->userData || !$userEmail) {
         redirectTo(toLocation: 'login', replace: true);
         return;
       }
 
-      if (isset($response) && is_array($response)) {
+      $hasChildrenArray = count($this->userData) > 1;
+      if (isset($this->userData) && is_array($this->userData) && $hasChildrenArray) {
         $mergedArr = [];
-        foreach ($response as $subArr) {
+        foreach ($this->userData as $subArr) {
           $mergedArr = array_merge($mergedArr, $subArr);
         }
         $this->pageData = $mergedArr;
+      } else if (isset($this->userData) && is_array($this->userData) && !$hasChildrenArray) {
+        $this->pageData = $this->userData;
       }
     } else {
       redirectTo(toLocation: 'login', replace: true);
@@ -55,8 +59,31 @@ class Dashboard
 
   public function blogs()
   {
-    $this->pageData['pageTitle'] = "Blogs";
+    $this->pageData['pageTitle'] = "My Blogs";
+    $this->pageData['myBlogs'] = $this->getMyBlogs($this->pageData);
+
     $this->loadUserPage('dashboard/blogs', $this->pageData);
+  }
+
+  public function blog()
+  {
+    $this->pageData['pageTitle'] = "Blog";
+    if (!$_SERVER['HTTP_REFERER']) {
+      echo "<script>window.history.back()</script>";
+      return;
+    }
+    if (!isset($_GET['id'])) {
+      header("Location: {$_SERVER['HTTP_REFERER']}");
+      return;
+    }
+    $blogId = $_GET['id'];
+    $blogId = filter_var($blogId, FILTER_VALIDATE_INT);
+
+    if ($blogId) {
+      $this->pageData['blogId'] = $blogId;
+      $this->getBlogById($this->pageData);
+    }
+    $this->loadUserPage('dashboard/blog', $this->pageData);
   }
 
   public function layout()
@@ -68,7 +95,17 @@ class Dashboard
   public function write()
   {
     $this->pageData['pageTitle'] = "Write";
-    $this->loadUserPage("dashboard/write", $this->pageData);
+    if (strtoupper($_SERVER['REQUEST_METHOD']) !== "POST") {
+      $this->loadUserPage("dashboard/write", $this->pageData);
+      return;
+    }
+
+    if ($_SERVER['HTTP_X_CUSTOM_UPDATE']) {
+      match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
+        strtolower("postBlog") => $this->postBlog(),
+        strtolower("editBlog") => $this->updateBlog(),
+      };
+    }
   }
 
   public function profile()
@@ -79,9 +116,18 @@ class Dashboard
       return;
     }
 
-    match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
-      strtolower("profileImage") => $this->uploadUserImage(),
-      strtolower("userDetails") => $this->updateUserDetails(),
-    };
+    if ($_SERVER['HTTP_X_CUSTOM_UPDATE']) {
+      match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
+        strtolower("profileImage") => $this->uploadUserImage(),
+        strtolower("userDetails") => $this->updateUserDetails(),
+      };
+    }
+  }
+
+  public function savedBlogs()
+  {
+    $this->pageData['pageTitle'] = "Saved Blogs";
+
+    $this->loadUserPage("dashboard/saved-blogs", $this->pageData);
   }
 }

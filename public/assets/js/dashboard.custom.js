@@ -286,12 +286,13 @@ const initUpdateUserProfileDetails = () => {
 	if (!toggler) return;
 	toggler.addEventListener("click", async function () {
 		const target = this;
+		const TOGGLER_TEXT = target.innerHTML;
 		setLoadStatus(target, undefined, true);
 		const allInputs = callDomEle("input", parentContainer, true);
 		if (!allInputs.length) return;
 		for (let input of allInputs) {
 			if (input.value.trim() === "") {
-				setLoadStatus(target, "Update", false);
+				setLoadStatus(target, TOGGLER_TEXT, false);
 				let errorMessage;
 				switch (input.getAttribute("name").toLowerCase()) {
 					case "phone":
@@ -332,7 +333,7 @@ const initUpdateUserProfileDetails = () => {
 				throw new Error(data.message);
 			}
 			if (data && data.status) {
-				target.innerHTML = "Update";
+				setLoadStatus(target, TOGGLER_TEXT, false);
 				showToast(data.message, "success");
 				reloadPage(3);
 				return;
@@ -340,7 +341,7 @@ const initUpdateUserProfileDetails = () => {
 		} catch (error) {
 			showToast(error, "failed");
 		} finally {
-			setLoadStatus(target, "Update", false);
+			setLoadStatus(target, TOGGLER_TEXT, false);
 		}
 	});
 };
@@ -351,6 +352,7 @@ const initUpdateBasicProfile = () => {
 	if (!updateToggler) return;
 	updateToggler.addEventListener("click", async function () {
 		const self = this;
+		const TOGGLER_TEXT = self.innerHTML;
 		const allInputs = callDomEle("#basicProfileSetting input", undefined, true);
 		if (!allInputs.length) return;
 		setLoadStatus(self, undefined, true);
@@ -383,7 +385,7 @@ const initUpdateBasicProfile = () => {
 			showToast(error, "failed");
 			return;
 		} finally {
-			setLoadStatus(self, "Update", false);
+			setLoadStatus(self, TOGGLER_TEXT, false);
 		}
 	});
 };

@@ -4,7 +4,7 @@ declare(strict_types=1);
 ?>
 
 <!-- blog&Contacts @::start -->
-<div class="offcanvas offcanvas-end" tabindex="-1" data-bs-backdrop="static" id="blogAndContacts" aria-labelledby="blogAndContactsLabel">
+<div class="offcanvas offcanvas-end v-blog-offcanvas" tabindex="-1" data-bs-backdrop="static" id="blogsOffcanvas" aria-labelledby="blogsOffcanvasLabel">
   <div class="offcanvas-header pb-0">
     <button type="button" class="v-back-to-prev" data-bs-dismiss="offcanvas" aria-label="Close">
       <span class="v-icon">
@@ -23,7 +23,7 @@ declare(strict_types=1);
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <h5 class="offcanvas-title v-green-it" id="blogAndContactsLabel">
+    <h5 class="offcanvas-title v-green-it" id="blogsOffcanvasLabel">
       <b>Saved Blogs</b>
     </h5>
     <div class="v-cornered-items-container mt-3">

@@ -47,6 +47,6 @@ class App
     }
     $this->params = $resultingArr ? array_values($resultingArr) : [];
     $controllerBeingUsed = new $this->controller;
-    call_user_func_array([$controllerBeingUsed, $this->method], [$this->params]);
+    call_user_func_array([$controllerBeingUsed, $this->method], $this->params);
   }
 }
