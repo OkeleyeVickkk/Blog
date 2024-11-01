@@ -141,8 +141,8 @@ class User
     $this->tableName = "blogs";
     if (empty($userData)) return false;
     static::$query = "INSERT INTO {$this->tableName}
-    (blog_title, blog_content, author_name, author_id, blog_image, blog_subtitle, blog_image_type, blog_image_ext, created_at, updated_at) VALUES
-    (:blogTitle, :blogContent, :authorName, :authorId, :blogImage, :blogSubtitle, :blogImageType, :blogImageExt, NOW(), NOW())";
+    (id, blog_title, blog_content, author_name, author_id, blog_image, blog_subtitle, blog_image_type, blog_image_ext, created_at, updated_at) VALUES
+    (:blogId, :blogTitle, :blogContent, :authorName, :authorId, :blogImage, :blogSubtitle, :blogImageType, :blogImageExt, NOW(), NOW())";
 
     return $this->execute(sqlQuery: static::$query, arr: $userData);
   }

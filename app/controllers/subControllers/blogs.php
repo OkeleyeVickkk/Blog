@@ -27,7 +27,7 @@ trait Blog
       return;
     }
     if (!$blogContent) {
-      sendDataToUser("application/json", array("status" => false, "message" => "You cannot publish a  blog without a blog content"));
+      sendDataToUser("application/json", array("status" => false, "message" => "You cannot publish a blog without a blog content"));
       return;
     }
 
@@ -57,8 +57,10 @@ trait Blog
     }
     // give the file a new name to prevent attacks;
     $fileName = $this->createFileName();
+    $generatedId = $this->createFileName();
 
     $userData = [
+      "blogId" => $generatedId,
       "blogImage" => $fileName,
       "authorId" => $authorId,
       "blogTitle" => $blogTitle,

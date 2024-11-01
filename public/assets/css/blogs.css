@@ -135,6 +135,12 @@
 	font-size: 0.9rem;
 	opacity: 0.8;
 }
+.v-action-btn {
+	background-color: var(--primary-clr);
+	color: var(--white);
+	border-radius: 5px;
+	padding: 14px 1.5rem;
+}
 /* for write page */
 .v-text-editor-container .v-text-editor-control {
 	appearance: none;

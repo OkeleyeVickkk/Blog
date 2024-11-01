@@ -69,6 +69,7 @@ class Dashboard
   {
     $this->pageData['pageTitle'] = "Blog";
     if (!$_SERVER['HTTP_REFERER']) {
+      die;
       echo "<script>window.history.back()</script>";
       return;
     }

@@ -40,7 +40,11 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                         <div class="d-flex align-items-center justify-content-between">
                           <div class="d-flex align-items-center v-post-data flex-grow-1">
                             <span class="v-author-image">
-                              <img src="<?= requireAssets("users/{$pageData['name']}.{$pageData['extension']}"); ?>" alt="" class="img-fluid" />
+                              <img src="
+                              <?= isset($pageData['name'])
+                                ? requireAssets(filePath: "users/{$pageData['name']}.{$pageData['extension']}")
+                                : requireAssets(filePath: "images/avatars/user-avatar.webp"); ?>
+                              " alt="" class="img-fluid">
                             </span>
                             <span class="fw-medium v-text align-middle d-flex align-items-center justify-content-between column-gap-1">
                               <span><?= implode(" ", splitString($blog['author_name'], ' ', 1)) ?></span>
@@ -85,7 +89,17 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                   <?php } ?>
                 </ul>
               <?php } else { ?>
-                "No Blog"
+                <div class="d-flex align-items-center flex-column row-gap-4 justify-content-center m-auto">
+                  <figure class="v-image" style="max-width: 500px; width: 100%">
+                    <img src="<?= requireAssets('images/8087e5d3976a556ba5982cdffdb4b6123.png'); ?>" alt="" class="img-fluid">
+                  </figure>
+                  <div class="d-flex align-items-center flex-column row-gap-4 justify-content-center">
+                    <h4>You haven't published anything yet!</h4>
+                    <div>
+                      <a href="<?= requireLink('dashboard/write'); ?>" class="v-action-btn">Write a blog</a>
+                    </div>
+                  </div>
+                </div>
               <?php } ?>
             </div>
           </div>
