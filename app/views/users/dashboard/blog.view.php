@@ -23,21 +23,31 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
             <div class="v-blog-container">
               <div class="v-each-blog-post" style="--profile-image-radius: 2.8rem">
                 <div class="v-blog-content">
+                  <?php
+                  // preIt($pageData);
+                  $currentBlog = $pageData['currentBlog'];
+                  ?>
                   <div class="d-flex align-items-start flex-column column-gap-4 row-gap-3 justify-content-between">
-                    <h1 class="v-title">Improve your Design Skills</h1>
-                    <span class="v-main-subtext opacity-75">
-                      8 habits to help you be a better version
-                    </span>
+                    <h1 class="v-title"><?= htmlspecialchars($currentBlog['blog_title']) ?></h1>
+                    <?php if (!empty($currentBlog['blog_subtitle'])): ?>
+                      <span class="v-main-subtext opacity-75">
+                        <?= htmlspecialchars($currentBlog['blog_subtitle']) ?>
+                      </span>
+                    <?php endif; ?>
                   </div>
                   <div class="d-flex align-items-center justify-content-between mt-3 pt-3 mb-2">
                     <div class="d-flex align-items-center v-post-data">
                       <span class="v-author-image">
-                        <img src="<?= requireAssets('images/avatars/user-avatar.png'); ?>" alt="" class="img-fluid" />
+                        <img src="
+                              <?= isset($pageData['name'])
+                                ? requireAssets(filePath: "users/{$pageData['name']}.{$pageData['extension']}")
+                                : requireAssets(filePath: "images/avatars/user-avatar.webp"); ?>
+                              " alt="" class="img-fluid">
                       </span>
                       <span class="v-text align-middle d-flex align-items-center column-gap-1">
-                        Lana Steiner
+                        <?= implode(" ", splitString($currentBlog['author_name'], ' ', 1)) ?>
                         <span> &CenterDot; </span>
-                        12 Jan,2025</span>
+                        <?= formatDate(date: $currentBlog['created_at']) ?></span>
                     </div>
                   </div>
                 </div>
@@ -51,7 +61,9 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                         </svg>
                       </span>
                     </button>
-                    <span class="v-count">289</span>
+                    <span class="v-count">
+                      <?= htmlspecialchars($currentBlog['no_of_likes']) ?>
+                    </span>
                   </div>
                   <button type="button" class="v-book-mark-blog">
                     <span class="v-icon">
@@ -62,10 +74,15 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                     </span>
                   </button>
                 </div>
-                <div class="mt-5">
+                <div class="mt-5 d-flex flex-column row-gap-4">
                   <figure class="v-image d-flex ratio-16x9">
-                    <img src="<?= requireAssets('images/thumbs/about/about-600.jpg'); ?>" alt="" class="img-fluid flex-grow-1" />
+                    <img src="<?= requireAssets(filePath: "blogs/{$currentBlog['blog_image']}.{$currentBlog['blog_image_ext']}") ?>"
+                      alt="" class="img-fluid flex-grow-1" />
                   </figure>
+                  <div class="mt-2">
+                    <?php $content = $currentBlog['blog_content'];
+                    ?>
+                  </div>
                 </div>
               </div>
             </div>

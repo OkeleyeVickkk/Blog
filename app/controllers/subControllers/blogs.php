@@ -5,6 +5,7 @@ declare(strict_types=1);
 require_once FIRST_PARENT_DIR . "models/User.php";
 require_once "fileImageController.php";
 
+
 trait Blog
 {
   use fileImageController;
@@ -86,12 +87,13 @@ trait Blog
   protected function updateBlog() {}
 
   protected function getAllBlogs() {}
-  protected function getBlogById($userData)
+
+  protected function getBlogById($blogId)
   {
-    if ($userData) {
+    if ($blogId) {
       $user = new User;
+      return $user->getAnySpecificBlog(userData: ["blogId" => $blogId]);
     }
-    // $response = $user->getUserBlogs(userData: array("userId" => $userData['userId']));
   }
 
   protected function getMyBlogs($userData)

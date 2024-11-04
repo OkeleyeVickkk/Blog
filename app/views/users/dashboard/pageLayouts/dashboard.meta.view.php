@@ -27,4 +27,4 @@
 </head>
 
 <body>
-  <?php require_once(dirname(__FILE__) . '../../../components/toast.view.php'); ?>
+  <?php require_once FIRST_PARENT_DIR . "views/users/components/toast.view.php"; ?>

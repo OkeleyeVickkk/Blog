@@ -99,9 +99,7 @@ class User
       $isAdmin = htmlspecialchars($data['isAdmin']);
     }
     $this->tableName = 'clockUserIn';
-    static::$query = "INSERT INTO {$this->tableName} 
-              (idOfWhoLoggedIn, userEmail, isAdmin) 
-              VALUES (:userId, :userEmail, :isAdmin);";
+    static::$query = "INSERT INTO {$this->tableName} (idOfWhoLoggedIn, userEmail, isAdmin) VALUES (:userId, :userEmail, :isAdmin);";
     $result = $this->execute(
       sqlQuery: static::$query,
       arr: [
@@ -162,6 +160,15 @@ class User
     if (empty($userData)) return false;
     $this->tableName = "blogs";
     static::$query = "SELECT * FROM {$this->tableName} WHERE id = :blogId AND author_id = :userId;";
+
+    return $this->runQuery(sqlQuery: static::$query, arr: $userData);
+  }
+
+  public function getAnySpecificBlog(array $userData)
+  {
+    if (empty($userData)) return false;
+    $this->tableName = "blogs";
+    static::$query = "SELECT * FROM {$this->tableName} WHERE id = :blogId;";
 
     return $this->runQuery(sqlQuery: static::$query, arr: $userData);
   }

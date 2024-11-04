@@ -68,8 +68,7 @@ class Dashboard
   public function blog()
   {
     $this->pageData['pageTitle'] = "Blog";
-    if (!$_SERVER['HTTP_REFERER']) {
-      die;
+    if (!isset($_SERVER['HTTP_REFERER'])) {
       echo "<script>window.history.back()</script>";
       return;
     }
@@ -78,12 +77,13 @@ class Dashboard
       return;
     }
     $blogId = $_GET['id'];
-    $blogId = filter_var($blogId, FILTER_VALIDATE_INT);
+    $blogId = htmlspecialchars($blogId);
 
     if ($blogId) {
-      $this->pageData['blogId'] = $blogId;
-      $this->getBlogById($this->pageData);
+      $response = $this->getBlogById($blogId);
+      $this->pageData['currentBlog'] = $response[0];
     }
+
     $this->loadUserPage('dashboard/blog', $this->pageData);
   }
 
