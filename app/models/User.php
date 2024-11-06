@@ -13,14 +13,11 @@ class User
     if (!$userData) return false;
     try {
       // 👇 this is called late static binding
-      static::$query = "INSERT INTO {$this->tableName} 
-               (fullName, userName, userEmail, password, encryptPassKey, isAdmin) 
-               VALUES(:fullname, :username, :email, :password, :encryptPassKey, :isAdmin);";
+      static::$query = "INSERT INTO {$this->tableName} (fullName, userName, userEmail, password, encryptPassKey, isAdmin) VALUES(:fullname, :username, :email, :password, :encryptPassKey, :isAdmin);";
       $responseFromCreatingNewUser = $this->execute(sqlQuery: static::$query, arr: $userData);
       if (!$responseFromCreatingNewUser) {
         throw new Exception('Error creating an account, try again!');
       }
-
       $this->tableName = "userProfileImage";
       static::$query = "INSERT INTO {$this->tableName} (userEmail) VALUES (:email);";
       $response = $this->execute(sqlQuery: static::$query, arr: ['email' => $userData['email']]);
@@ -39,8 +36,7 @@ class User
   public function loginUser(array $userData)
   {
     if ($userData) {
-      static::$query = "SELECT * FROM {$this->tableName}
-                WHERE userEmail = :email AND password = :password AND encryptPassKey = :encryptPassKey;";
+      static::$query = "SELECT * FROM {$this->tableName} WHERE userEmail = :email AND password = :password AND encryptPassKey = :encryptPassKey;";
       $result = $this->runQuery(sqlQuery: static::$query, arr: $userData);
       return $result;
     }
@@ -49,8 +45,7 @@ class User
   public function checkIfAccountExist(array $userData): bool
   {
     if ($userData) {
-      static::$query = "SELECT * FROM {$this->tableName}
-                WHERE userEmail = :email;";
+      static::$query = "SELECT * FROM {$this->tableName} WHERE userEmail = :email;";
       $result = (bool) $this->runQuery(sqlQuery: static::$query, arr: $userData);
       return $result;
     }
@@ -59,8 +54,7 @@ class User
   public function getUserAuthDetails(array $userData): array
   {
     if ($userData) {
-      static::$query = "SELECT * FROM {$this->tableName}
-                WHERE userEmail = :email AND encryptPassKey = :encryptedPass;";
+      static::$query = "SELECT * FROM {$this->tableName} WHERE userEmail = :email AND encryptPassKey = :encryptedPass;";
       $result = $this->runQuery(sqlQuery: static::$query, arr: $userData);
       return $result;
     }
@@ -70,13 +64,10 @@ class User
   {
     if ($userData) {
       $this->tableName = 'users';
-      static::$query = "SELECT * FROM {$this->tableName}
-                WHERE userEmail = :email;";
+      static::$query = "SELECT * FROM {$this->tableName} WHERE userEmail = :email;";
       $userResult = $this->runQuery(sqlQuery: static::$query, arr: $userData);
-
       $this->tableName = "userProfileImage";
-      static::$query = "SELECT * FROM {$this->tableName}
-                        WHERE userEmail = :email;";
+      static::$query = "SELECT * FROM {$this->tableName} WHERE userEmail = :email;";
       $profileImageResult = $this->runQuery(sqlQuery: static::$query, arr: $userData);
 
       if ($profileImageResult && $userResult) {
@@ -130,7 +121,6 @@ class User
     static::$query = "UPDATE {$this->tableName}
     SET fullName = :fullName, userName = :userName, phoneNumber = :phoneNumber
     WHERE userId = :userId;";
-
     return $this->execute(sqlQuery: static::$query, arr: $userData);
   }
 
@@ -144,7 +134,6 @@ class User
 
     return $this->execute(sqlQuery: static::$query, arr: $userData);
   }
-
 
   public function getUserBlogs(array $userData)
   {

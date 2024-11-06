@@ -87,7 +87,7 @@ trait ProfilePage
     if (!$result) {
       sendDataToUser(
         contentType: 'application/json',
-        response: array("status" => false, "message" => "Error trying to update profile,try again!")
+        response: array("status" => false, "message" => "Error trying to update profile, try again!")
       );
       return;
     }
