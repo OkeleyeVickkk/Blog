@@ -14,6 +14,13 @@ class Login
     if (!isset($this->user)) {
       $this->user = new User();
     }
+
+    $user = Session::getInstance()->__get(USER_SESSION);
+    if ($user) {
+      $this->pageData = ['status' => true, "message" => 'isLoggedIn'];
+      sendDataToUser(contentType: 'application/json', response: $this->pageData);
+      redirectTo(toLocation: 'dashboard/index', replace: true);
+    }
   }
 
   public function index()

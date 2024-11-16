@@ -97,7 +97,7 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
                 </button>
                 <!-- v-each-button @::end -->
                 <!-- v-each-button @::start -->
-                <button type="button" class="v-each-cornered-item v-red">
+                <a href="<?= requireLink('dashboard/logout') ?>" type="button" class="v-each-cornered-item v-red">
                   <span class="v-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                       <rect width="24" height="24" fill="none" />
@@ -112,7 +112,7 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
                     </svg>
                   </span>
                   <span class="v-text" role="text">Logout Account</span>
-                </button>
+                </a>
                 <!-- v-each-button @::end -->
                 <!-- v-each-button @::start -->
                 <button type="button" class="v-each-cornered-item v-red">

@@ -24,7 +24,6 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
               <div class="v-each-blog-post" style="--profile-image-radius: 2.8rem">
                 <div class="v-blog-content">
                   <?php
-                  // preIt($pageData);
                   $currentBlog = $pageData['currentBlog'];
                   ?>
                   <div class="d-flex align-items-start flex-column column-gap-4 row-gap-3 justify-content-between">

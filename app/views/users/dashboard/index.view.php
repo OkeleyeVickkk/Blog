@@ -27,13 +27,13 @@ $customPageLink = [
             <div class="v-blog-container">
               <ul class="v-blogs-grid-container">
                 <li class="v-each-blog-post">
-                  <a href="<?= requireLink("dashboard/blog?id=" . 1); ?>">
+                  <a href="<?= requireLink("dashboard/blog"); ?>">
                     <figure class="v-image">
                       <img src="<?= requireAssets('images/thumbs/about/about-600.jpg'); ?>" alt="" class="img-fluid" />
                     </figure>
                   </a>
                   <div class="v-blog-content">
-                    <a href="<?= requireLink("dashboard/blog?id=" . 1); ?>">
+                    <a href="<?= requireLink("dashboard/blog"); ?>">
                       <div class="d-flex align-items-start column-gap-4 justify-content-between">
                         <h5 class="v-title">Improve your Design Skills</h5>
                         <span class="v-icon">

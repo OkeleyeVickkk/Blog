@@ -73,7 +73,7 @@ declare(strict_types=1);
     </li>
     <div>
       <li class="v-link-container">
-        <a href="<?= requireLink("dashboard/logout"); ?>" class="v-sidebar-link">
+        <a href="<?= requireLink('dashboard/logout') ?>" class="v-sidebar-link logout">
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
             <rect width="24" height="24" fill="none" />
             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">

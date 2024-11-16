@@ -131,4 +131,15 @@ class Dashboard
 
     $this->loadUserPage("dashboard/saved-blogs", $this->pageData);
   }
+
+  public function logout()
+  {
+    $session = Session::getInstance();
+    if (!$session->__get(USER_SESSION)) return;
+    $session->__unset(USER_SESSION);
+    $isSessionDestroyed = $session->destroy();
+    if ($isSessionDestroyed) {
+      redirectTo(toLocation: 'login', replace: true);
+    }
+  }
 }

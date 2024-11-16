@@ -62,7 +62,7 @@ import { showToast, setLoadStatus, falsies, BASE_URL } from "./utils.custom.js";
 							showToast(`${item} required`, ERROR);
 							break;
 					}
-					target.innerHTML = "Login";
+					setLoadStatus(target, "Login", false);
 					return;
 				}
 			}
@@ -92,6 +92,7 @@ import { showToast, setLoadStatus, falsies, BASE_URL } from "./utils.custom.js";
 			} catch (error) {
 				target.innerHTML = "Login";
 				showToast(error, ERROR);
+				setLoadStatus(target, "Login", false);
 			}
 		});
 	}

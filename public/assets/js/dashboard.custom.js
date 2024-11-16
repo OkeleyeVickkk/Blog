@@ -8,7 +8,7 @@ import {
 	falsies,
 	showToast,
 	setLoadStatus,
-} from "./utils.custom.js?ver=0.000000000003";
+} from "./utils.custom.js?ver=0.000000000004";
 
 const sidebarLinksWithDropdown = document.querySelectorAll(".v-main-link-container:has(.v-is-dropdown) .v-sidebar-link");
 const backdrop = document.querySelector(".v-right-nav #v-backdrop");
@@ -391,7 +391,6 @@ const initUpdateBasicProfile = () => {
 };
 
 // animations
-
 function initAnimations() {
 	const dropdownSplide = document.querySelector("#profile__dropdown__splide");
 	if ((null || undefined) == dropdownSplide) return;
@@ -400,18 +399,6 @@ function initAnimations() {
 		gap: "1rem",
 		autoplay: true,
 		arrows: false,
-	}).mount();
-
-	const dollarCardSplide = document.querySelector("#offcanvas__card__splide");
-	if ((null || undefined) == dollarCardSplide) return;
-	new Splide(dollarCardSplide, {
-		rewind: true,
-		autoplay: true,
-		arrows: false,
-		focus: "center",
-		perPage: 1.15,
-		snap: true,
-		gap: 10,
 	}).mount();
 }
 
@@ -433,6 +420,7 @@ function initiateOffcanvas() {
 
 (() => {
 	function init() {
+		// general
 		initAnimations();
 		// initiateOffcanvas();
 		toggleInput();

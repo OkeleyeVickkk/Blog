@@ -119,7 +119,7 @@ declare(strict_types=1);
           <label for="phone" class="form-label"> Phone No </label>
           <div class="position-relative v-icon-holder">
             <input
-              type="tel"
+              type="number"
               class="form-control"
               inputmode="numeric"
               name="phone"

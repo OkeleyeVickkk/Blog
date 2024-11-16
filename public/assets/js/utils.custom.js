@@ -62,9 +62,9 @@ export const checkLength = function (elementArray) {
 
 export const callDomEle = function (target, parentElem, isTargetMoreThanOne = false) {
 	if (!target) return null;
-	parentElem = parentElem || document;
+	const catcher = parentElem || document;
 	const queryMethod = isTargetMoreThanOne ? "querySelectorAll" : "querySelector";
-	const elem = parentElem[queryMethod](target);
+	const elem = catcher[queryMethod](target);
 
 	return elem || null;
 };
