@@ -83,7 +83,7 @@ import { callDomEle, setLoadStatus, showToast, BASE_URL, reloadPage } from "./ut
 					if (response.status !== 200 || !response.ok) throw new Error("Error occured, try again!");
 					const result = await response.json();
 					if (!result.status) {
-						throw new Error("Bad response!");
+						throw new Error(result.message ?? "Error occured");
 					}
 					showToast(result.message, "Success");
 					reloadPage(3);

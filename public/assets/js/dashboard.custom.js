@@ -292,6 +292,7 @@ const initUpdateUserProfileDetails = () => {
 		if (!allInputs.length) return;
 		for (let input of allInputs) {
 			if (input.value.trim() === "") {
+				console.log(input.value);
 				setLoadStatus(target, TOGGLER_TEXT, false);
 				let errorMessage;
 				switch (input.getAttribute("name").toLowerCase()) {

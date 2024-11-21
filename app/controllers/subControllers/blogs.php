@@ -86,7 +86,10 @@ trait Blog
   }
   protected function updateBlog() {}
 
-  protected function getAllBlogs() {}
+  protected function getAllBlogs()
+  {
+    echo "lif is beatiful";
+  }
 
   protected function getBlogById($blogId)
   {

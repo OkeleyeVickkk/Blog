@@ -55,6 +55,8 @@ class Dashboard
   {
     $this->pageData['pageTitle'] = "Home";
     $this->loadUserPage('dashboard/index', $this->pageData);
+
+    $this->getAllBlogs();
   }
 
   public function blogs()

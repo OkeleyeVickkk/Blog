@@ -47,8 +47,8 @@ function cleanString(string $string, mixed $type = "text"): mixed
       }
       break;
     case "number":
-      $data = intval($data);
-      $resultFromCheck = filter_var($data, FILTER_VALIDATE_INT);
+      $number = intval($data);
+      $resultFromCheck = filter_var($number, FILTER_VALIDATE_INT);
       if (!$resultFromCheck) {
         $data = false;
       }

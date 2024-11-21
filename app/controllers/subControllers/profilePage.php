@@ -62,6 +62,7 @@ trait ProfilePage
 
   protected function updateUserDetails(): void
   {
+
     $fullName = isset($_POST['fullName']) ? cleanString(string: $_POST['fullName'], type: "text") : '';
     $userName = isset($_POST['userName']) ? cleanString(string: $_POST['userName'], type: "text") : '';
     $phoneNumber = isset($_POST['phone']) ? cleanString(string: $_POST['phone'], type: "number") : '';
@@ -76,6 +77,8 @@ trait ProfilePage
       return;
     }
     $user = new User();
+
+
     $userData = [
       'fullName' => $fullName,
       'userName' => $userName,
