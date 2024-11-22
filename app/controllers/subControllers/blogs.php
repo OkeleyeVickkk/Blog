@@ -86,24 +86,24 @@ trait Blog
   }
   protected function updateBlog() {}
 
-  protected function getAllBlogs()
+  protected function getBlogs()
   {
-    echo "lif is beatiful";
+    if ($this->userEmail) {
+      return $this->user->getAllBlogs();
+    }
   }
 
   protected function getBlogById($blogId)
   {
     if ($blogId) {
-      $user = new User;
-      return $user->getAnySpecificBlog(userData: ["blogId" => $blogId]);
+      return $this->user->getAnySpecificBlog(userData: ["blogId" => $blogId]);
     }
   }
 
   protected function getMyBlogs($userData)
   {
     if ($userData) {
-      $user = new User();
-      $response = $user->getUserBlogs(userData: array("userId" => $userData['userId']));
+      $response = $this->user->getUserBlogs(userData: array("userId" => $userData['userId']));
       if (!$response) return [];
       return $response;
     }

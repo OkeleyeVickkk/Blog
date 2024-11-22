@@ -8,9 +8,10 @@ require_once FIRST_PARENT_DIR . "controllers/subControllers/blogs.php";
 
 class Dashboard
 {
-  private User $user;
+  protected User $user;
   private ?string $userSession;
-  private array $userData = [];
+  protected array $userData = [];
+  protected mixed $userEmail;
 
   use UserController, ProfilePage, Blog;
 
@@ -19,10 +20,10 @@ class Dashboard
     if ($this->isSessionSet()) {
       require_once FIRST_PARENT_DIR . "models/User.php";
       $this->user = new User();
-      $userEmail = $this->userSession;
-      $this->userData = $this->user->getUserDetails(userData: ["email" => $userEmail]);
+      $this->userEmail = $this->userSession;
+      $this->userData = $this->user->getUserDetails(userData: ["email" => $this->userEmail]);
 
-      if (!$this->userData || !$userEmail) {
+      if (!$this->userData || !$this->userEmail) {
         redirectTo(toLocation: 'login', replace: true);
         return;
       }
@@ -54,9 +55,8 @@ class Dashboard
   public function index()
   {
     $this->pageData['pageTitle'] = "Home";
+    $this->pageData['allBlogs'] = $this->getBlogs();
     $this->loadUserPage('dashboard/index', $this->pageData);
-
-    $this->getAllBlogs();
   }
 
   public function blogs()
@@ -130,7 +130,6 @@ class Dashboard
   public function savedBlogs()
   {
     $this->pageData['pageTitle'] = "Saved Blogs";
-
     $this->loadUserPage("dashboard/saved-blogs", $this->pageData);
   }
 

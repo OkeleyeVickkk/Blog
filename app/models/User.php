@@ -129,7 +129,7 @@ class User
     $this->tableName = "blogs";
     if (empty($userData)) return false;
     static::$query = "INSERT INTO {$this->tableName}
-    (id, blog_title, blog_content, author_name, author_id, blog_image, blog_subtitle, blog_image_type, blog_image_ext, created_at, updated_at) VALUES
+    (blogId, blog_title, blog_content, author_name, author_id, blog_image, blog_subtitle, blog_image_type, blog_image_ext, created_at, updated_at) VALUES
     (:blogId, :blogTitle, :blogContent, :authorName, :authorId, :blogImage, :blogSubtitle, :blogImageType, :blogImageExt, NOW(), NOW())";
 
     return $this->execute(sqlQuery: static::$query, arr: $userData);
@@ -139,25 +139,32 @@ class User
   {
     if (empty($userData)) return false;
     $this->tableName = "blogs";
-    static::$query = "SELECT * FROM {$this->tableName} WHERE author_id = :userId";
+    static::$query = "SELECT * FROM {$this->tableName} 
+    INNER JOIN users ON {$this->tableName}.author_id = users.userId
+    INNER JOIN userprofileimage ON users.userEmail = userprofileimage.userEmail 
+    WHERE author_id = :userId";
 
     return $this->runQuery(sqlQuery: static::$query, arr: $userData);
   }
 
-  public function getUserSpecificBlog(array $userData)
+  public function getAllBlogs()
   {
-    if (empty($userData)) return false;
     $this->tableName = "blogs";
-    static::$query = "SELECT * FROM {$this->tableName} WHERE id = :blogId AND author_id = :userId;";
-
-    return $this->runQuery(sqlQuery: static::$query, arr: $userData);
+    static::$query = "SELECT * FROM {$this->tableName} 
+    INNER JOIN users ON users.userId = {$this->tableName}.author_id
+    INNER JOIN userprofileimage ON users.userEmail = userprofileimage.userEmail;
+    ";
+    return $this->runQuery(sqlQuery: static::$query);
   }
 
   public function getAnySpecificBlog(array $userData)
   {
     if (empty($userData)) return false;
     $this->tableName = "blogs";
-    static::$query = "SELECT * FROM {$this->tableName} WHERE id = :blogId;";
+    static::$query = "SELECT * FROM {$this->tableName} 
+    INNER JOIN users ON {$this->tableName}.author_id = users.userId
+    INNER JOIN userprofileimage ON users.userEmail = userprofileimage.userEmail 
+    WHERE blogId = :blogId";
 
     return $this->runQuery(sqlQuery: static::$query, arr: $userData);
   }

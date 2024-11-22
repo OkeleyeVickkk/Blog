@@ -116,10 +116,7 @@ declare(strict_types=1); ?>
   <div class="d-flex align-items-center gap-3">
     <button type="button" class="v-toggle-profile" data-target="v-profile-dropdown">
       <div class="v-profile-image">
-        <img src="<?=
-                  isset($pageData['name'])
-                    ? requireAssets(filePath: "users/{$pageData['name']}.{$pageData['extension']}")
-                    : requireAssets(filePath: "images/avatars/user-avatar.webp") ?>" alt="" class="img-fluid" />
+        <img src="<?= isset($pageData['name']) ? requireAssets(filePath: "users/{$pageData['name']}.{$pageData['extension']}") : requireAssets(filePath: "images/avatars/user-avatar.webp") ?>" alt="" class="img-fluid" />
       </div>
       <div class="v-right-nav-detail d-none d-sm-flex">
         <span class="v-user-name">
@@ -180,12 +177,12 @@ declare(strict_types=1); ?>
     </div>
     <div class="v-step-container v-step-four">
       <li class="v-dropdown-link-list">
-        <button type="button" class="v-link logout">
+        <a href="<?= requireLink(link: 'dashboard/logout') ?>" type="button" class="v-link logout">
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
             <path fill="currentColor" d="M3 21V3h9v2H5v14h7v2zm13-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z" />
           </svg>
           <span class="v-link-name">Log out</span>
-        </button>
+        </a>
       </li>
     </div>
   </div>

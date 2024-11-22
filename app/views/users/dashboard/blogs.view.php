@@ -31,7 +31,7 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                 <ul class="v-blogs-grid-container">
                   <?php foreach ($blogsArr as $blog) { ?>
                     <li class="v-each-blog-post">
-                      <a href="<?= requireLink("dashboard/blog?id={$blog['id']}"); ?>">
+                      <a href="<?= requireLink("dashboard/blog?id={$blog['blogId']}"); ?>">
                         <figure class="v-blog-image border d-flex  justify-content-center ratio-16x9 overflow-hidden">
                           <img src="<?= requireAssets("blogs/{$blog['blog_image']}.{$blog['blog_image_ext']}"); ?>" alt="" class="img-fluid flex-grow-1 object-fit-cover" />
                         </figure>
@@ -64,7 +64,7 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                             <span class="v-count"><?= $blog['no_of_likes'] ?></span>
                           </div>
                         </div>
-                        <a href="<?= requireLink("dashboard/blog?id=" . $blog['id']); ?>">
+                        <a href="<?= requireLink("dashboard/blog?id=" . $blog['blogId']); ?>">
                           <div class="d-flex align-items-start column-gap-4 justify-content-between mt-2">
                             <h5 class="v-title"><?= $blog['blog_title'] ?></h5>
                             <span class="v-icon">

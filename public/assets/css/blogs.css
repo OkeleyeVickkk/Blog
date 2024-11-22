@@ -104,6 +104,15 @@
 }
 .v-each-blog-post .v-blog-image {
 	height: 200px;
+	overflow: hidden;
+}
+.v-each-blog-post .v-blog-image .img-fluid {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	-o-object-fit: cover;
+	object-position: center center;
+	-o-object-position: center center;
 }
 .v-each-blog-post .v-book-mark-blog {
 	display: flex;
