@@ -391,6 +391,84 @@ const initUpdateBasicProfile = () => {
 	});
 };
 
+const blogPostAction = () => {
+	const url = window.location.href;
+	const arr = url.split("?")[0].split("/");
+	const pagesWherePostCanLikedOrBookMarked = ["index", "home", "blogs", "blog", "savedblogs", "profile"];
+	const currentPage = arr.at(-1);
+
+	async function runActions(currentPage, blogId, customHeader) {
+		const url = `${BASE_URL}/dashboard/${currentPage}?id=${blogId}`;
+		try {
+			const response = await fetch(url, {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"x-custom-update": `${customHeader}`,
+				},
+				body: JSON.stringify({ id: blogId }),
+			});
+
+			if (!response.ok || response.status !== 200) throw new Error(response.statusText);
+			const data = await response.json();
+			if (!data.status) {
+				throw new Error(data.message);
+			}
+			if (data && data.status) {
+				showToast(data.message, "success");
+				// reloadPage(3);
+			}
+		} catch (error) {
+			console.log(error);
+			showToast(error, "failed");
+			return;
+		} finally {
+		}
+	}
+
+	function likeBlog(id) {
+		if (!id) return console.log(`id is not passed`);
+		runActions(currentPage, id, "likeBlog");
+	}
+	function unLikeBlog(id) {
+		if (!id) return console.log(`id is not passed`);
+		runActions(currentPage, id, "unlikeBlog");
+	}
+	function bookmarkBlog(id) {
+		if (!id) return console.log(`id is not passed`);
+		runActions(currentPage, id, "bookMarkBlog");
+	}
+	function removeBookmarkOnBlog(id) {
+		if (!id) return console.log(`id is not passed`);
+		runActions(currentPage, id, "unbookmarkBlog");
+	}
+
+	const allBlogTogglers = callDomEle(".v-book-mark-blog", undefined, true);
+	for (const eachAction of allBlogTogglers) {
+		eachAction.addEventListener("click", function (e) {
+			e.stopPropagation();
+			if (!e.target || !e.target.dataset) return;
+			const { id, action } = e.target.dataset;
+			if (!id || !action) return console.log("Missing action and/or id");
+			if (!pagesWherePostCanLikedOrBookMarked.includes(currentPage)) return;
+			switch (action.toLowerCase()) {
+				case "like":
+					likeBlog(id);
+					break;
+				case "unlike":
+					unLikeBlog(id);
+					break;
+				case "bookmark":
+					bookmarkBlog(id);
+					break;
+				case "unbookmark":
+					removeBookmarkOnBlog(id);
+					break;
+			}
+		});
+	}
+};
+
 // animations
 function initAnimations() {
 	const dropdownSplide = document.querySelector("#profile__dropdown__splide");
@@ -428,6 +506,7 @@ function initiateOffcanvas() {
 		togglePasswords();
 		handleDropdownOutsideClick();
 		handleGeneralOutsideClick();
+		blogPostAction();
 
 		// profile page
 		initUpdateBasicProfile();

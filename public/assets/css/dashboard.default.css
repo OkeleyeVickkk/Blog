@@ -154,3 +154,6 @@ figure {
 	align-items: center;
 	justify-content: center;
 }
+button:has(.v-icon) .v-icon {
+	pointer-events: none;
+}

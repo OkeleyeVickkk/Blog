@@ -53,7 +53,7 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                             </span>
                           </div>
                           <div class="d-none d-sm-flex align-items-center column-gap-2">
-                            <button type="button" class="v-book-mark-blog">
+                            <button type="button" data-action="like" data-id="<?= $blog['blogId'] ?>" class="v-book-mark-blog">
                               <span class="v-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 256 256">
                                   <rect width="256" height="256" fill="none" />

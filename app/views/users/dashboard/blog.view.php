@@ -47,7 +47,7 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                 </div>
                 <div class="d-flex mt-3 align-items-center justify-content-between border-top border-bottom py-2">
                   <div class="v-action-container">
-                    <button type="button" class="v-book-mark-blog">
+                    <button data-action="like" data-id="<?= $currentBlog['blogId'] ?>" type="button" class="v-book-mark-blog">
                       <span class="v-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 256 256">
                           <rect width="256" height="256" fill="none" />
@@ -59,7 +59,7 @@ require_once "pageLayouts/dashboard.meta.view.php"; ?>
                       <?= htmlspecialchars($currentBlog['no_of_likes']) ?>
                     </span>
                   </div>
-                  <button type="button" class="v-book-mark-blog">
+                  <button type="button" data-action="bookmark" data-id="<?= $currentBlog['blogId'] ?>" class="v-book-mark-blog">
                     <span class="v-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
                         <rect width="24" height="24" fill="none" />

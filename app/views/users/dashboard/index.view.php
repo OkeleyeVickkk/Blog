@@ -73,7 +73,7 @@ $customPageLink = [
                               <?= formatDate($blog['created_at']) ?>
                             </span>
                           </div>
-                          <button type="button" class="v-book-mark-blog">
+                          <button type="button" data-action="bookmark" data-id="<?= $blog['blogId'] ?>" class="v-book-mark-blog">
                             <span class="v-icon">
                               <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
                                 <rect width="24" height="24" fill="none" />

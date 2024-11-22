@@ -52,7 +52,7 @@ declare(strict_types=1);
                 <a href="<?= requireLink("dashboard/blogs") ?>" class="v-sublink">My Blogs</a>
               </li>
               <li class="v-sublink-item">
-                <a href="<?= requireLink("dashboard/savedBlogs") ?>" class="v-sublink">Saved Blogs</a>
+                <a href="<?= requireLink("dashboard/saved") ?>" class="v-sublink">Saved Blogs</a>
               </li>
             </ul>
           </div>

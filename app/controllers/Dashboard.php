@@ -43,6 +43,11 @@ class Dashboard
     }
   }
 
+  private function redirectBack()
+  {
+    header("Location: {$_SERVER['HTTP_REFERER']}");
+  }
+
   private function isSessionSet(): bool
   {
     if (!Session::getInstance()->__get(USER_SESSION)) {
@@ -56,37 +61,51 @@ class Dashboard
   {
     $this->pageData['pageTitle'] = "Home";
     $this->pageData['allBlogs'] = $this->getBlogs();
-    $this->loadUserPage('dashboard/index', $this->pageData);
+
+    if (strtoupper($_SERVER['REQUEST_METHOD']) !== "POST") {
+      $this->loadUserPage('dashboard/index', $this->pageData);
+      return;
+    }
+    $this->runBlogAction();
   }
 
   public function blogs()
   {
     $this->pageData['pageTitle'] = "My Blogs";
-    $this->pageData['myBlogs'] = $this->getMyBlogs($this->pageData);
 
+    if (strtoupper($_SERVER['REQUEST_METHOD']) === "POST") {
+    }
+    $this->pageData['myBlogs'] = $this->getMyBlogs($this->pageData);
     $this->loadUserPage('dashboard/blogs', $this->pageData);
   }
 
   public function blog()
   {
     $this->pageData['pageTitle'] = "Blog";
-    if (!isset($_SERVER['HTTP_REFERER'])) {
-      echo "<script>window.history.back()</script>";
-      return;
-    }
+
     if (!isset($_GET['id'])) {
-      header("Location: {$_SERVER['HTTP_REFERER']}");
+      $this->redirectBack();
       return;
     }
-    $blogId = $_GET['id'];
-    $blogId = htmlspecialchars($blogId);
-
-    if ($blogId) {
+    $blogId = htmlspecialchars($_GET['id']);
+    if (!$blogId) {
+      echo "Something is not right with this two";
+      $this->redirectBack();
+      return;
+    } else {
       $response = $this->getBlogById($blogId);
-      $this->pageData['currentBlog'] = $response[0];
+      if ($response && count($response) > 0)
+        $this->pageData['currentBlog'] = $response[0];
+      else {
+        $this->redirectBack();
+      }
     }
 
-    $this->loadUserPage('dashboard/blog', $this->pageData);
+    if (strtoupper($_SERVER['REQUEST_METHOD']) !== "POST") {
+      $this->loadUserPage("dashboard/blog", $this->pageData);
+      return;
+    }
+    $this->runBlogAction();
   }
 
   public function layout()
@@ -114,23 +133,34 @@ class Dashboard
   public function profile()
   {
     $this->pageData['pageTitle'] = "My Profile";
+
     if (strtoupper($_SERVER['REQUEST_METHOD']) !== "POST") {
       $this->loadUserPage("dashboard/profile", $this->pageData);
       return;
     }
 
-    if ($_SERVER['HTTP_X_CUSTOM_UPDATE']) {
-      match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
-        strtolower("profileImage") => $this->uploadUserImage(),
-        strtolower("userDetails") => $this->updateUserDetails(),
-      };
+    if (strtoupper($_SERVER['REQUEST_METHOD']) === "POST") {
+      $this->runBlogAction();
+      if ($_SERVER['HTTP_X_CUSTOM_UPDATE']) {
+        match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
+          strtolower("profileImage") => $this->uploadUserImage(),
+          strtolower("userDetails") => $this->updateUserDetails(),
+          default => null
+        };
+        return;
+      }
     }
   }
 
-  public function savedBlogs()
+  public function saved()
   {
     $this->pageData['pageTitle'] = "Saved Blogs";
-    $this->loadUserPage("dashboard/saved-blogs", $this->pageData);
+
+    if (strtoupper($_SERVER['REQUEST_METHOD']) !== "POST") {
+      $this->loadUserPage("dashboard/saved-blogs", $this->pageData);
+      return;
+    }
+    $this->runBlogAction();
   }
 
   public function logout()

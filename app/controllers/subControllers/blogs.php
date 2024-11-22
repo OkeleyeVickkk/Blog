@@ -108,4 +108,41 @@ trait Blog
       return $response;
     }
   }
+
+  protected function likeBlog()
+  {
+    $postData = json_decode(file_get_contents('php://input'), true);
+    var_dump($postData);
+  }
+
+  protected function unlikeBlog()
+  {
+    $postData = json_decode(file_get_contents('php://input'), true);
+    var_dump($postData);
+  }
+
+  protected function bookMarkBlog()
+  {
+    $postData = json_decode(file_get_contents('php://input'), true);
+    var_dump($postData);
+  }
+
+  protected function removeBookFromBlog()
+  {
+    $postData = json_decode(file_get_contents('php://input'), true);
+    var_dump($postData);
+  }
+
+  protected function runBlogAction()
+  {
+    if ($_SERVER['HTTP_X_CUSTOM_UPDATE']) {
+      match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
+        strtolower("unbookmarkBlog") => $this->removeBookFromBlog(),
+        strtolower("bookMarkBlog") => $this->bookMarkBlog(),
+        strtolower("likeBlog") => $this->likeBlog(),
+        strtolower("unlikeBlog") => $this->unlikeBlog(),
+        default => null
+      };
+    }
+  }
 }
