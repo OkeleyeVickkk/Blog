@@ -66,17 +66,17 @@ class Dashboard
       $this->loadUserPage('dashboard/index', $this->pageData);
       return;
     }
-    $this->runBlogAction();
   }
 
   public function blogs()
   {
     $this->pageData['pageTitle'] = "My Blogs";
 
-    if (strtoupper($_SERVER['REQUEST_METHOD']) === "POST") {
-    }
     $this->pageData['myBlogs'] = $this->getMyBlogs($this->pageData);
-    $this->loadUserPage('dashboard/blogs', $this->pageData);
+    if (strtoupper($_SERVER['REQUEST_METHOD']) !== "POST") {
+      $this->loadUserPage('dashboard/blogs', $this->pageData);
+      return;
+    }
   }
 
   public function blog()
@@ -105,7 +105,6 @@ class Dashboard
       $this->loadUserPage("dashboard/blog", $this->pageData);
       return;
     }
-    $this->runBlogAction();
   }
 
   public function layout()
@@ -139,28 +138,14 @@ class Dashboard
       return;
     }
 
-    if (strtoupper($_SERVER['REQUEST_METHOD']) === "POST") {
-      $this->runBlogAction();
-      if ($_SERVER['HTTP_X_CUSTOM_UPDATE']) {
-        match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
-          strtolower("profileImage") => $this->uploadUserImage(),
-          strtolower("userDetails") => $this->updateUserDetails(),
-          default => null
-        };
-        return;
-      }
-    }
-  }
-
-  public function saved()
-  {
-    $this->pageData['pageTitle'] = "Saved Blogs";
-
-    if (strtoupper($_SERVER['REQUEST_METHOD']) !== "POST") {
-      $this->loadUserPage("dashboard/saved-blogs", $this->pageData);
+    if ($_SERVER['HTTP_X_CUSTOM_UPDATE']) {
+      match (strtolower($_SERVER['HTTP_X_CUSTOM_UPDATE'])) {
+        strtolower("profileImage") => $this->uploadUserImage(),
+        strtolower("userDetails") => $this->updateUserDetails(),
+        default => null
+      };
       return;
     }
-    $this->runBlogAction();
   }
 
   public function logout()

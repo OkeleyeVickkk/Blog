@@ -2,7 +2,7 @@
 
 declare(strict_types=1); ?>
 
-<div class="position-relative">
+<div class="position-relative d-none">
   <button type="button" class="v-toggle-noti" data-target="v-noti-dropdown">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
       <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">

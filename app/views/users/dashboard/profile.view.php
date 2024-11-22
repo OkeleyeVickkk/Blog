@@ -86,17 +86,6 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
                 </button>
                 <!-- v-each-button @::end -->
                 <!-- v-each-button @::start -->
-                <button type="button" class="v-each-cornered-item" data-bs-toggle="offcanvas" data-bs-target="#blogsOffcanvas">
-                  <span class="v-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 24 24">
-                      <rect width="24" height="24" fill="none" />
-                      <path fill="currentColor" d="M19.97 6.321v13.33a2.47 2.47 0 0 1-1.45 2.13a2.53 2.53 0 0 1-1.3.2a2.46 2.46 0 0 1-1.22-.51l-3.41-2.53a1.07 1.07 0 0 0-1.23 0l-3.43 2.56a2.47 2.47 0 0 1-1.2.5h-.3a2.4 2.4 0 0 1-1-.22a2.5 2.5 0 0 1-1-.83a2.53 2.53 0 0 1-.43-1.25V6.342a4.49 4.49 0 0 1 4.65-4.34h6.73A4.49 4.49 0 0 1 20 6.321z" />
-                    </svg>
-                  </span>
-                  <span class="v-text" role="text">Saved Blogs</span>
-                </button>
-                <!-- v-each-button @::end -->
-                <!-- v-each-button @::start -->
                 <a href="<?= requireLink('dashboard/logout') ?>" type="button" class="v-each-cornered-item v-red">
                   <span class="v-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -113,17 +102,6 @@ require_once "pageLayouts/dashboard.meta.view.php" ?>
                   </span>
                   <span class="v-text" role="text">Logout Account</span>
                 </a>
-                <!-- v-each-button @::end -->
-                <!-- v-each-button @::start -->
-                <button type="button" class="v-each-cornered-item v-red">
-                  <span class="v-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="-3 -2 24 24">
-                      <rect x=-3 y=-2 width="24" height="24" fill="none" />
-                      <path fill="currentColor" d="M12 2h5a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h5V1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1zm3.8 6l-.613 9.2a3 3 0 0 1-2.993 2.8H5.826a3 3 0 0 1-2.993-2.796L2.205 8zM7 9a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1m4 0a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1" />
-                    </svg>
-                  </span>
-                  <span class="v-text" role="text">Delete Account</span>
-                </button>
                 <!-- v-each-button @::end -->
               </section>
             </div>

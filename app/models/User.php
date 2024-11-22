@@ -168,4 +168,18 @@ class User
 
     return $this->runQuery(sqlQuery: static::$query, arr: $userData);
   }
+
+  public function updateBlog($userData, $typeOfAction)
+  {
+    if (empty($userData)) return false;
+    $this->tableName = "blogs";
+    static::$query = match (strtolower($typeOfAction)) {
+      "like" => "UPDATE {$this->tableName} SET no_of_likes = no_of_likes + 1 WHERE blogId = :blogId",
+      "unlike" => "UPDATE {$this->tableName} SET no_of_likes = no_of_likes - 1 WHERE blogId = :blogId"
+    };
+
+    if (!static::$query) return;
+    $this->execute(static::$query, $userData);
+    // static::$query = "UPDATE {$this->tableName} WHERE "
+  }
 }

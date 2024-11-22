@@ -3,51 +3,6 @@
 declare(strict_types=1);
 ?>
 
-<!-- blog&Contacts @::start -->
-<div class="offcanvas offcanvas-end v-blog-offcanvas" tabindex="-1" data-bs-backdrop="static" id="blogsOffcanvas" aria-labelledby="blogsOffcanvasLabel">
-  <div class="offcanvas-header pb-0">
-    <button type="button" class="v-back-to-prev" data-bs-dismiss="offcanvas" aria-label="Close">
-      <span class="v-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-          <rect width="24" height="24" fill="none" />
-          <path
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M20 12H4m0 0l6-6m-6 6l6 6" />
-        </svg>
-      </span>
-    </button>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <h5 class="offcanvas-title v-green-it" id="blogsOffcanvasLabel">
-      <b>Saved Blogs</b>
-    </h5>
-    <div class="v-cornered-items-container mt-3">
-      <div class="v-each-cornered-item">
-        <span class="v-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-            <rect width="24" height="24" fill="none" />
-            <path
-              fill="currentColor"
-              d="M19 2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3h15v-2H6.012C5.55 19.988 5 19.806 5 19q0-.15.024-.273c.112-.576.584-.717.988-.727H21V4a2 2 0 0 0-2-2m0 9l-2-1l-2 1V4h4z" />
-          </svg>
-        </span>
-        <div class="v-each-cornered-detail">
-          <h6 class="v-title fw-medium">Read Blog</h6>
-          <span class="v-subtext">
-            Stay updated with Cardify Blog! Read our newsletters, check out the latest events, and explore other exiciting content
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- blog&Contacts @::end -->
-
 <!-- all details edit @::start -->
 <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-backdrop="static" id="editDetails" aria-labelledby="editDetailsLabel">
   <div class="offcanvas-header">
